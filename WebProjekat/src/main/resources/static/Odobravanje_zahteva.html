@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odobravanje Zahteva</title>
+    <style>
+        html{
+            height: 100%;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background: linear-gradient(#141e30, #243b55);
+        }
+        .login{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 400px;
+            padding: 40px;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, .5);
+            box-sizing: border-box;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
+            border-radius: 10px;
+        }
+        h1{
+            margin-top: 50px;
+            color: #fff;
+            text-align: center;
+        }
+        h2{
+            margin: 0 0 30px;
+            padding: 0;
+            color: #fff;
+            text-align: center;
+        }
+        .user{
+            position: relative;
+        }
+        
+        li{
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+        }
+        label{
+            color: #03e9f4;
+        }
+    </style>
+</head>
+<body>
+        <h1>Odobravanje Zahteva</h1>
+        <div class="login">
+            <h2>Lista Zahteva</h2>
+                <ol>
+                    
+                    <li>Marko Markovic
+                        <input type="radio" id="odobri" value="odobri" name="zahtev1">
+                        <label for="odobri">ODOBRI</label>
+                        <input type="radio" id="odbi" value="odbi" name="zahtev1">
+                        <label for="odbi">ODBI</label>
+                    </li>
+                    
+                    
+                    <li>Petar Petrovic
+                        <input type="radio" id="odobri" value="odobri" name="zahtev2">
+                        <label for="odobri">ODOBRI</label>
+                        <input type="radio" id="odbi" value="odbi" name="zahtev2">
+                        <label for="odbi">ODBI</label>
+                    </li>
+                    
+                    
+                    <li>Lazar Lazarevic
+                        <input type="radio" id="odobri" value="odobri" name="zahtev3">
+                        <label for="odobri">ODOBRI</label>
+                        <input type="radio" id="odbi" value="odbi" name="zahtev3">
+                        <label for="odbi">ODBI</label>
+                    </li>
+                    
+                </ol>
+        </div>
+</body>
+</html>
