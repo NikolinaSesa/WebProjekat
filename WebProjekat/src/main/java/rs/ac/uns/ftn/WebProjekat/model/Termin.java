@@ -28,7 +28,14 @@ public class Termin{
     private Sala sala;
 
     @ManyToMany(mappedBy = "listaPrijavaZaTermine")
-    private Set<Clan> prijavljeni= new HashSet<>();
+    private Set<Clan> prijavljeni = new HashSet<>();
+
+    @ManyToMany(mappedBy = "listaOdradjenihTreninga")
+    private Set<Clan> clanoviKojiSuOdradili = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "ocene", joinColumns = @JoinColumn(name = "clan_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "termin_id", referencedColumnName = "id"))
+    private Set<Ocena> oceneTermina = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Trening trening;

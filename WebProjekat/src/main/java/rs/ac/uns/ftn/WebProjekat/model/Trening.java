@@ -30,14 +30,8 @@ public class Trening implements Serializable{
     @ManyToOne(fetch = FetchType.EAGER)
     private Trener trener;
 
-    @ManyToMany(mappedBy = "odradjenitreninzi")
-    private Set<Clan> clanovi = new HashSet<>();
-
     @OneToMany(mappedBy = "trening", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Termin> termini= new HashSet<>();
-
-    @Column
-    private Double ocena;
 
     public Long getId(){return id;}
     public void setId(Long id){this.id=id;}
@@ -57,7 +51,5 @@ public class Trening implements Serializable{
     public Set<Termin> getTermini(){return termini;}
     public void setTermini(Set<Termin> termini){this.termini=termini;}
 
-    public Double getOcena(){return ocena;}
-    public void setOcena(Double ocena){this.ocena=ocena;}
     
 }

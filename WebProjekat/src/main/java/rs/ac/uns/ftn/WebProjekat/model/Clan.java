@@ -46,12 +46,16 @@ public class Clan implements Serializable{
     private Fitnesscentar fitnesscentar;
 
     @ManyToMany
-    @JoinTable(name = "odradjeni", joinColumns = @JoinColumn(name = "clan_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "trening_id", referencedColumnName = "id"))
-    private Set<Trening> odradjenitreninzi = new HashSet<>();
+    @JoinTable(name = "ocene", joinColumns = @JoinColumn(name = "clan_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "ocena_id", referencedColumnName = "id"))
+    private Set<Ocena> listaOcena = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "listaprijava", joinColumns = @JoinColumn(name = "clan_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "termin_id", referencedColumnName = "id"))
     private Set<Termin> listaPrijavaZaTermine= new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "odradjeni", joinColumns = @JoinColumn(name = "clan_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "termin_id", referencedColumnName = "id"))
+    private Set<Termin> listaOdradjenihTreninga = new HashSet<>();
 
     public Long getId(){return id;}
     public void setId(Long id){this.id=id;}

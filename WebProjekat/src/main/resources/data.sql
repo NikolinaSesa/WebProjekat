@@ -22,12 +22,23 @@ INSERT INTO TRENING(naziv, opis, tip, trajanje, trener_id) VALUES('Hiit', 'Vezbe
 INSERT INTO TRENING(naziv, opis, tip, trajanje, trener_id) VALUES('Pilates', 'Pilates trening', 'PILATES', 1.0, 2);
 INSERT INTO TRENING(naziv, opis, tip, trajanje, trener_id) VALUES('Pilates', 'Pilates trening', 'PILATES', 1.0, 1);
 
-INSERT INTO ODRADJENI(trening_id, clan_id) VALUES(2, 3);
-INSERT INTO ODRADJENI(trening_id, clan_id) VALUES(1, 3);
-
 INSERT INTO TERMIN(br_prijavljenih_clanova, cena, dan, vreme, sala_id, trening_id) VALUES(2, 1500.0, 'UTORAK', 13.00, 2, 2);
 INSERT INTO TERMIN(br_prijavljenih_clanova, cena, dan, vreme, sala_id, trening_id) VALUES(0, 1500.0, 'CETVRTAK', 15.00, 2, 2);
 INSERT INTO TERMIN(br_prijavljenih_clanova, cena, dan, vreme, sala_id, trening_id) VALUES(0, 2000.0, 'SUBOTA', 17.00, 1, 5);
 
 INSERT INTO LISTAPRIJAVA(clan_id, termin_id) VALUES(3, 1);
 INSERT INTO LISTAPRIJAVA(clan_id, termin_id) VALUES(2, 1);
+
+INSERT INTO ODRADJENI(clan_id, termin_id) VALUES(1, 2);
+INSERT INTO ODRADJENI(clan_id, termin_id) VALUES(2, 2);
+INSERT INTO ODRADJENI(clan_id, termin_id) VALUES(3, 3);
+
+INSERT INTO OCENA(ocena) VALUES(1);
+INSERT INTO OCENA(ocena) VALUES(2);
+INSERT INTO OCENA(ocena) VALUES(3);
+INSERT INTO OCENA(ocena) VALUES(4);
+INSERT INTO OCENA(ocena) VALUES(5);
+
+INSERT INTO OCENE(clan_id, termin_id, ocena_id) VALUES(1, 2, 4);
+INSERT INTO OCENE(clan_id, termin_id, ocena_id) VALUES(2, 2, 5);
+INSERT INTO OCENE(clan_id, termin_id, ocena_id) VALUES(3, 3, 3);
