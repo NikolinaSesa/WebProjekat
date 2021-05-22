@@ -1,16 +1,14 @@
 package rs.ac.uns.ftn.WebProjekat.model.dto;
 
 public class TreningDTO{
-    
+
     private Long id;
     private String naziv;
     private String opis;
     private Double trajanje;
     private String imeTrenera;
     private String prezimeTrenera;
-   // private Double cena;
     
-
     public TreningDTO(){}
 
     public TreningDTO(Long id, String n, String o, Double tr, String ime, String prezime){
@@ -27,9 +25,6 @@ public class TreningDTO{
 
     public String getNaziv(){return naziv;}
     public void setNaziv(String naziv){this.naziv=naziv;}
-
-   // public Tip getTip(){return tip;}
-   // public void setTip(Tip tip){this.tip=tip;}
 
     public String getOpis(){return opis;}
     public void setOpis(String opis){this.opis=opis;}

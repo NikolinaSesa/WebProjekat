@@ -30,7 +30,7 @@ public class TreningController{
         List<TreningDTO> treninziDTO = new ArrayList<>();
 
         for(Trening trening : treninzi) {
-            TreningDTO treningDTO = new TreningDTO(trening.getId(), trening.getNaziv(), trening.getOpis(), trening.getTrajanje(),trening.getTrener().getIme(), trening.getTrener().getPrezime());
+            TreningDTO treningDTO = new TreningDTO(trening.getId(),trening.getNaziv(), trening.getOpis(), trening.getTrajanje(),trening.getTrener().getIme(), trening.getTrener().getPrezime());
             treninziDTO.add(treningDTO);
         }
 

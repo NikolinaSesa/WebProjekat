@@ -22,9 +22,12 @@ INSERT INTO TRENING(naziv, opis, tip, trajanje, trener_id) VALUES('Hiit', 'Vezbe
 INSERT INTO TRENING(naziv, opis, tip, trajanje, trener_id) VALUES('Pilates', 'Pilates trening', 'PILATES', 1.0, 2);
 INSERT INTO TRENING(naziv, opis, tip, trajanje, trener_id) VALUES('Pilates', 'Pilates trening', 'PILATES', 1.0, 1);
 
-INSERT INTO TERMIN(br_prijavljenih_clanova, cena, dan, vreme, sala_id, trening_id) VALUES(2, 1500.0, 'UTORAK', 13.00, 2, 2);
-INSERT INTO TERMIN(br_prijavljenih_clanova, cena, dan, vreme, sala_id, trening_id) VALUES(0, 1500.0, 'CETVRTAK', 15.00, 2, 2);
+INSERT INTO TERMIN(br_prijavljenih_clanova, cena, dan, vreme, sala_id, trening_id) VALUES(0, 1500.0, 'UTORAK', 13.00, 2, 2);
+INSERT INTO TERMIN(br_prijavljenih_clanova, cena, dan, vreme, sala_id, trening_id) VALUES(0, 1500.0, 'CETVRTAK', 13.00, 2, 2);
 INSERT INTO TERMIN(br_prijavljenih_clanova, cena, dan, vreme, sala_id, trening_id) VALUES(0, 2000.0, 'SUBOTA', 17.00, 1, 5);
+INSERT INTO TERMIN(br_prijavljenih_clanova, cena, dan, vreme, sala_id, trening_id) VALUES(0, 2500.0, 'PONEDELJAK', 20.00, 1, 3);
+INSERT INTO TERMIN(br_prijavljenih_clanova, cena, dan, vreme, sala_id, trening_id) VALUES(0, 2500.0, 'SREDA', 21.00, 1, 3);
+INSERT INTO TERMIN(br_prijavljenih_clanova, cena, dan, vreme, sala_id, trening_id) VALUES(0, 1200.0, 'PETAK', 20.00, 1, 1);
 
 INSERT INTO LISTAPRIJAVA(clan_id, termin_id) VALUES(3, 1);
 INSERT INTO LISTAPRIJAVA(clan_id, termin_id) VALUES(2, 1);

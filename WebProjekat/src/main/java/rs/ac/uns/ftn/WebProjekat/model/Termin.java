@@ -4,8 +4,7 @@ import javax.persistence.Entity;
 import java.util.Set;
 import java.util.HashSet;
 import javax.persistence.*;
-
-enum Dani{PONEDELJAK, UTORAK, SREDA, CETVRTAK, PETAK, SUBOTA}
+import rs.ac.uns.ftn.WebProjekat.model.dto.Dani;
 
 @Entity
 public class Termin{

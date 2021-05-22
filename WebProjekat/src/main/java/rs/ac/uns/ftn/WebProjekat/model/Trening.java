@@ -4,8 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-
-enum Tip{CARDIO, YOGA, PILATES, HIIT, KICKBOX}
+import rs.ac.uns.ftn.WebProjekat.model.dto.Tip;
 
 @Entity
 public class Trening implements Serializable{
