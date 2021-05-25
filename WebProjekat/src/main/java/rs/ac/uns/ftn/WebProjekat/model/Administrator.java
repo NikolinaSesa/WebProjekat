@@ -4,8 +4,6 @@ import javax.persistence.*;
 import jdk.jfr.BooleanFlag;
 import java.io.Serializable;
 
-enum Uloga{ADMINISTRATOR, CLAN, TRENER}
-
 @Entity
 public class Administrator implements Serializable{
     

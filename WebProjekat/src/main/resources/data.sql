@@ -14,6 +14,9 @@ INSERT INTO CLAN(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumr
 INSERT INTO TRENER(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumrodjenja, uloga, aktivan, fitnesscentar_id) VALUES('bokiipanic', 'nchd7384', 'Boris', 'Panic', '0654326781', 'borispanicc@gmail.com','1998.07.18','TRENER', true, 1);
 INSERT INTO TRENER(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumrodjenja, uloga, aktivan, fitnesscentar_id) VALUES('srdjanvasic','hfnc73748', 'Srdjan', 'Vasic', '0692435647', 'srkiivas@gmail.com', '1997.12.03', 'TRENER', true, 1);
 INSERT INTO TRENER(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumrodjenja, uloga, aktivan, fitnesscentar_id) VALUES('anasesa', 'hhdfs67324', 'Ana', 'Sesa', '0642314725','anasesaa03@gmail.com', '2003.06.25','TRENER', true, 1);
+INSERT INTO TRENER(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumrodjenja, uloga, aktivan, fitnesscentar_id) VALUES('markomarkovic123', 'nncby746', 'Marko', 'Markovic', '0634657892','makimaki123@gmail.com', '1998.07.23','TRENER', false, 1);
+INSERT INTO TRENER(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumrodjenja, uloga, aktivan, fitnesscentar_id) VALUES('perapetrovic', 'jdskjfhshf743', 'Petar', 'Petrovic', '0626478986','perapera23@gmail.com', '2001.10.12','TRENER', false, 1);
+INSERT INTO TRENER(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumrodjenja, uloga, aktivan, fitnesscentar_id) VALUES('radarada', 'kfsdkffs67324', 'Radoslava', 'Rasic', '0697461725','radarasic@gmail.com', '1999.01.14','TRENER', false, 1);
 
 INSERT INTO TRENING(naziv, opis, tip, trajanje, trener_id) VALUES('Kardio trening', 'Kardio trening za celo telo','CARDIO', 1.5, 1);
 INSERT INTO TRENING(naziv, opis, tip, trajanje, trener_id) VALUES('Joga', 'Joga za opustanje','YOGA', 1.0, 2);

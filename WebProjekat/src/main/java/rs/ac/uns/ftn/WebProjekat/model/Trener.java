@@ -51,6 +51,18 @@ public class Trener implements Serializable{
     @OneToMany(mappedBy = "trener", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Trening> listatreninga = new HashSet<>();
 
+    public Trener(){}
+
+    public Trener(String ki, String ime, String prez, String br, String email, String datum, Boolean aktivan){
+        this.korisnickoime=ki;
+        this.ime=ime;
+        this.prezime=prez;
+        this.brtelefona=br;
+        this.email=email;
+        this.datumrodjenja=datum;
+        this.aktivan=aktivan;
+    }
+
     public Long getId(){return id;}
     public void setId(Long id){this.id=id;}
 

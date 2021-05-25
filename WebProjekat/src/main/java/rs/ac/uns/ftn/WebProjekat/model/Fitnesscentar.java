@@ -36,11 +36,23 @@ public class Fitnesscentar implements Serializable{
     @OneToOne(mappedBy = "fitnesscentar")
     private Administrator admin;
 
+    public Fitnesscentar(){}
+
+    public Fitnesscentar(String naziv, String adresa, String br, String email){
+        this.naziv=naziv;
+        this.adresa=adresa;
+        this.brtelefona=br;
+        this.email=email;
+    }
+
     public Long getId(){return id;}
     public void setId(Long id){this.id=id;}
 
     public String getNaziv(){return naziv;}
     public void setNaziv(String naziv){this.naziv=naziv;}
+
+    public String getAdresa(){return adresa;}
+    public void setAdresa(String adresa){this.adresa=adresa;}
 
     public String getBrTelefona(){return brtelefona;}
     public void setBrTelefona(String brtelefona){this.brtelefona=brtelefona;}
