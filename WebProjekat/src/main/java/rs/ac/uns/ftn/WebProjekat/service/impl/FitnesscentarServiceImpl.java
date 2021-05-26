@@ -25,4 +25,24 @@ public class FitnesscentarServiceImpl implements FitnesscentarService{
         Fitnesscentar newFitnesscentar = this.fitnesscentarRepository.save(fitnesscentar);
         return newFitnesscentar;
     }
+
+    @Override
+    public Fitnesscentar update(Fitnesscentar fitnesscentar) throws Exception{
+        Fitnesscentar fitnesscentarToUpdate = this.fitnesscentarRepository.getOne(fitnesscentar.getId());
+        if(fitnesscentarToUpdate==null){
+            throw new Exception("Fitnesscentar doesn't exist!");
+        }
+        fitnesscentarToUpdate.setNaziv(fitnesscentar.getNaziv());
+        fitnesscentarToUpdate.setAdresa(fitnesscentar.getAdresa());
+        fitnesscentarToUpdate.setBrTelefona(fitnesscentar.getBrTelefona());
+        fitnesscentarToUpdate.setEmail(fitnesscentar.getEmail());
+
+        Fitnesscentar savedFitnesscentar = this.fitnesscentarRepository.save(fitnesscentarToUpdate);
+        return savedFitnesscentar;
+    }
+
+    @Override
+    public void delete(Long id){
+        this.fitnesscentarRepository.deleteById(id);
+    }
 }

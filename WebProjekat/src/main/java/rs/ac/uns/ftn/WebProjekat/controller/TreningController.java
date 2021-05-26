@@ -8,7 +8,6 @@ import rs.ac.uns.ftn.WebProjekat.service.TreningService;
 import rs.ac.uns.ftn.WebProjekat.model.Trening;
 import rs.ac.uns.ftn.WebProjekat.model.dto.TreningDTO;
 import org.springframework.http.HttpStatus;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class TreningController{
         List<TreningDTO> treninziDTO = new ArrayList<>();
 
         for(Trening trening : treninzi) {
-            TreningDTO treningDTO = new TreningDTO(trening.getId(),trening.getNaziv(), trening.getOpis(), trening.getTrajanje(),trening.getTrener().getIme(), trening.getTrener().getPrezime());
+            TreningDTO treningDTO = new TreningDTO(trening.getId(),trening.getNaziv(), trening.getTip(), trening.getOpis(), trening.getTrajanje(),trening.getTrener().getIme(), trening.getTrener().getPrezime());
             treninziDTO.add(treningDTO);
         }
 

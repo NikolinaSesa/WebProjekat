@@ -4,6 +4,7 @@ public class TreningDTO{
 
     private Long id;
     private String naziv;
+    private Tip tip;
     private String opis;
     private Double trajanje;
     private String imeTrenera;
@@ -11,9 +12,10 @@ public class TreningDTO{
     
     public TreningDTO(){}
 
-    public TreningDTO(Long id, String n, String o, Double tr, String ime, String prezime){
+    public TreningDTO(Long id, String n, Tip tip, String o, Double tr, String ime, String prezime){
         this.id=id;
         this.naziv=n;
+        this.tip=tip;
         this.opis=o;
         this.trajanje=tr;
         this.imeTrenera=ime;
@@ -25,6 +27,9 @@ public class TreningDTO{
 
     public String getNaziv(){return naziv;}
     public void setNaziv(String naziv){this.naziv=naziv;}
+
+    public Tip getTip(){return tip;}
+    public void setTip(Tip tip){this.tip=tip;}
 
     public String getOpis(){return opis;}
     public void setOpis(String opis){this.opis=opis;}
