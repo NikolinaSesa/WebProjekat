@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/trening_document_ready.js"></script>
+    <title>Pregled Treninga</title>
+    <style>
+        html{
+            height: 100%;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background: linear-gradient(#141e30, #243b55);
+        }
+        table{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 75%;
+            padding: 40px;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, .5);
+            box-sizing: border-box;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
+            border-radius: 10px;
+        }
+        h1{
+            margin-top: 50px;
+            color: #fff;
+            text-align: center;
+        }
+        th, td{
+            padding: 0.5rem;
+            border: 1px solid #999;
+            color: #fff;
+        }
+        table, th, td{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="treninzi">
+        <h1>Pregled Treninga</h1>
+        <table id="sviTreninzi">
+            <thead>
+                <tr>
+                    <th>Naziv</th>
+                    <th>Tip</th>
+                    <th>Opis</th>
+                    <th>Trajanje</th>
+                    <th>Ime Trenera</th>
+                    <th>Prezime Trenera</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</body>
+</html>

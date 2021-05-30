@@ -2,6 +2,8 @@ package rs.ac.uns.ftn.WebProjekat.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import rs.ac.uns.ftn.WebProjekat.service.TrenerService;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,7 @@ import rs.ac.uns.ftn.WebProjekat.model.dto.TrenerDTO;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/api/trener")
 public class TrenerController{
@@ -28,7 +31,7 @@ public class TrenerController{
         this.trenerService=trenerService;
     }
 
-    @GetMapping(value = "/{aktivan}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/aktivan/{aktivan}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<TrenerDTO>> getListaZahteva(@PathVariable("aktivan") Boolean aktivan){
         List<Trener> treneri = this.trenerService.findByAktivan(aktivan);
 
@@ -39,6 +42,23 @@ public class TrenerController{
             treneriDTO.add(trenerDTO);
         }
         return new ResponseEntity<>(treneriDTO, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<TrenerDTO> getTrener(@PathVariable("id") Long id){
+        Trener trener = this.trenerService.findOne(id);
+
+        TrenerDTO trenerDTO = new TrenerDTO();
+        trenerDTO.setId(trener.getId());
+        trenerDTO.setKorisnickoIme(trener.getKorisnickoIme());
+        trenerDTO.setIme(trener.getIme());
+        trenerDTO.setPrezime(trener.getPrezime());
+        trenerDTO.setBr(trener.getBrTelefona());
+        trenerDTO.setEmail(trener.getEmail());
+        trenerDTO.setDatum(trener.getDatum());
+        trenerDTO.setAktivan(trener.getAktivan());
+
+        return new ResponseEntity<>(trenerDTO, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/delete/{id}")

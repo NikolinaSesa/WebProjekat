@@ -39,4 +39,10 @@ public class TrenerServiceImpl implements TrenerService{
         Trener saveTrener = this.trenerRepository.save(trenerToUpdate);
         return saveTrener;
     }
+
+    @Override
+    public Trener findOne(Long id){
+        Trener trener = this.trenerRepository.getOne(id);
+        return trener;
+    }
 }

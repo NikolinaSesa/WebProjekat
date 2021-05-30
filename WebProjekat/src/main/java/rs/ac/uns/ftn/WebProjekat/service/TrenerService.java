@@ -10,4 +10,6 @@ public interface TrenerService{
     void delete(Long id);
 
     Trener update(Trener trener) throws Exception;
+
+    Trener findOne(Long id);
 }
