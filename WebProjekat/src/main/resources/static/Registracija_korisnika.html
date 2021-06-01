@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/clan.js"></script>
     <title>Registracija Korisnika</title>
     <style>
         html{
@@ -63,7 +63,7 @@
             color: #03e9f4;
             font-size: 12px;
         }
-        form a{
+        .submit{
             position: relative;
             display: inline-block;
             padding: 10px 20px;
@@ -76,7 +76,7 @@
             margin-top: 40px;
             letter-spacing: 4px;
         }
-        a:hover{
+        .submit:hover{
             background: #30e9f4;
             color: #fff;
             border-radius: 5px;
@@ -90,38 +90,36 @@
 <body>
     <div class="login">
         <h2>Registracija Korisnika</h2>
-        <form>
+        <form id="regKorisnika">
             <div class="user">
-                <input type="text" required>
-                <label>Ime</label>
+                <input id="ime" type="text" required>
+                <label for="ime">Ime</label>
             </div>
             <div class="user">
-                <input type="text" required>
-                <label>Prezime</label>
+                <input id="prezime" type="text" required>
+                <label for="prezime">Prezime</label>
             </div>
             <div class="user">
-                <input type="text" required>
-                <label>Korisnicko Ime</label>
+                <input id="korisnickoIme" type="text" required>
+                <label for="korisnickoIme">Korisnicko Ime</label>
             </div>
             <div class="user">
-                <input type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
-                <label>E-mail Adresa</label>
+                <input id="email" type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                <label for="email">E-mail Adresa</label>
             </div>
             <div class="user">
-                <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
-                <label>Lozinka</label>
+                <input id="lozinka" type="password" required>
+                <label for="lozinka">Lozinka</label>
             </div>
             <div class="user">
-                <input type="date" required>
-                <label style="top: -20px;">Datum Rodjenja</label>
+                <input id="datum" type="date" required>
+                <label for="datum" style="top: -20px;">Datum Rodjenja</label>
             </div>
             <div class="user">
-                <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
-                <label>Kontakt Telefon</label>
+                <input id="broj" type="tel" required>
+                <label for="broj">Kontakt Telefon</label>
             </div>
-            <a href="#">
-                Registruj Se
-            </a>
+            <input type="submit" class="submit" value="Registruj Se">
         </form>
     </div>
 </body>

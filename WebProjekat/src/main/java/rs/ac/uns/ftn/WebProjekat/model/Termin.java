@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.HashSet;
 import javax.persistence.*;
 import rs.ac.uns.ftn.WebProjekat.model.dto.Dani;
+import java.sql.Time;
 
 @Entity
 public class Termin{
@@ -21,7 +22,7 @@ public class Termin{
     private Dani dan;
 
     @Column
-    private Double vreme;
+    private Time vreme;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Sala sala;
@@ -51,8 +52,8 @@ public class Termin{
     public Dani getDan(){return dan;}
     public void setDan(Dani dan){this.dan=dan;}
 
-    public Double getVreme(){return vreme;}
-    public void setVreme(Double vreme){this.vreme=vreme;}
+    public Time getVreme(){return vreme;}
+    public void setVreme(Time vreme){this.vreme=vreme;}
 
     public Sala getSala(){return sala;}
     public void setSala(Sala sala){this.sala=sala;}

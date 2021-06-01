@@ -36,6 +36,7 @@ $(document).on('click','.btnOdobri', function(){
         type:"PUT",
         url:"http://localhost:8080/api/trener/put/"+trenerId,
         dataType:"json",
+        contentType:"application/json",
         data: JSON.stringify({"aktivan":true}),
         success:function(response){
             console.log("SUCCESS:\n", response);
@@ -61,6 +62,46 @@ $(document).on('click','.btnOdbi', function(){
         },
         error:function(){
             alert("ERROR");
+        }
+    });
+});
+
+//registracija novog trenera i prikaz u tabeli zahteva
+$(document).on("submit", "#regTrenera", function(event){
+    event.preventDefault();
+
+    let ime = $("#ime").val();
+    let prezime = $("#prezime").val();
+    let korisnickoIme = $("#korisnickoIme").val();
+    let email = $("#email").val();
+    let lozinka = $("#lozinka").val();
+    let datumRodjenja = $("#datum").val()
+    let brTelefona = $("#telefon").val();
+
+    let newTrener = {
+        korisnickoIme,
+        lozinka,
+        ime,
+        prezime,
+        brTelefona,
+        email,
+        datumRodjenja
+    }
+    $.ajax({
+        type:"POST",
+        url:"http://localhost:8080/api/trener/dodaj",
+        dataType:"json",
+        contentType:"application/json",
+        data: JSON.stringify(newTrener),
+        success:function(response){
+            console.log(response);
+
+            alert("Hvala na registraciji! Molim Vas sacekajte da vas zahtev bude obradjen!");
+
+            window.location.href="Login_korisnika.html";
+        },
+        error:function(){
+            alert("Greska prilikom registracije!");
         }
     });
 });

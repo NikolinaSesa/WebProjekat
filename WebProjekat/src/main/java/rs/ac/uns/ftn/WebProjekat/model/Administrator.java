@@ -3,6 +3,7 @@ package rs.ac.uns.ftn.WebProjekat.model;
 import javax.persistence.*;
 import jdk.jfr.BooleanFlag;
 import java.io.Serializable;
+import java.sql.Date;
 
 @Entity
 public class Administrator implements Serializable{
@@ -24,13 +25,13 @@ public class Administrator implements Serializable{
     private String prezime;
 
     @Column
-    private String brtelefona;
+    private Long brtelefona;
 
     @Column
     private String email;
 
     @Column
-    private String datumrodjenja;
+    private Date datumrodjenja;
 
     @Enumerated(EnumType.STRING)
     @Column
@@ -58,14 +59,14 @@ public class Administrator implements Serializable{
     public String getPrezime(){return prezime;}
     public void setPrezime(String prezime){this.prezime=prezime;}
 
-    public String getBrTelefona(){return brtelefona;}
-    public void setBrTelefona(String tel){this.brtelefona=tel;}
+    public Long getBrTelefona(){return brtelefona;}
+    public void setBrTelefona(Long tel){this.brtelefona=tel;}
 
     public String getEmail(){return email;}
     public void setEmail(String email){this.email=email;}
 
-    public String getDatum(){return datumrodjenja;}
-    public void setDatum(String datum){this.datumrodjenja=datum;}
+    public Date getDatum(){return datumrodjenja;}
+    public void setDatum(Date datum){this.datumrodjenja=datum;}
 
     public Uloga getUloga(){return uloga;}
     public void setUloga(Uloga uloga){this.uloga=uloga;}

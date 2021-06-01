@@ -45,4 +45,13 @@ public class TrenerServiceImpl implements TrenerService{
         Trener trener = this.trenerRepository.getOne(id);
         return trener;
     }
+
+    @Override
+    public Trener create(Trener trener) throws Exception{
+        if(trener.getId()!=null){
+            throw new Exception("ID must be null!");
+        }
+        Trener newTrener = this.trenerRepository.save(trener);
+        return newTrener;
+    }
 }

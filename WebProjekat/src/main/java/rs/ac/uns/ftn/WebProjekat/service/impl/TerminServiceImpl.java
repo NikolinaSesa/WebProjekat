@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import rs.ac.uns.ftn.WebProjekat.model.*;
+import java.sql.Time;
 import java.util.List;
 import rs.ac.uns.ftn.WebProjekat.repository.TerminRepository;
 import rs.ac.uns.ftn.WebProjekat.service.TerminService;
@@ -26,7 +27,7 @@ public class TerminServiceImpl implements TerminService{
     }
 
     @Override
-    public List<Termin> findByVreme(Double vreme){
+    public List<Termin> findByVreme(Time vreme){
         List<Termin> terminiPoVremenu = this.terminRepository.findByVreme(vreme);
         return terminiPoVremenu;
     }

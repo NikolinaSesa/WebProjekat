@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.MediaType;
 import rs.ac.uns.ftn.WebProjekat.model.dto.TerminDTO;
 import rs.ac.uns.ftn.WebProjekat.model.Termin;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import rs.ac.uns.ftn.WebProjekat.service.TerminService;
@@ -40,7 +41,7 @@ public class TerminController{
     } 
     
     @GetMapping(value = "/vreme/{vreme}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<TerminDTO>> getTerminiPoVremenu(@PathVariable("vreme") Double vreme){
+    public ResponseEntity<List<TerminDTO>> getTerminiPoVremenu(@PathVariable("vreme") Time vreme){
         List<Termin> termini = this.terminService.findByVreme(vreme);
 
         List<TerminDTO> terminiDTO = new ArrayList<>();

@@ -1,6 +1,7 @@
 package rs.ac.uns.ftn.WebProjekat.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
@@ -26,13 +27,13 @@ public class Clan implements Serializable{
     private String prezime;
 
     @Column
-    private String brtelefona;
+    private Long brtelefona;
 
     @Column
     private String email;
 
     @Column
-    private String datumrodjenja;
+    private Date datumrodjenja;
 
     @Enumerated(EnumType.STRING)
     @Column
@@ -57,6 +58,20 @@ public class Clan implements Serializable{
     @JoinTable(name = "odradjeni", joinColumns = @JoinColumn(name = "clan_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "termin_id", referencedColumnName = "id"))
     private Set<Termin> listaOdradjenihTreninga = new HashSet<>();
 
+    public Clan(){}
+
+    public Clan(String ki, String lozinka, String ime, String prezime, Long br, String email, Date datum, Uloga uloga, Boolean aktivan){
+        this.korisnickoime=ki;
+        this.lozinka=lozinka;
+        this.ime=ime;
+        this.prezime=prezime;
+        this.brtelefona=br;
+        this.email=email;
+        this.datumrodjenja=datum;
+        this.uloga=uloga;
+        this.aktivan=aktivan;
+    }
+
     public Long getId(){return id;}
     public void setId(Long id){this.id=id;}
 
@@ -72,14 +87,14 @@ public class Clan implements Serializable{
     public String getPrezime(){return prezime;}
     public void setPrezime(String prezime){this.prezime=prezime;}
 
-    public String getBrTelefona(){return brtelefona;}
-    public void setBrTelefona(String tel){this.brtelefona=tel;}
+    public Long getBrTelefona(){return brtelefona;}
+    public void setBrTelefona(Long tel){this.brtelefona=tel;}
 
     public String getEmail(){return email;}
     public void setEmail(String email){this.email=email;}
 
-    public String getDatum(){return datumrodjenja;}
-    public void setDatum(String datum){this.datumrodjenja=datum;}
+    public Date getDatum(){return datumrodjenja;}
+    public void setDatum(Date datum){this.datumrodjenja=datum;}
 
     public Uloga getUloga(){return uloga;}
     public void setUloga(Uloga uloga){this.uloga=uloga;}

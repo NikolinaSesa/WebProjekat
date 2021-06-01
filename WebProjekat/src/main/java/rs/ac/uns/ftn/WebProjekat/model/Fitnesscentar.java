@@ -19,7 +19,7 @@ public class Fitnesscentar implements Serializable{
     private String adresa;
 
     @Column
-    private String brtelefona;
+    private Long brtelefona;
 
     @Column
     private String email;
@@ -38,7 +38,7 @@ public class Fitnesscentar implements Serializable{
 
     public Fitnesscentar(){}
 
-    public Fitnesscentar(String naziv, String adresa, String br, String email){
+    public Fitnesscentar(String naziv, String adresa, Long br, String email){
         this.naziv=naziv;
         this.adresa=adresa;
         this.brtelefona=br;
@@ -54,8 +54,8 @@ public class Fitnesscentar implements Serializable{
     public String getAdresa(){return adresa;}
     public void setAdresa(String adresa){this.adresa=adresa;}
 
-    public String getBrTelefona(){return brtelefona;}
-    public void setBrTelefona(String brtelefona){this.brtelefona=brtelefona;}
+    public Long getBrTelefona(){return brtelefona;}
+    public void setBrTelefona(Long brtelefona){this.brtelefona=brtelefona;}
 
     public String getEmail(){return email;}
     public void setEmail(String email){this.email=email;}

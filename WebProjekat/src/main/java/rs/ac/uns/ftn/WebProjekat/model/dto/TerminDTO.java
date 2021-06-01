@@ -1,5 +1,7 @@
 package rs.ac.uns.ftn.WebProjekat.model.dto;
 
+import java.sql.Time;
+
 public class TerminDTO{
     
     private Long id;
@@ -7,14 +9,14 @@ public class TerminDTO{
     private Tip tipTreninga;
     private String opisTreninga;
     private Double cena;
-    private Double vreme;
+    private Time vreme;
     private Dani dan;
     private String imeTrenera;
     private String prezimeTrenera;
 
     public TerminDTO(){}
 
-    public TerminDTO(Long id, String naziv,Tip tip, String opis, Double cena, Double vreme, Dani dan, String ime, String prezime){
+    public TerminDTO(Long id, String naziv,Tip tip, String opis, Double cena, Time vreme, Dani dan, String ime, String prezime){
         this.id=id;
         this.nazivTreninga=naziv;
         this.tipTreninga=tip;
@@ -41,8 +43,8 @@ public class TerminDTO{
     public Double getCena(){return cena;}
     public void setCena(Double cena){this.cena=cena;}
 
-    public Double getVreme(){return vreme;}
-    public void setVreme(Double vreme){this.vreme=vreme;}
+    public Time getVreme(){return vreme;}
+    public void setVreme(Time vreme){this.vreme=vreme;}
 
     public Dani getDan(){return dan;}
     public void setDan(Dani dan){this.dan=dan;}

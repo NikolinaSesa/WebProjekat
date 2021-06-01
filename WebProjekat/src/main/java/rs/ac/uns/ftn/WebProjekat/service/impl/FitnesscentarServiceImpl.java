@@ -2,7 +2,7 @@ package rs.ac.uns.ftn.WebProjekat.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import java.util.List;
 import rs.ac.uns.ftn.WebProjekat.model.Fitnesscentar;
 import rs.ac.uns.ftn.WebProjekat.repository.FitnesscentarRepository;
 import rs.ac.uns.ftn.WebProjekat.service.FitnesscentarService;
@@ -44,5 +44,11 @@ public class FitnesscentarServiceImpl implements FitnesscentarService{
     @Override
     public void delete(Long id){
         this.fitnesscentarRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Fitnesscentar> findAll(){
+        List<Fitnesscentar> fitnesscentri = this.fitnesscentarRepository.findAll();
+        return fitnesscentri;
     }
 }

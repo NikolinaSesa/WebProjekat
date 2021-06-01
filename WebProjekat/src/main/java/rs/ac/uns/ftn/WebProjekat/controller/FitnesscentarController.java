@@ -1,7 +1,9 @@
 package rs.ac.uns.ftn.WebProjekat.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -14,7 +16,10 @@ import org.springframework.http.ResponseEntity;
 import rs.ac.uns.ftn.WebProjekat.model.Fitnesscentar;
 import rs.ac.uns.ftn.WebProjekat.model.dto.FitnesscentarDTO;
 import rs.ac.uns.ftn.WebProjekat.service.FitnesscentarService;
+import java.util.ArrayList;
+import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/api/fitnesscentar")
 public class FitnesscentarController {
@@ -55,5 +60,18 @@ public class FitnesscentarController {
     public ResponseEntity<Void> deleteFitnesscentar(@PathVariable Long id){
         this.fitnesscentarService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping(value = "/svi", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<FitnesscentarDTO>> getFitnesscentri(){
+        List<Fitnesscentar> fitnesscentri = this.fitnesscentarService.findAll();
+
+        List<FitnesscentarDTO> fitnesscentriDTO = new ArrayList<>();
+
+        for(Fitnesscentar fitnesscentar : fitnesscentri){
+            FitnesscentarDTO fitnesscentarDTO = new FitnesscentarDTO(fitnesscentar.getId(), fitnesscentar.getNaziv(), fitnesscentar.getAdresa(), fitnesscentar.getBrTelefona(), fitnesscentar.getEmail());
+            fitnesscentriDTO.add(fitnesscentarDTO);
+        }
+        return new ResponseEntity<>(fitnesscentriDTO, HttpStatus.OK);
     }
 }
