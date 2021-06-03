@@ -18,8 +18,8 @@ public class TrenerServiceImpl implements TrenerService{
     }
 
     @Override
-    public List<Trener> findByAktivan(Boolean aktivan){
-        List<Trener> listaZahteva = this.trenerRepository.findByAktivan(aktivan);
+    public List<Trener> findByAktivanAndFitnesscentarId(Boolean aktivan, Long fitnesscentarId){
+        List<Trener> listaZahteva = this.trenerRepository.findByAktivanAndFitnesscentarId(aktivan, fitnesscentarId);
         return listaZahteva;
     }
 

@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Fitnesscentar</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/trener.js"></script>
+    <title>Registracija Novog Trenera</title>
     <style>
         html{
             height: 100%;
@@ -24,11 +26,6 @@
             box-sizing: border-box;
             box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
             border-radius: 10px;
-        }
-        h1{
-            margin-top: 50px;
-            color: #fff;
-            text-align: center;
         }
         h2{
             margin: 0 0 30px;
@@ -66,7 +63,7 @@
             color: #03e9f4;
             font-size: 12px;
         }
-        form a{
+        .submit{
             position: relative;
             display: inline-block;
             padding: 10px 20px;
@@ -79,7 +76,7 @@
             margin-top: 40px;
             letter-spacing: 4px;
         }
-        a:hover{
+        .submit:hover{
             background: #30e9f4;
             color: #fff;
             border-radius: 5px;
@@ -91,17 +88,39 @@
     </style>
 </head>
 <body>
-    <h1>FITNESS CENTAR</h1>
     <div class="login">
-        <form>
-            <a href="#">IZMENI</a>         
-            <a href="#">SALE</a>
-            <a href="Pregled_treninga.html">TRENINZI</a>
-            <a href="Odobravanje_zahteva.html">ZAHTEVI</a>
-            <a href="Admin_Registracija_Trenera.html">REGISTRACIJA TRENERA</a>
-            <a href="#">UKLANJANJE TRENERA</a>
-            <a href="#">UKLONI FITNESS CENTAR</a>
-         </form>
+        <h2>Registracija Novog Trenera</h2>
+        <form id="adminRegTrenera">
+            <div class="user">
+                <input id="ime" type="text" required>
+                <label for="ime">Ime</label>
+            </div>
+            <div class="user">
+                <input id="prezime" type="text" required>
+                <label for="prezime">Prezime</label>
+            </div>
+            <div class="user">
+                <input id="korisnickoIme" type="text" required>
+                <label for="korisnickoIme">Korisnicko Ime</label>
+            </div>
+            <div class="user">
+                <input id="email" type="text" required>
+                <label for="email">E-mail Adresa</label>
+            </div>
+            <div class="user">
+                <input id="lozinka" type="password" required>
+                <label for="lozinka">Lozinka</label>
+            </div>
+            <div class="user">
+                <input id="datum" type="date" required>
+                <label for="datum" style="top: -20px;">Datum Rodjenja</label>
+            </div>
+            <div class="user">
+                <input id="telefon" type="tel" required>
+                <label for="telefon">Kontakt Telefon</label>
+            </div>
+            <input type="submit" class="submit" value="Posalji Zahtev">
+        </form>
     </div>
 </body>
 </html>

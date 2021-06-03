@@ -1,8 +1,9 @@
 $(document).ready(function(){
     // ajax poziv za dobavljanje svih trenera ciji zahtevi nisu odobreni
+    let fitnesscentarId = localStorage.getItem("fitnesscentarId");
     $.ajax({
         type:"GET",
-        url:"http://localhost:8080/api/trener/aktivan/false",
+        url:"http://localhost:8080/api/trener/aktivan/fcid/false/"+fitnesscentarId,
         dataType:"json",
         success:function(response){
             console.log("SUCCESS:\n", response);

@@ -44,9 +44,20 @@ public class TrenerController{
         return new ResponseEntity<>(newTrenerDTO, HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/aktivan/{aktivan}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<TrenerDTO>> getListaZahteva(@PathVariable("aktivan") Boolean aktivan){
-        List<Trener> treneri = this.trenerService.findByAktivan(aktivan);
+    @PostMapping(value = "/dodajKaoAdmin", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<TrenerDTO> adminCreateTrener(@RequestBody TrenerDTO trenerDTO) throws Exception{
+        Trener trener = new Trener(trenerDTO.getKorisnickoIme(), trenerDTO.getLozinka(), trenerDTO.getIme(), trenerDTO.getPrezime(),trenerDTO.getBrTelefona(), trenerDTO.getEmail(), trenerDTO.getDatumRodjenja(), Uloga.TRENER, true);
+        
+        Trener newTrener = trenerService.create(trener);
+
+        TrenerDTO newTrenerDTO = new TrenerDTO(newTrener.getId(), newTrener.getKorisnickoIme(), newTrener.getLozinka(), newTrener.getIme(), newTrener.getPrezime(), newTrener.getBrTelefona(), newTrener.getEmail(), newTrener.getDatum(), newTrener.getUloga(), newTrener.getAktivan());
+
+        return new ResponseEntity<>(newTrenerDTO, HttpStatus.CREATED);
+    }
+
+    @GetMapping(value = "/aktivan/fcid/{aktivan}/{fitnesscentarId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TrenerDTO>> getListaZahteva(@PathVariable Boolean aktivan, @PathVariable Long fitnesscentarId){
+        List<Trener> treneri = this.trenerService.findByAktivanAndFitnesscentarId(aktivan, fitnesscentarId);
 
         List<TrenerDTO> treneriDTO = new ArrayList<>(); 
 

@@ -5,7 +5,7 @@ import rs.ac.uns.ftn.WebProjekat.model.Trener;
 
 public interface TrenerService{
     
-    List<Trener> findByAktivan(Boolean aktivan);
+    List<Trener> findByAktivanAndFitnesscentarId(Boolean aktivan, Long fitnesscentarId);
 
     void delete(Long id);
 

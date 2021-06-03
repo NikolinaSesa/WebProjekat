@@ -22,6 +22,3 @@ $(document).ready(function(){
     });
 });
 
-$(document).on('click', '.btnSeeMore', function(){
-    window.location.href="Fitnesscentar.html";
-})
