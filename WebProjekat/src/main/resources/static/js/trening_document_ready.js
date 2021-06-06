@@ -1,8 +1,10 @@
 $(document).ready(function(){
 
+    let fitnesscentarId=localStorage.getItem("fitnesscentarId");
+
     $.ajax({
         type:"GET",
-        url:"http://localhost:8080/api/treninzi",
+        url:"http://localhost:8080/api/treninzi/"+fitnesscentarId,
         dataType:"json",
         success:function(response){
             console.log("SUCCESS:\n", response);

@@ -1,6 +1,8 @@
 package rs.ac.uns.ftn.WebProjekat.model.dto;
 
 import java.sql.Date;
+
+import rs.ac.uns.ftn.WebProjekat.model.Fitnesscentar;
 import rs.ac.uns.ftn.WebProjekat.model.Uloga;
 
 public class TrenerDTO {
@@ -15,6 +17,7 @@ public class TrenerDTO {
     private Date datumRodjenja;
     private Uloga uloga;
     private Boolean aktivan;
+    private Fitnesscentar fitnesscentar;
 
     public TrenerDTO(){}
 
@@ -73,4 +76,6 @@ public class TrenerDTO {
     public Boolean getAktivan(){return aktivan;}
     public void setAktivan(Boolean aktivan){this.aktivan=aktivan;}
     
+    public Fitnesscentar getFitnesscentar(){return fitnesscentar;}
+    public void setFitnesscentar(Fitnesscentar fitnesscentar){this.fitnesscentar=fitnesscentar;}
 }

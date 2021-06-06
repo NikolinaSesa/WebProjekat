@@ -18,8 +18,8 @@ public class TreningServiceImpl implements TreningService{
     }
 
     @Override
-    public List<Trening> findAll(){
-        List<Trening> treninzi = this.treningRepository.findAll();
+    public List<Trening> findByTrenerFitnesscentarId(Long fitnesscentarId){
+        List<Trening> treninzi = this.treningRepository.findByTrenerFitnesscentarId(fitnesscentarId);
         return treninzi;
     }
     

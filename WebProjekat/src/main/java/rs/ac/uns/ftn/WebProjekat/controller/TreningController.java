@@ -23,9 +23,9 @@ public class TreningController{
         this.treningService = treningService;
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<TreningDTO>> getTreninzi(){
-        List<Trening> treninzi = this.treningService.findAll(); 
+    @GetMapping(value = "/{fitnesscentarId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TreningDTO>> getTreninzi(@PathVariable Long fitnesscentarId){
+        List<Trening> treninzi = this.treningService.findByTrenerFitnesscentarId(fitnesscentarId); 
 
         List<TreningDTO> treninziDTO = new ArrayList<>();
 

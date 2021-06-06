@@ -117,33 +117,51 @@ $(document).on("submit", "#adminRegTrenera", function(event){
     let lozinka = $("#lozinka").val();
     let datumRodjenja = $("#datum").val()
     let brTelefona = $("#telefon").val();
+    let fitnesscentarId=localStorage.getItem("fitnesscentarId")
 
-    let newTrener = {
-        korisnickoIme,
-        lozinka,
-        ime,
-        prezime,
-        brTelefona,
-        email,
-        datumRodjenja
-    }
-    $.ajax({
-        type:"POST",
-        url:"http://localhost:8080/api/trener/dodajKaoAdmin",
-        dataType:"json",
-        contentType:"application/json",
-        data: JSON.stringify(newTrener),
-        success:function(response){
-            console.log(response);
-
-            alert("Hvala na registraciji!");
-
-            window.location.href="Login_korisnika.html";
-        },
-        error:function(){
-            alert("Greska prilikom registracije!");
+        let newTrener = {
+            korisnickoIme,
+            lozinka,
+            ime,
+            prezime,
+            brTelefona,
+            email,
+            datumRodjenja,
         }
-    });
+        
+        $.ajax({
+            type:"POST",
+            url:"http://localhost:8080/api/trener/dodajKaoAdmin",
+            dataType:"json",
+            contentType:"application/json",
+            data: JSON.stringify(newTrener),
+            success:function(response){
+                console.log(response);
+                    
+                alert("Hvala na registraciji!");
+        
+                window.location.href="Login_korisnika.html";
+            },
+            error:function(){
+                alert("Greska prilikom registracije!");
+            }   
+    });  
 });
 
 //uklanjanje trenera od strane administratora
+$(document).on('click','.btnObrisi', function(){
+    let trenerId = this.dataset.id;
+
+    $.ajax({
+        type:"DELETE",
+        url:"http://localhost:8080/api/trener/delete/"+trenerId,
+        dataType:"json",
+        success:function(){
+            console.log("SUCCESS");
+            $('[data-id="'+trenerId+'"]').parent().parent().remove();
+        },
+        error:function(){
+            alert("ERROR");
+        }
+    });
+});

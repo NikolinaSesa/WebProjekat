@@ -74,4 +74,13 @@ public class FitnesscentarController {
         }
         return new ResponseEntity<>(fitnesscentriDTO, HttpStatus.OK);
     }
+
+    @GetMapping(value = "/id/{fitnesscentarId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<FitnesscentarDTO> getFitnesscentarById(@PathVariable Long fitnesscentarId){
+        Fitnesscentar fitnesscentar = this.fitnesscentarService.findById(fitnesscentarId);
+
+        FitnesscentarDTO fitnesscentarDTO = new FitnesscentarDTO(fitnesscentar.getId(), fitnesscentar.getNaziv(), fitnesscentar.getAdresa(), fitnesscentar.getBrTelefona(), fitnesscentar.getEmail());
+
+        return new ResponseEntity<>(fitnesscentarDTO, HttpStatus.OK);
+    }
 }

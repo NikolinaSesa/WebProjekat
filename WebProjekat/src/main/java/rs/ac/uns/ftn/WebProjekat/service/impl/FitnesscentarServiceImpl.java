@@ -1,5 +1,4 @@
 package rs.ac.uns.ftn.WebProjekat.service.impl;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -50,5 +49,11 @@ public class FitnesscentarServiceImpl implements FitnesscentarService{
     public List<Fitnesscentar> findAll(){
         List<Fitnesscentar> fitnesscentri = this.fitnesscentarRepository.findAll();
         return fitnesscentri;
+    }
+
+    @Override
+    public Fitnesscentar findById(Long fitnesscentarId){
+        Fitnesscentar fitnesscentar = this.fitnesscentarRepository.getOne(fitnesscentarId);
+        return fitnesscentar;
     }
 }

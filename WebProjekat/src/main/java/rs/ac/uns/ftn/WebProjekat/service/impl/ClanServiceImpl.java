@@ -25,4 +25,10 @@ public class ClanServiceImpl implements ClanService{
         Clan newClan = this.clanRepository.save(clan);
         return newClan;
     }
+
+    @Override
+    public Clan findByKorisnickoime(String korisnickoime){
+        Clan clan = this.clanRepository.findByKorisnickoime(korisnickoime);
+        return clan;
+    }
 }

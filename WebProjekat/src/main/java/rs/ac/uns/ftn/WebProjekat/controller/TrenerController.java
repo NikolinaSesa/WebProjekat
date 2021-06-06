@@ -2,7 +2,6 @@ package rs.ac.uns.ftn.WebProjekat.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import rs.ac.uns.ftn.WebProjekat.service.TrenerService;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +35,7 @@ public class TrenerController{
     @PostMapping(value = "/dodaj", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TrenerDTO> createTrener(@RequestBody TrenerDTO trenerDTO) throws Exception{
         Trener trener = new Trener(trenerDTO.getKorisnickoIme(), trenerDTO.getLozinka(), trenerDTO.getIme(), trenerDTO.getPrezime(),trenerDTO.getBrTelefona(), trenerDTO.getEmail(), trenerDTO.getDatumRodjenja(), Uloga.TRENER, false);
-        
+      
         Trener newTrener = trenerService.create(trener);
 
         TrenerDTO newTrenerDTO = new TrenerDTO(newTrener.getId(), newTrener.getKorisnickoIme(), newTrener.getLozinka(), newTrener.getIme(), newTrener.getPrezime(), newTrener.getBrTelefona(), newTrener.getEmail(), newTrener.getDatum(), newTrener.getUloga(), newTrener.getAktivan());

@@ -5,6 +5,8 @@ import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,6 +37,15 @@ public class ClanController {
         ClanDTO newClanDTO = new ClanDTO(newClan.getId(), newClan.getKorisnickoIme(), newClan.getLozinka(), newClan.getIme(), newClan.getPrezime(), newClan.getBrTelefona(), newClan.getEmail(), newClan.getDatum(), newClan.getUloga(), newClan.getAktivan());
         
         return new ResponseEntity<>(newClanDTO, HttpStatus.CREATED);
+    }
+
+    @GetMapping(value = "/ki/{korisnickoime}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ClanDTO> getClan(@PathVariable("korisnickoime") String korisnickoime){
+        Clan clan = this.clanService.findByKorisnickoime(korisnickoime);
+
+        ClanDTO clanDTO = new ClanDTO(clan.getId(), clan.getKorisnickoIme(), clan.getLozinka(), clan.getIme(), clan.getPrezime(), clan.getBrTelefona(), clan.getEmail(), clan.getDatum(), clan.getUloga(), clan.getAktivan());
+
+        return new ResponseEntity<>(clanDTO, HttpStatus.OK);
     }
     
 }

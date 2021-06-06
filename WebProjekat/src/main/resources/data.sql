@@ -1,4 +1,5 @@
 INSERT INTO FITNESSCENTAR(naziv, adresa, brtelefona, email) VALUES ('SuperFC', 'Kraljevica Marka bb', '0645536273', 'superfc@gmail.com');
+INSERT INTO FITNESSCENTAR(naziv, adresa, brtelefona, email) VALUES ('FitMax', 'Svetog Save 11a', '0651234676', 'maxFit@gmail.com');
 
 INSERT INTO SALA(kapacitet, oznaka, fitnesscentar_id) VALUES (60, 'A23',1);
 INSERT INTO SALA(kapacitet, oznaka, fitnesscentar_id) VALUES (45, 'B14',1);

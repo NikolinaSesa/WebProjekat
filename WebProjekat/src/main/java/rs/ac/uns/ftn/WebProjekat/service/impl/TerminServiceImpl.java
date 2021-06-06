@@ -34,31 +34,43 @@ public class TerminServiceImpl implements TerminService{
 
     @Override
     public List<Termin> findByTreningNaziv(String naziv){
-        List<Termin> terminiPoNazivuTreninga = this.terminRepository.findByTreningNaziv(naziv);
+        List<Termin> terminiPoNazivuTreninga = this.terminRepository.findByTreningNazivContaining(naziv);
         return terminiPoNazivuTreninga;
     }
 
     @Override
     public List<Termin> findByTreningOpis(String opis){
-        List<Termin> terminiPoOpisuTreninga = this.terminRepository.findByTreningOpis(opis);
+        List<Termin> terminiPoOpisuTreninga = this.terminRepository.findByTreningOpisContaining(opis);
         return terminiPoOpisuTreninga;
     }
 
     @Override
     public List<Termin> findByTreningTip(Tip tip){
-        List<Termin> terminiPoTipuTreninga = this.terminRepository.findByTreningTip(tip);
+        List<Termin> terminiPoTipuTreninga = this.terminRepository.findByTreningTipContaining(tip);
         return terminiPoTipuTreninga;
     }
 
     @Override
-    public List<Termin> findAllAndSortByCena(){
-        List<Termin> terminiSortiraniPoCeni = this.terminRepository.findAll(Sort.by(Sort.Direction.ASC, "cena"));
+    public List<Termin> findAllAndSortByCenaRastuce(Long fitnesscentarId){
+        List<Termin> terminiSortiraniPoCeni = this.terminRepository.findByTreningTrenerFitnesscentarId(Sort.by(Sort.Direction.ASC, "cena"), fitnesscentarId);
         return terminiSortiraniPoCeni;
     }
 
     @Override
-    public List<Termin> findAllAndSortByVreme(){
-        List<Termin> terminiSortiraniPoVemenu = this.terminRepository.findAll(Sort.by(Sort.Direction.ASC, "vreme"));
+    public List<Termin> findAllAndSortByCenaOpadajuce(Long fitnesscentarId){
+        List<Termin> terminiSortiraniPoCeni = this.terminRepository.findByTreningTrenerFitnesscentarId(Sort.by(Sort.Direction.DESC, "cena"), fitnesscentarId);
+        return terminiSortiraniPoCeni;
+    }
+
+    @Override
+    public List<Termin> findAllAndSortByVremeRastuce(Long fitnesscentarId){
+        List<Termin> terminiSortiraniPoVemenu = this.terminRepository.findByTreningTrenerFitnesscentarId(Sort.by(Sort.Direction.ASC, "vreme"), fitnesscentarId);
+        return terminiSortiraniPoVemenu;
+    }
+
+    @Override
+    public List<Termin> findAllAndSortByVremeOpadajuce(Long fitnesscentarId){
+        List<Termin> terminiSortiraniPoVemenu = this.terminRepository.findByTreningTrenerFitnesscentarId(Sort.by(Sort.Direction.DESC, "vreme"), fitnesscentarId);
         return terminiSortiraniPoVemenu;
     }
 }

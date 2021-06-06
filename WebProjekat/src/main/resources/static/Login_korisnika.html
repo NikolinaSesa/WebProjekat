@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/clanLogIn.js"></script>
     <title>Prijava Korisnika</title>
     <style>
         html{
@@ -90,24 +90,44 @@
                         0 0 50px #03e9f4,
                         0 0 100px #03e9f4;
         }
+        .submit{
+            position: relative;
+            display: inline-block;
+            padding: 10px 20px;
+            color: #30e9f4;
+            font-size: 16px;
+            text-decoration: none;
+            text-transform: uppercase;
+            overflow: hidden;
+            transition: .5s;
+            margin-top: 40px;
+            letter-spacing: 4px;
+        }
+        .submit:hover{
+            background: #30e9f4;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #03e9f4,
+                        0 0 25px #03e9f4,
+                        0 0 50px #03e9f4,
+                        0 0 100px #03e9f4;
+        }
     </style>
 </head>
 <body>
     <h1>FITNESS CENTAR</h1>
     <div class="login">
         <h2>Prijava Korisnika</h2>
-        <form>
+        <form id="logIn">
             <div class="user">
-                <input type="text" required>
-                <label>Korisnicko Ime</label>
+                <input id="korisnickoIme" type="text" required>
+                <label for="korisnickoIme">Korisnicko Ime</label>
             </div>
             <div class="user">
-                <input type="password" required>
-                <label>Lozinka</label>
+                <input id="lozinka" type="password" required>
+                <label for="lozinka">Lozinka</label>
             </div>
-            <a href="#">
-                Prijavi Se
-            </a>
+            <input type="submit" class="submit" value="Prijavi Se"/>
             <a href="Registracija_korisnika.html">
                 Registuj Se
             </a>

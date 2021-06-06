@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <script src="js/jquery.min.js"></script>
-    <script src="js/trening_document_ready.js"></script>
-    <script src="js/trening.js"></script>
-    <title>Pregled Treninga</title>
+    <script src="js/termin_document_ready.js"></script>
+    <title>Termini</title>
     <style>
         html{
             height: 100%;
@@ -29,7 +28,7 @@
             border-radius: 10px;
         }
         h1{
-            margin-top: 35px;
+            margin-top: 45px;
             color: #fff;
             text-align: center;
         }
@@ -75,31 +74,18 @@
     </style>
 </head>
 <body>
-    <div class="topnav">
-        <input id="pretraga" type="text" placeholder="Pretrazi...">
-    </div>
-    
-    <div id="treninzi">
-        <h1>Pregled Treninga</h1>
-        <table id="sviTreninzi">
+    <div id="termini">
+        <h1>Termini u Ponudi</h1>
+        <table id="sviTermini">
             <thead>
                 <tr>
-                    <th>Naziv</th>
-                    <th>Tip</th>
-                    <th>Opis</th>
-                    <th>Trajanje</th>
+                    <th>Naziv treninga</th>
+                    <th>Tip treninga</th>
+                    <th>Opis treninga</th>
+                    <th>Cena</th>
+                    <th>Vreme</th>
                     <th>Ime Trenera</th>
                     <th>Prezime Trenera</th>
-                </tr>
-            </thead>
-        </table>
-        <table style="top: 80%;">
-            <thead>
-                <tr>
-                    <th><button class="btn1">Cena/Rastuce</button></th>
-                    <th><button class="btn2">Cena/Opadajuce</button></th>
-                    <th><button class="btn3">Vreme/Rastuce</button></th>
-                    <th><button class="btn4">Vreme/Opadajuce</button></th>
                 </tr>
             </thead>
         </table>

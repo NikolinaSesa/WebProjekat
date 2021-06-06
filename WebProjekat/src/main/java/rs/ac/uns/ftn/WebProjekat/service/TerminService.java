@@ -18,7 +18,11 @@ public interface TerminService {
 
     List<Termin> findByTreningTip(Tip tip);
 
-    List<Termin> findAllAndSortByCena();
+    List<Termin> findAllAndSortByCenaRastuce(Long fitnesscentarId);
 
-    List<Termin> findAllAndSortByVreme();
+    List<Termin> findAllAndSortByCenaOpadajuce(Long fitnesscentarId);
+
+    List<Termin> findAllAndSortByVremeRastuce(Long fitnesscentarId);
+
+    List<Termin> findAllAndSortByVremeOpadajuce(Long fitnesscentarId);
 }

@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface TreningService{
     
-    List<Trening> findAll();
+    List<Trening> findByTrenerFitnesscentarId(Long fitnesscentarId);
   
 }

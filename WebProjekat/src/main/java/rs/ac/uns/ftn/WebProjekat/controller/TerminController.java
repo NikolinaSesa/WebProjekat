@@ -3,6 +3,7 @@ package rs.ac.uns.ftn.WebProjekat.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import java.util.List;
 import rs.ac.uns.ftn.WebProjekat.service.TerminService;
 import rs.ac.uns.ftn.WebProjekat.model.dto.Tip;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/api/termin")
 public class TerminController{
@@ -92,9 +94,9 @@ public class TerminController{
         return new ResponseEntity<>(terminiDTO, HttpStatus.OK);
     } 
 
-    @GetMapping(value = "/sort/cena", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<TerminDTO>> getSortTerminiPoCena(){
-        List<Termin> termini = this.terminService.findAllAndSortByCena();
+    @GetMapping(value = "/sort/rastuce/cena/{fitnesscentarId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TerminDTO>> getSortTerminiPoCenaRastuce(@PathVariable Long fitnesscentarId){
+        List<Termin> termini = this.terminService.findAllAndSortByCenaRastuce(fitnesscentarId);
 
         List<TerminDTO> terminiDTO = new ArrayList<>();
 
@@ -105,9 +107,35 @@ public class TerminController{
         return new ResponseEntity<>(terminiDTO, HttpStatus.OK);
     } 
 
-    @GetMapping(value = "/sort/vreme", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<TerminDTO>> getSortTerminiPoVreme(){
-        List<Termin> termini = this.terminService.findAllAndSortByVreme();
+    @GetMapping(value = "/sort/opadajuce/cena/{fitnesscentarId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TerminDTO>> getSortTerminiPoCenaOpadajuce(@PathVariable Long fitnesscentarId){
+        List<Termin> termini = this.terminService.findAllAndSortByCenaOpadajuce(fitnesscentarId);
+
+        List<TerminDTO> terminiDTO = new ArrayList<>();
+
+        for(Termin termin : termini){
+            TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDan(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
+            terminiDTO.add(terminDTO);
+        }
+        return new ResponseEntity<>(terminiDTO, HttpStatus.OK);
+    } 
+
+    @GetMapping(value = "/sort/rastuce/vreme/{fitnesscentarId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TerminDTO>> getSortTerminiPoVremeRastuce(@PathVariable Long fitnesscentarId){
+        List<Termin> termini = this.terminService.findAllAndSortByVremeRastuce(fitnesscentarId);
+
+        List<TerminDTO> terminiDTO = new ArrayList<>();
+
+        for(Termin termin : termini){
+            TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDan(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
+            terminiDTO.add(terminDTO);
+        }
+        return new ResponseEntity<>(terminiDTO, HttpStatus.OK);
+    } 
+
+    @GetMapping(value = "/sort/opadajuce/vreme/{fitnesscentarId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TerminDTO>> getSortTerminiPoVremeOpadajuce(@PathVariable Long fitnesscentarId){
+        List<Termin> termini = this.terminService.findAllAndSortByVremeOpadajuce(fitnesscentarId);
 
         List<TerminDTO> terminiDTO = new ArrayList<>();
 

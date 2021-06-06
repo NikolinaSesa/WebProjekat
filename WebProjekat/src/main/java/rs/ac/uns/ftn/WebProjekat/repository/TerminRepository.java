@@ -5,6 +5,7 @@ import java.sql.Time;
 import java.util.List;
 import rs.ac.uns.ftn.WebProjekat.model.Termin;
 import rs.ac.uns.ftn.WebProjekat.model.dto.Tip;
+import org.springframework.data.domain.Sort;
 
 public interface TerminRepository extends JpaRepository<Termin, Long>{
     
@@ -12,10 +13,11 @@ public interface TerminRepository extends JpaRepository<Termin, Long>{
 
     List<Termin> findByVreme(Time vreme);
 
-    List<Termin> findByTreningNaziv(String naziv);
+    List<Termin> findByTreningNazivContaining(String naziv);
 
-    List<Termin> findByTreningOpis(String opis);
+    List<Termin> findByTreningOpisContaining(String opis);
 
-    List<Termin> findByTreningTip(Tip tip);
+    List<Termin> findByTreningTipContaining(Tip tip);
 
+    List<Termin> findByTreningTrenerFitnesscentarId(Sort sort, Long fitnesscentarId);
 }

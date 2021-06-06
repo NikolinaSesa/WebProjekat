@@ -12,4 +12,6 @@ public interface FitnesscentarService {
     void delete(Long id);
 
     List<Fitnesscentar> findAll();
+
+    Fitnesscentar findById(Long fitnesscentarId);
 }
