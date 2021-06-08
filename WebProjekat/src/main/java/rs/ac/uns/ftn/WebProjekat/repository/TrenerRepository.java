@@ -7,4 +7,6 @@ import rs.ac.uns.ftn.WebProjekat.model.Trener;
 public interface TrenerRepository extends JpaRepository<Trener, Long>{
     
     List<Trener> findByAktivanAndFitnesscentarId(Boolean aktivan, Long fitnesscentarId);
+
+    Trener findByKorisnickoime(String korisnickoime);
 }

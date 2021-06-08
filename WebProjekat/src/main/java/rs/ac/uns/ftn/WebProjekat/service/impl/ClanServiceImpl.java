@@ -31,4 +31,10 @@ public class ClanServiceImpl implements ClanService{
         Clan clan = this.clanRepository.findByKorisnickoime(korisnickoime);
         return clan;
     }
+
+    @Override
+    public Clan findOne(Long id){
+        Clan clan=this.clanRepository.getOne(id);
+        return clan;
+    }
 }

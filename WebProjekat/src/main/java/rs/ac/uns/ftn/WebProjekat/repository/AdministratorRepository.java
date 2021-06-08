@@ -6,4 +6,5 @@ import rs.ac.uns.ftn.WebProjekat.model.Administrator;
 
 public interface AdministratorRepository extends JpaRepository<Administrator, Long>{
     
+    Administrator findByKorisnickoime(String korisnickoime);
 }

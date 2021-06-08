@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import rs.ac.uns.ftn.WebProjekat.model.Administrator;
 import rs.ac.uns.ftn.WebProjekat.model.Fitnesscentar;
+import rs.ac.uns.ftn.WebProjekat.model.Uloga;
 import rs.ac.uns.ftn.WebProjekat.model.dto.FitnesscentarDTO;
+import rs.ac.uns.ftn.WebProjekat.service.AdminService;
 import rs.ac.uns.ftn.WebProjekat.service.FitnesscentarService;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,21 +28,34 @@ import java.util.List;
 public class FitnesscentarController {
 
     private final FitnesscentarService fitnesscentarService;
+    private final AdminService adminService;
 
     @Autowired
-    public FitnesscentarController(FitnesscentarService fitnesscentarService){
+    public FitnesscentarController(FitnesscentarService fitnesscentarService, AdminService adminService){
         this.fitnesscentarService = fitnesscentarService;
+        this.adminService=adminService;
     }
     
-    @PostMapping(value = "/dodaj" ,consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<FitnesscentarDTO> createFitnesscentar(@RequestBody FitnesscentarDTO fitnesscentarDTO) throws Exception{
-        Fitnesscentar fitnesscentar = new Fitnesscentar(fitnesscentarDTO.getNaziv(), fitnesscentarDTO.getAdresa(), fitnesscentarDTO.getBrTelefona(), fitnesscentarDTO.getEmail());
+    @PostMapping(value = "/dodaj/{id}/{uloga}" ,consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<FitnesscentarDTO> createFitnesscentar(@RequestBody FitnesscentarDTO fitnesscentarDTO, @PathVariable Long id, @PathVariable Uloga uloga) throws Exception{
 
-        Fitnesscentar newFitnesscentar = fitnesscentarService.create(fitnesscentar);
+        if(uloga==Uloga.ADMINISTRATOR){
 
-        FitnesscentarDTO newFitnesscentarDTO = new FitnesscentarDTO(newFitnesscentar.getId(), newFitnesscentar.getNaziv(), newFitnesscentar.getAdresa(), newFitnesscentar.getBrTelefona(), newFitnesscentar.getEmail());
+            Administrator admin = this.adminService.findOne(id);
+            if(admin==null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            else{
+                Fitnesscentar fitnesscentar = new Fitnesscentar(fitnesscentarDTO.getNaziv(), fitnesscentarDTO.getAdresa(), fitnesscentarDTO.getBrTelefona(), fitnesscentarDTO.getEmail());
 
-        return new ResponseEntity<>(newFitnesscentarDTO, HttpStatus.CREATED);
+                Fitnesscentar newFitnesscentar = fitnesscentarService.create(fitnesscentar);
+
+                FitnesscentarDTO newFitnesscentarDTO = new FitnesscentarDTO(newFitnesscentar.getId(), newFitnesscentar.getNaziv(), newFitnesscentar.getAdresa(), newFitnesscentar.getBrTelefona(), newFitnesscentar.getEmail());
+
+                return new ResponseEntity<>(newFitnesscentarDTO, HttpStatus.CREATED);
+            }
+        }
+        else return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
     @PutMapping(value = "/izmeni/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -59,20 +75,32 @@ public class FitnesscentarController {
     @DeleteMapping(value = "/obrisi/{id}")
     public ResponseEntity<Void> deleteFitnesscentar(@PathVariable Long id){
         this.fitnesscentarService.delete(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping(value = "/svi", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<FitnesscentarDTO>> getFitnesscentri(){
-        List<Fitnesscentar> fitnesscentri = this.fitnesscentarService.findAll();
+    @GetMapping(value = "/svi/{id}/{uloga}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<FitnesscentarDTO>> getFitnesscentri(@PathVariable Long id, @PathVariable Uloga uloga){
 
-        List<FitnesscentarDTO> fitnesscentriDTO = new ArrayList<>();
+        if(uloga==Uloga.ADMINISTRATOR){
 
-        for(Fitnesscentar fitnesscentar : fitnesscentri){
-            FitnesscentarDTO fitnesscentarDTO = new FitnesscentarDTO(fitnesscentar.getId(), fitnesscentar.getNaziv(), fitnesscentar.getAdresa(), fitnesscentar.getBrTelefona(), fitnesscentar.getEmail());
-            fitnesscentriDTO.add(fitnesscentarDTO);
+            Administrator admin =this.adminService.findOne(id);
+            if(admin==null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            else{
+
+                List<Fitnesscentar> fitnesscentri = this.fitnesscentarService.findAll();
+
+                List<FitnesscentarDTO> fitnesscentriDTO = new ArrayList<>();
+
+                for(Fitnesscentar fitnesscentar : fitnesscentri){
+                    FitnesscentarDTO fitnesscentarDTO = new FitnesscentarDTO(fitnesscentar.getId(), fitnesscentar.getNaziv(), fitnesscentar.getAdresa(), fitnesscentar.getBrTelefona(), fitnesscentar.getEmail());
+                    fitnesscentriDTO.add(fitnesscentarDTO);
+                }
+                return new ResponseEntity<>(fitnesscentriDTO, HttpStatus.OK);
+            }
         }
-        return new ResponseEntity<>(fitnesscentriDTO, HttpStatus.OK);
+        else return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
     @GetMapping(value = "/id/{fitnesscentarId}", produces = MediaType.APPLICATION_JSON_VALUE)

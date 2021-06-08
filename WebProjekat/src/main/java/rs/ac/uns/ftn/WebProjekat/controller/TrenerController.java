@@ -1,6 +1,9 @@
 package rs.ac.uns.ftn.WebProjekat.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import rs.ac.uns.ftn.WebProjekat.service.AdminService;
+import rs.ac.uns.ftn.WebProjekat.service.ClanService;
+import rs.ac.uns.ftn.WebProjekat.service.FitnesscentarService;
 import rs.ac.uns.ftn.WebProjekat.service.TrenerService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,7 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import rs.ac.uns.ftn.WebProjekat.model.Administrator;
+import rs.ac.uns.ftn.WebProjekat.model.Fitnesscentar;
 import rs.ac.uns.ftn.WebProjekat.model.Trener;
+import rs.ac.uns.ftn.WebProjekat.model.Clan;
 import rs.ac.uns.ftn.WebProjekat.model.Uloga;
 import rs.ac.uns.ftn.WebProjekat.model.dto.TrenerDTO;
 import java.util.ArrayList;
@@ -26,50 +32,91 @@ import java.util.List;
 public class TrenerController{
 
     private final TrenerService trenerService;
+    private final AdminService adminService;
+    private final FitnesscentarService fitnesscentarService;
+    private final ClanService calnService;
 
     @Autowired
-    public TrenerController(TrenerService trenerService){
+    public TrenerController(TrenerService trenerService, AdminService adminService, FitnesscentarService fitnesscentarService, ClanService clanService){
         this.trenerService=trenerService;
+        this.adminService=adminService;
+        this.fitnesscentarService=fitnesscentarService;
+        this.calnService=clanService;
     }
 
+    //za registraciju trenera
     @PostMapping(value = "/dodaj", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TrenerDTO> createTrener(@RequestBody TrenerDTO trenerDTO) throws Exception{
-        Trener trener = new Trener(trenerDTO.getKorisnickoIme(), trenerDTO.getLozinka(), trenerDTO.getIme(), trenerDTO.getPrezime(),trenerDTO.getBrTelefona(), trenerDTO.getEmail(), trenerDTO.getDatumRodjenja(), Uloga.TRENER, false);
-      
-        Trener newTrener = trenerService.create(trener);
 
-        TrenerDTO newTrenerDTO = new TrenerDTO(newTrener.getId(), newTrener.getKorisnickoIme(), newTrener.getLozinka(), newTrener.getIme(), newTrener.getPrezime(), newTrener.getBrTelefona(), newTrener.getEmail(), newTrener.getDatum(), newTrener.getUloga(), newTrener.getAktivan());
-
-        return new ResponseEntity<>(newTrenerDTO, HttpStatus.CREATED);
+        Clan tmplClan=this.calnService.findByKorisnickoime(trenerDTO.getKorisnickoIme());
+        Administrator tmplAdmin=this.adminService.findByKorisnickoime(trenerDTO.getKorisnickoIme());
+        if(tmplClan==null && tmplAdmin==null){
+            Trener tmplTrener = this.trenerService.findByKorisnickoime(trenerDTO.getKorisnickoIme());
+            if(tmplTrener!=null){
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            }else{
+                Trener trener = new Trener(trenerDTO.getKorisnickoIme(), trenerDTO.getLozinka(), trenerDTO.getIme(), trenerDTO.getPrezime(),trenerDTO.getBrTelefona(), trenerDTO.getEmail(), trenerDTO.getDatumRodjenja(), Uloga.TRENER, false);
+                Trener newTrener = trenerService.create(trener);
+                TrenerDTO newTrenerDTO = new TrenerDTO(newTrener.getId(), newTrener.getKorisnickoIme(), newTrener.getIme(), newTrener.getPrezime(), newTrener.getBrTelefona(), newTrener.getEmail(), newTrener.getDatum(), newTrener.getUloga(), newTrener.getAktivan());
+                newTrenerDTO.setLozinka(trener.getLozinka());                  
+                return new ResponseEntity<>(newTrenerDTO, HttpStatus.CREATED);
+            }
+        }else{
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            }
     }
 
-    @PostMapping(value = "/dodajKaoAdmin", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<TrenerDTO> adminCreateTrener(@RequestBody TrenerDTO trenerDTO) throws Exception{
-        Trener trener = new Trener(trenerDTO.getKorisnickoIme(), trenerDTO.getLozinka(), trenerDTO.getIme(), trenerDTO.getPrezime(),trenerDTO.getBrTelefona(), trenerDTO.getEmail(), trenerDTO.getDatumRodjenja(), Uloga.TRENER, true);
-        
-        Trener newTrener = trenerService.create(trener);
+    //za registraciju trenera od strane admina
+    @PostMapping(value = "/dodajKaoAdmin/{fitnesscentarId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<TrenerDTO> adminCreateTrener(@RequestBody TrenerDTO trenerDTO, @PathVariable Long fitnesscentarId) throws Exception{
 
-        TrenerDTO newTrenerDTO = new TrenerDTO(newTrener.getId(), newTrener.getKorisnickoIme(), newTrener.getLozinka(), newTrener.getIme(), newTrener.getPrezime(), newTrener.getBrTelefona(), newTrener.getEmail(), newTrener.getDatum(), newTrener.getUloga(), newTrener.getAktivan());
-
-        return new ResponseEntity<>(newTrenerDTO, HttpStatus.CREATED);
-    }
-
-    @GetMapping(value = "/aktivan/fcid/{aktivan}/{fitnesscentarId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<TrenerDTO>> getListaZahteva(@PathVariable Boolean aktivan, @PathVariable Long fitnesscentarId){
-        List<Trener> treneri = this.trenerService.findByAktivanAndFitnesscentarId(aktivan, fitnesscentarId);
-
-        List<TrenerDTO> treneriDTO = new ArrayList<>(); 
-
-        for(Trener trener : treneri){
-            TrenerDTO trenerDTO = new TrenerDTO(trener.getId(), trener.getKorisnickoIme(), trener.getIme(), trener.getPrezime(), trener.getBrTelefona(), trener.getEmail(), trener.getDatum(), trener.getUloga(), trener.getAktivan());
-            treneriDTO.add(trenerDTO);
+        Trener tmplTrener = this.trenerService.findByKorisnickoime(trenerDTO.getKorisnickoIme());
+        Clan tmplClan = this.calnService.findByKorisnickoime(trenerDTO.getKorisnickoIme());
+        Administrator tmplAdmin = this.adminService.findByKorisnickoime(trenerDTO.getKorisnickoIme());
+        if(tmplTrener!=null && tmplClan!=null && tmplAdmin!=null){
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
-        return new ResponseEntity<>(treneriDTO, HttpStatus.OK);
+        else{
+            Fitnesscentar fitnesscentar = this.fitnesscentarService.findById(fitnesscentarId);
+            Trener trener = new Trener(trenerDTO.getKorisnickoIme(), trenerDTO.getLozinka(), trenerDTO.getIme(), trenerDTO.getPrezime(),trenerDTO.getBrTelefona(), trenerDTO.getEmail(), trenerDTO.getDatumRodjenja(), Uloga.TRENER, true);
+            trener.setFitnessCentar(fitnesscentar);
+            Trener newTrener = trenerService.create(trener);
+            TrenerDTO newTrenerDTO = new TrenerDTO(newTrener.getId(), newTrener.getKorisnickoIme(), newTrener.getLozinka(), newTrener.getIme(), newTrener.getPrezime(), newTrener.getBrTelefona(), newTrener.getEmail(), newTrener.getDatum(), newTrener.getUloga(), newTrener.getAktivan(), newTrener.getFitnessCentar().getId());
+            return new ResponseEntity<>(newTrenerDTO, HttpStatus.CREATED);
+        }   
     }
 
-    @GetMapping(value = "/id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<TrenerDTO> getTrener(@PathVariable("id") Long id){
-        Trener trener = this.trenerService.findOne(id);
+    //za dobavljane svih trenera po aktivnosti u datom fc
+    @GetMapping(value = "/aktivan/fcid/{aktivan}/{fitnesscentarId}/{id}/{uloga}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TrenerDTO>> getListaZahteva(@PathVariable Boolean aktivan, @PathVariable Long fitnesscentarId, @PathVariable Long id, @PathVariable Uloga uloga){
+
+        if(uloga == Uloga.ADMINISTRATOR){
+
+            Administrator admin = this.adminService.findOne(id);
+            if(admin==null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            else{
+
+                List<Trener> treneri = this.trenerService.findByAktivanAndFitnesscentarId(aktivan, fitnesscentarId);
+
+                List<TrenerDTO> treneriDTO = new ArrayList<>(); 
+
+                for(Trener trener : treneri){
+                    TrenerDTO trenerDTO = new TrenerDTO(trener.getId(), trener.getKorisnickoIme(), trener.getIme(), trener.getPrezime(), trener.getBrTelefona(), trener.getEmail(), trener.getDatum(), trener.getUloga(), trener.getAktivan());
+                    treneriDTO.add(trenerDTO);
+                }
+                return new ResponseEntity<>(treneriDTO, HttpStatus.OK);
+            }
+        }
+        else return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+    }
+
+    //za dodatne informacije o treneru
+    @GetMapping(value = "/id/{trenerId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<TrenerDTO> getTrener(@PathVariable Long trenerId){
+
+        Trener trener = this.trenerService.findOne(trenerId);
 
         TrenerDTO trenerDTO = new TrenerDTO();
         trenerDTO.setId(trener.getId());
@@ -81,10 +128,12 @@ public class TrenerController{
         trenerDTO.setDatum(trener.getDatum());
         trenerDTO.setUloga(trener.getUloga());
         trenerDTO.setAktivan(trener.getAktivan());
-
+        
         return new ResponseEntity<>(trenerDTO, HttpStatus.OK);
+    
     }
 
+    //za brisanje trenera od strane admina
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Void> deleteZahtev(@PathVariable Long id){
         this.trenerService.delete(id);
@@ -101,6 +150,20 @@ public class TrenerController{
         TrenerDTO updateTrenerDTO = new TrenerDTO(updateTrener.getId(), updateTrener.getKorisnickoIme(), updateTrener.getIme(), updateTrener.getPrezime(), updateTrener.getBrTelefona(), updateTrener.getEmail(), updateTrener.getDatum(), updateTrener.getUloga(), updateTrener.getAktivan());
 
         return new ResponseEntity<>(updateTrenerDTO, HttpStatus.OK);
+    }
+
+    //za prijavu trenera
+    @GetMapping(value = "/ki/{korisnickoime}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<TrenerDTO> getTrener(@PathVariable String korisnickoime){
+        Trener trener = this.trenerService.findByKorisnickoime(korisnickoime);
+        if(trener.getAktivan()==true){
+            TrenerDTO trenerDTO = new TrenerDTO(trener.getId(), trener.getKorisnickoIme(), trener.getLozinka(), trener.getIme(), trener.getPrezime(), trener.getBrTelefona(), trener.getEmail(), trener.getDatum(), trener.getUloga(), trener.getAktivan(), trener.getFitnessCentar().getId());
+            return new ResponseEntity<>(trenerDTO, HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        
     }
 
 }

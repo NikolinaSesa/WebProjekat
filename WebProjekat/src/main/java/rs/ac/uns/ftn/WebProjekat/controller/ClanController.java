@@ -12,9 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import rs.ac.uns.ftn.WebProjekat.model.dto.ClanDTO;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import rs.ac.uns.ftn.WebProjekat.model.Administrator;
 import rs.ac.uns.ftn.WebProjekat.model.Clan;
+import rs.ac.uns.ftn.WebProjekat.model.Trener;
 import rs.ac.uns.ftn.WebProjekat.model.Uloga;
+import rs.ac.uns.ftn.WebProjekat.service.AdminService;
 import rs.ac.uns.ftn.WebProjekat.service.ClanService;
+import rs.ac.uns.ftn.WebProjekat.service.TrenerService;
 
 @CrossOrigin("*")
 @RestController
@@ -22,23 +27,40 @@ import rs.ac.uns.ftn.WebProjekat.service.ClanService;
 public class ClanController {
 
     private final ClanService clanService;
+    private final TrenerService trenerService;
+    private AdminService adminService;
 
     @Autowired
-    public ClanController(ClanService clanService){
+    public ClanController(ClanService clanService, TrenerService trenerService, AdminService adminService){
         this.clanService=clanService;
+        this.trenerService=trenerService;
+        this.adminService=adminService;
     }
 
+    //za registraciju clana
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ClanDTO> createClan(@RequestBody ClanDTO clanDTO) throws Exception{
-        Clan clan = new Clan(clanDTO.getKorisnickoIme(), clanDTO.getLozinka(), clanDTO.getIme(), clanDTO.getPrezime(), clanDTO.getBrTelefona(), clanDTO.getEmail(), clanDTO.getDatumRodjenja(), Uloga.CLAN, true);
-
-        Clan newClan = clanService.create(clan);
-
-        ClanDTO newClanDTO = new ClanDTO(newClan.getId(), newClan.getKorisnickoIme(), newClan.getLozinka(), newClan.getIme(), newClan.getPrezime(), newClan.getBrTelefona(), newClan.getEmail(), newClan.getDatum(), newClan.getUloga(), newClan.getAktivan());
         
-        return new ResponseEntity<>(newClanDTO, HttpStatus.CREATED);
+        Trener tmplTrener=this.trenerService.findByKorisnickoime(clanDTO.getKorisnickoIme());
+        Administrator tmplAdmin=this.adminService.findByKorisnickoime(clanDTO.getKorisnickoIme());
+        if(tmplTrener==null && tmplAdmin==null){
+            Clan tmplClan=this.clanService.findByKorisnickoime(clanDTO.getKorisnickoIme());
+            if(tmplClan==null){
+                Clan clan = new Clan(clanDTO.getKorisnickoIme(), clanDTO.getLozinka(), clanDTO.getIme(), clanDTO.getPrezime(), clanDTO.getBrTelefona(), clanDTO.getEmail(), clanDTO.getDatumRodjenja(), Uloga.CLAN, true);
+                Clan newClan = clanService.create(clan);
+                ClanDTO newClanDTO = new ClanDTO(newClan.getId(), newClan.getKorisnickoIme(), newClan.getLozinka(), newClan.getIme(), newClan.getPrezime(), newClan.getBrTelefona(), newClan.getEmail(), newClan.getDatum(), newClan.getUloga(), newClan.getAktivan());
+                return new ResponseEntity<>(newClanDTO, HttpStatus.CREATED);
+            }
+            else{
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            }
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
     }
 
+    //za prijavu clana
     @GetMapping(value = "/ki/{korisnickoime}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ClanDTO> getClan(@PathVariable("korisnickoime") String korisnickoime){
         Clan clan = this.clanService.findByKorisnickoime(korisnickoime);

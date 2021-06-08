@@ -1,3 +1,4 @@
+//registracija clana
 $(document).on("submit", "#regKorisnika", function(event){
     event.preventDefault();
 

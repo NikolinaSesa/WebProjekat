@@ -1,9 +1,12 @@
 $(document).ready(function(){
     // ajax poziv za dobavljanje svih trenera u datom fitnesscentra
+    //samo admin
     let fitnesscentarId = localStorage.getItem("fitnesscentarId");
+    let id=localStorage.getItem("korisnikId");
+    let uloga=localStorage.getItem("uloga");
     $.ajax({
         type:"GET",
-        url:"http://localhost:8080/api/trener/aktivan/fcid/true/"+fitnesscentarId,
+        url:"http://localhost:8080/api/trener/aktivan/fcid/true/"+fitnesscentarId+"/"+id+"/"+uloga,
         dataType:"json",
         success:function(response){
             console.log("SUCCESS:\n", response);
@@ -23,6 +26,8 @@ $(document).ready(function(){
         },
         error:function(response){
             console.log("ERROR:\n",response);
+            alert("Niste prijavljeni!");
+            window.location.href="Login_korisnika.html";
         }
     });
 });

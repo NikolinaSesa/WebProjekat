@@ -7,4 +7,6 @@ public interface ClanService {
     Clan create(Clan clan) throws Exception;
 
     Clan findByKorisnickoime(String korisnickoime);
+
+    Clan findOne(Long id);
 }

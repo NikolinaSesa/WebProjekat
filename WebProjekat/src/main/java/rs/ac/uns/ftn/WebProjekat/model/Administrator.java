@@ -41,9 +41,6 @@ public class Administrator implements Serializable{
     @Column
     private Boolean aktivan;
 
-    @OneToOne
-    private Fitnesscentar fitnesscentar;
-
     public Long getId(){return id;}
     public void setId(Long id){this.id=id;}
 

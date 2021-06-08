@@ -1,3 +1,5 @@
+//dodavanje fitness centar
+//moze da radi samo admin
 $(document).on("submit", "#dodajFC", function(event){
     event.preventDefault();
 
@@ -13,9 +15,12 @@ $(document).on("submit", "#dodajFC", function(event){
         email
     }
 
+    let id=localStorage.getItem("korisnikId");
+    let uloga=localStorage.getItem("uloga");
+
     $.ajax({
         type:"POST",
-        url:"http://localhost:8080/api/fitnesscentar/dodaj",
+        url:"http://localhost:8080/api/fitnesscentar/dodaj/"+id+"/"+uloga,
         dataType:"json",
         contentType:"application/json",
         data: JSON.stringify(noviFC),

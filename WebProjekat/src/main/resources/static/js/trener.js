@@ -1,4 +1,5 @@
 //prikaz dodatnih informacija o svakom treneru iz zahteva
+//samo admin
 $(document).on('click', '.btnSeeMore', function(){
     let treneriDiv = $('#treneri');
     treneriDiv.hide();
@@ -24,6 +25,7 @@ $(document).on('click', '.btnSeeMore', function(){
         },
         error:function(response){
             console.log("ERROR:\n", response);
+            alert("Niste prijavljeni!");
         }
     });
 });
@@ -87,6 +89,7 @@ $(document).on("submit", "#regTrenera", function(event){
         email,
         datumRodjenja
     }
+
     $.ajax({
         type:"POST",
         url:"http://localhost:8080/api/trener/dodaj",
@@ -100,8 +103,9 @@ $(document).on("submit", "#regTrenera", function(event){
 
             window.location.href="Login_korisnika.html";
         },
-        error:function(){
-            alert("Greska prilikom registracije!");
+        error:function(response){
+            console.log("ERROR:\n", response);
+            alert("Greska prilikom registracije!\nKorisnicko ime vec postoji!");
         }
     });
 });
@@ -131,19 +135,21 @@ $(document).on("submit", "#adminRegTrenera", function(event){
         
         $.ajax({
             type:"POST",
-            url:"http://localhost:8080/api/trener/dodajKaoAdmin",
+            url:"http://localhost:8080/api/trener/dodajKaoAdmin/"+fitnesscentarId,
             dataType:"json",
             contentType:"application/json",
             data: JSON.stringify(newTrener),
             success:function(response){
                 console.log(response);
                     
-                alert("Hvala na registraciji!");
-        
-                window.location.href="Login_korisnika.html";
+                alert("Uspesno registrovan novi trener!");
+                
+                window.location.href="Fitnesscentar.html";
             },
-            error:function(){
-                alert("Greska prilikom registracije!");
+            error:function(response){
+                console.log("ERROR:\n", response);
+                alert("Greska prilikom registracije!\nKorisnicko ime vec postoji!");
+
             }   
     });  
 });

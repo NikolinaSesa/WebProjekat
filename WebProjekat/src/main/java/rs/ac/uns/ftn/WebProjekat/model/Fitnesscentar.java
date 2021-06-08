@@ -33,9 +33,6 @@ public class Fitnesscentar implements Serializable{
     @OneToMany(mappedBy = "fitnesscentar", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Clan> clanovi= new HashSet<>();
 
-    @OneToOne(mappedBy = "fitnesscentar")
-    private Administrator admin;
-
     public Fitnesscentar(){}
 
     public Fitnesscentar(String naziv, String adresa, Long br, String email){

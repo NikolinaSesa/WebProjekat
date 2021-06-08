@@ -96,17 +96,17 @@ public class TerminController{
 
     @GetMapping(value = "/sort/rastuce/cena/{fitnesscentarId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<TerminDTO>> getSortTerminiPoCenaRastuce(@PathVariable Long fitnesscentarId){
-        List<Termin> termini = this.terminService.findAllAndSortByCenaRastuce(fitnesscentarId);
 
-        List<TerminDTO> terminiDTO = new ArrayList<>();
+            List<Termin> termini = this.terminService.findAllAndSortByCenaRastuce(fitnesscentarId);
+            List<TerminDTO> terminiDTO = new ArrayList<>();
 
-        for(Termin termin : termini){
-            TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDan(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
-            terminiDTO.add(terminDTO);
+            for(Termin termin : termini){
+                TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDan(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
+                terminiDTO.add(terminDTO);
+            }
+            return new ResponseEntity<>(terminiDTO, HttpStatus.OK);
         }
-        return new ResponseEntity<>(terminiDTO, HttpStatus.OK);
-    } 
-
+        
     @GetMapping(value = "/sort/opadajuce/cena/{fitnesscentarId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<TerminDTO>> getSortTerminiPoCenaOpadajuce(@PathVariable Long fitnesscentarId){
         List<Termin> termini = this.terminService.findAllAndSortByCenaOpadajuce(fitnesscentarId);

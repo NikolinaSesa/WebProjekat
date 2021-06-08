@@ -54,4 +54,10 @@ public class TrenerServiceImpl implements TrenerService{
         Trener newTrener = this.trenerRepository.save(trener);
         return newTrener;
     }
+
+    @Override
+    public Trener findByKorisnickoime(String korisnickoime){
+        Trener trener = this.trenerRepository.findByKorisnickoime(korisnickoime);
+        return trener;
+    }
 }

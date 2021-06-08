@@ -14,4 +14,6 @@ public interface TrenerService{
     Trener findOne(Long id);
 
     Trener create(Trener trener) throws Exception;
+
+    Trener findByKorisnickoime(String korisnickoime);
 }

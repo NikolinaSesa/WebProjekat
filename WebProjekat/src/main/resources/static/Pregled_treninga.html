@@ -44,11 +44,17 @@
         .topnav input[type=text] {
             position: absolute;
             padding: 10px;
-            left: 15%;
-            top: 20%;
-            width: 70%;
+            top: 15%;
+            width: 10%;
             border: none;
             font-size: 17px;
+            background-color: #eee;
+        }
+        .btn{
+            position: absolute;
+            left: 15%;
+            top: 25%;
+            width: 70%;
         }
         button{
             position: relative;
@@ -76,9 +82,19 @@
 </head>
 <body>
     <div class="topnav">
-        <input id="pretraga" type="text" placeholder="Pretrazi...">
+        <input id="naziv" type="text" style="left: 5%;" placeholder="Pretrazi po nazivu...">
+        <input id="tip" type="text" style="left: 20%;" placeholder="Pretrazi po tipu...">
+        <input type="text" id="opis" style="left: 35%;" placeholder="Pretrazi po opisu...">
+        <input type="text" id="cena" style="left: 50%;" placeholder="Pretrazi po ceni...">
+        <input type="text" id="vreme" style="left: 65%;" placeholder="Pretrazi po vremenu...">
+        <button class="btn5" style="top: 15%; left: 80%; width: 10%; position: absolute;">Pretrazi</button>
     </div>
-    
+    <div class="btn">
+        <button class="btn1">Cena/Rastuce</button>
+        <button class="btn2" style="left: 10%;">Cena/Opadajuce</button> 
+        <button class="btn3" style="left: 20%;">Vreme/Rastuce</button>
+        <button class="btn4" style="left: 30%;">Vreme/Opadajuce</button>
+    </div>
     <div id="treninzi">
         <h1>Pregled Treninga</h1>
         <table id="sviTreninzi">
@@ -91,18 +107,8 @@
                     <th>Ime Trenera</th>
                     <th>Prezime Trenera</th>
                 </tr>
-            </thead>
-        </table>
-        <table style="top: 80%;">
-            <thead>
-                <tr>
-                    <th><button class="btn1">Cena/Rastuce</button></th>
-                    <th><button class="btn2">Cena/Opadajuce</button></th>
-                    <th><button class="btn3">Vreme/Rastuce</button></th>
-                    <th><button class="btn4">Vreme/Opadajuce</button></th>
-                </tr>
-            </thead>
-        </table>
+            </thead>    
+         </table>
     </div>
 </body>
 </html>

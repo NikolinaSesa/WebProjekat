@@ -1,7 +1,13 @@
+//pregled svi trenera 
+//SAMO ZA ADMINA
 $(document).ready(function(){
+
+    let id=localStorage.getItem("korisnikId");
+    let uloga=localStorage.getItem("uloga");
+
     $.ajax({
         type:"GET",
-        url:"http://localhost:8080/api/fitnesscentar/svi",
+        url:"http://localhost:8080/api/fitnesscentar/svi/"+id+"/"+uloga,
         dataType:"json",
         success:function(response){
             console.log("SUCCESS:\n", response);
@@ -18,6 +24,8 @@ $(document).ready(function(){
         },
         error:function(response){
             console.log("ERROR:\n", response);
+            alert("Niste prijavljeni!");
+            window.location.href="Login_korisnika.html";
         }
     });
 });

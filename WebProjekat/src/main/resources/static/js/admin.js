@@ -6,8 +6,9 @@ $(document).on('click', '.btnSeeMore', function(){
     window.location.href="Fitnesscentar.html";
 
 });
-
-$(document).on('click', '.obrisi', function(){
+//ZA KRAJNJU ODBRANU
+/*
+$(document).on(function(){
 
     let id=localStorage.getItem("fitnesscentarId");
 
@@ -15,14 +16,14 @@ $(document).on('click', '.obrisi', function(){
         type:"DELETE",
         url:"http://localhost:8080/api/fitnesscentar/obrisi/"+id,
         dataType:"json",
-        success:function(response){
-            console.log("SUCCESS:\n", response);
+        success:function(){
+            console.log("SUCCESS");
+            localStorage.removeItem("fitnesscentarId");
             alert("Fitness Centar je uklonjen");
-            console.log(response.naziv);
-            window.location.href="adminFunkcije.html";
         },
         error:function(){
             alert("Neuspesno uklanjanje Fitness Centra!");
         }
     });
 });
+*/

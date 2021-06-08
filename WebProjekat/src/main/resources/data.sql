@@ -4,7 +4,7 @@ INSERT INTO FITNESSCENTAR(naziv, adresa, brtelefona, email) VALUES ('FitMax', 'S
 INSERT INTO SALA(kapacitet, oznaka, fitnesscentar_id) VALUES (60, 'A23',1);
 INSERT INTO SALA(kapacitet, oznaka, fitnesscentar_id) VALUES (45, 'B14',1);
 
-INSERT INTO ADMINISTRATOR(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumrodjenja, uloga, aktivan, fitnesscentar_id) VALUES ('ninasesa', '2345ftg', 'Nikolina', 'Sesa', '0641126921', 'nikolinasesaa23@gmail.com', '2000-09-23', 'ADMINISTRATOR', true, 1);
+INSERT INTO ADMINISTRATOR(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumrodjenja, uloga, aktivan) VALUES ('ninasesa', '2345ftg', 'Nikolina', 'Sesa', '0641126921', 'nikolinasesaa23@gmail.com', '2000-09-23', 'ADMINISTRATOR', true);
 
 INSERT INTO CLAN(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumrodjenja, uloga, aktivan, fitnesscentar_id) VALUES ('natasadjacic', 'ncbhjd73', 'Natasa', 'Djacic', '065674831', 'natashaa@gmail.com', '2000-02-06', 'CLAN', true, 1);
 INSERT INTO CLAN(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumrodjenja, uloga, aktivan, fitnesscentar_id) VALUES ('dragasvircevic', '35426tg', 'Draga', 'Svircevic', '063452731', 'dragaasvircevic@gmail.com', '2000-07-29', 'CLAN', true, 1);

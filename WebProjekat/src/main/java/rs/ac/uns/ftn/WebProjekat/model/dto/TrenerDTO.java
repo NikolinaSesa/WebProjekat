@@ -1,8 +1,6 @@
 package rs.ac.uns.ftn.WebProjekat.model.dto;
 
 import java.sql.Date;
-
-import rs.ac.uns.ftn.WebProjekat.model.Fitnesscentar;
 import rs.ac.uns.ftn.WebProjekat.model.Uloga;
 
 public class TrenerDTO {
@@ -17,7 +15,7 @@ public class TrenerDTO {
     private Date datumRodjenja;
     private Uloga uloga;
     private Boolean aktivan;
-    private Fitnesscentar fitnesscentar;
+    private Long fitnesscentarId;
 
     public TrenerDTO(){}
 
@@ -33,7 +31,7 @@ public class TrenerDTO {
         this.aktivan=aktivan;
     }
 
-    public TrenerDTO(Long id, String ki, String lozinka, String ime, String prez, Long br, String email, Date datum, Uloga uloga, Boolean aktivan){
+    public TrenerDTO(Long id, String ki, String lozinka, String ime, String prez, Long br, String email, Date datum, Uloga uloga, Boolean aktivan, Long fitnesscentarId){
         this.id=id;
         this.korisnickoIme=ki;
         this.lozinka=lozinka;
@@ -44,6 +42,7 @@ public class TrenerDTO {
         this.datumRodjenja=datum;
         this.uloga=uloga;
         this.aktivan=aktivan;
+        this.fitnesscentarId=fitnesscentarId;
     }
     
     public Long getId(){return id;}
@@ -76,6 +75,6 @@ public class TrenerDTO {
     public Boolean getAktivan(){return aktivan;}
     public void setAktivan(Boolean aktivan){this.aktivan=aktivan;}
     
-    public Fitnesscentar getFitnesscentar(){return fitnesscentar;}
-    public void setFitnesscentar(Fitnesscentar fitnesscentar){this.fitnesscentar=fitnesscentar;}
+    public Long getFitnesscentar(){return fitnesscentarId;}
+    public void setFitnesscentar(Long fitnesscentarId){this.fitnesscentarId=fitnesscentarId;}
 }
