@@ -34,19 +34,19 @@ public class TerminServiceImpl implements TerminService{
 
     @Override
     public List<Termin> findByTreningNaziv(String naziv){
-        List<Termin> terminiPoNazivuTreninga = this.terminRepository.findByTreningNazivContaining(naziv);
+        List<Termin> terminiPoNazivuTreninga = this.terminRepository.findByTreningNazivContainingIgnoreCase(naziv);
         return terminiPoNazivuTreninga;
     }
 
     @Override
     public List<Termin> findByTreningOpis(String opis){
-        List<Termin> terminiPoOpisuTreninga = this.terminRepository.findByTreningOpisContaining(opis);
+        List<Termin> terminiPoOpisuTreninga = this.terminRepository.findByTreningOpisContainingIgnoreCase(opis);
         return terminiPoOpisuTreninga;
     }
 
     @Override
     public List<Termin> findByTreningTip(Tip tip){
-        List<Termin> terminiPoTipuTreninga = this.terminRepository.findByTreningTipContaining(tip);
+        List<Termin> terminiPoTipuTreninga = this.terminRepository.findByTreningTip(tip);
         return terminiPoTipuTreninga;
     }
 

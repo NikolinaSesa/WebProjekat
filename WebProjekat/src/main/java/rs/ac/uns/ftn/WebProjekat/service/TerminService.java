@@ -1,7 +1,6 @@
 package rs.ac.uns.ftn.WebProjekat.service;
 
 import rs.ac.uns.ftn.WebProjekat.model.*;
-
 import java.sql.Time;
 import java.util.List;
 import rs.ac.uns.ftn.WebProjekat.model.dto.Tip;

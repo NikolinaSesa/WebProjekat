@@ -13,11 +13,11 @@ public interface TerminRepository extends JpaRepository<Termin, Long>{
 
     List<Termin> findByVreme(Time vreme);
 
-    List<Termin> findByTreningNazivContaining(String naziv);
+    List<Termin> findByTreningNazivContainingIgnoreCase(String naziv);
 
-    List<Termin> findByTreningOpisContaining(String opis);
+    List<Termin> findByTreningOpisContainingIgnoreCase(String opis);
 
-    List<Termin> findByTreningTipContaining(Tip tip);
+    List<Termin> findByTreningTip(Tip tip);
 
     List<Termin> findByTreningTrenerFitnesscentarId(Sort sort, Long fitnesscentarId);
 }

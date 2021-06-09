@@ -20,7 +20,6 @@ $(document).on('submit','#logIn', function(event){
             else{
                 console.log("ERROR")
                 alert("Pogresili ste lozinku!");
-                window.location.href="Login_korisnika.html";
                 }
         },
         error:function(){
@@ -39,7 +38,6 @@ $(document).on('submit','#logIn', function(event){
                     else{
                         console.log("ERROR")
                         alert("Pogresili ste lozinku!");
-                        window.location.href="Login_korisnika.html";
                     }
                 },
                 error:function(){
@@ -58,7 +56,6 @@ $(document).on('submit','#logIn', function(event){
                             else{
                                 console.log("ERROR")
                                 alert("Pogresili ste lozinku!");
-                                window.location.href="Login_korisnika.html";
                             }
                         },
                         error:function(){

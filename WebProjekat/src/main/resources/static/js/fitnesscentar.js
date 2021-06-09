@@ -28,7 +28,7 @@ $(document).on("submit", "#dodajFC", function(event){
             console.log(response);
             alert("Fitnesscentar "+response.id+" je uspesno kreiran!");
 
-            window.location.href="admin_funkcije.html";
+            window.location.href="adminFunkcije.html";
         },
         error:function(response){
             console.log(response);
