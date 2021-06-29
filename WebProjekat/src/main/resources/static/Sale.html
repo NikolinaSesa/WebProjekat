@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="js/jquery.min.js"></script>
-    <script src="js/admin.js"></script>
-    <title>Fitnesscentar</title>
+    <script src="js/sale_document_ready.js"></script>
+    <script src="js/sala.js"></script>
+    <title>Sale</title>
     <style>
         html{
             height: 100%;
@@ -17,11 +18,11 @@
             font-family: sans-serif;
             background: linear-gradient(#141e30, #243b55);
         }
-        .login{
+        table{
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 400px;
+            width: 75%;
             padding: 40px;
             transform: translate(-50%, -50%);
             background: rgba(0, 0, 0, .5);
@@ -34,43 +35,15 @@
             color: #fff;
             text-align: center;
         }
-        h2{
-            margin: 0 0 30px;
-            padding: 0;
+        th, td{
+            padding: 0.5rem;
+            border: 1px solid #999;
             color: #fff;
+        }
+        table, th, td{
             text-align: center;
         }
-        .user{
-            position: relative;
-        }
-        input{
-            width: 100%;
-            padding: 10px 0;
-            font-size: 16px;
-            color: #fff;
-            margin-bottom: 30px;
-            border: none;
-            border-bottom: 1px solid #fff;
-            outline: none;
-            background: transparent;
-        }
-        label{
-            position: absolute;
-            top: 0;
-            left: 0;
-            padding: 10px 0;
-            font-size: 16px;
-            color: #fff;
-            pointer-events: none;
-            transition: .5s;
-        }
-        input:focus ~ label, input:valid ~ label{
-            top: -20px;
-            left: 0;
-            color: #03e9f4;
-            font-size: 12px;
-        }
-        form a{
+        a{
             position: relative;
             display: inline-block;
             padding: 10px 20px;
@@ -103,7 +76,7 @@
             overflow: hidden;
             transition: .5s;
             letter-spacing: 4px;
-            background-color:  rgba(0, 0, 0, .5);;
+            background-color: rgba(0, 0, 0, .5);
         }
         button:hover{
             background: #30e9f4;
@@ -117,17 +90,19 @@
     </style>
 </head>
 <body>
-    <h1>FITNESS CENTAR</h1>
-    <div class="login">
-        <form>
-            <a href="#">IZMENI</a>         
-            <a href="Sale.html">SALE</a>
-            <a href="Pregled_treninga.html">TRENINZI</a>
-            <a href="Odobravanje_zahteva.html">ZAHTEVI</a>
-            <a href="Admin_Registracija_Trenera.html">REGISTRACIJA TRENERA</a>
-            <a href="Svi_Treneri.html">UKLANJANJE TRENERA</a>
-            <button class="obrisi">UKLONI</button>
-         </form>
+    <div id="sale">
+        <h1>Sale</h1>
+        <table id="sveSale">
+            <thead>
+                <tr>
+                    <th>Oznaka</th>
+                    <th>Kapacitet</th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+            </thead>
+        </table>
+        <a href="Dodaj_salu.html" style=" top: 750px; left: 15px;">Dodaj salu</a>
     </div>
 </body>
 </html>

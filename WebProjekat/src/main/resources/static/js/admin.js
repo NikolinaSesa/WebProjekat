@@ -6,10 +6,11 @@ $(document).on('click', '.btnSeeMore', function(){
     window.location.href="Fitnesscentar.html";
 
 });
-//ZA KRAJNJU ODBRANU
-/*
-$(document).on(function(){
 
+//UKLANJANJE FITNESS CENTAR
+
+$(document).on('click', '.obrisi', function(event){
+    event.preventDefault();
     let id=localStorage.getItem("fitnesscentarId");
 
     $.ajax({
@@ -19,11 +20,11 @@ $(document).on(function(){
         success:function(){
             console.log("SUCCESS");
             localStorage.removeItem("fitnesscentarId");
-            alert("Fitness Centar je uklonjen");
+            alert("Fitness Centar je uklonjen!");
+            window.location.href="adminFunkcije.html"
         },
         error:function(){
             alert("Neuspesno uklanjanje Fitness Centra!");
         }
     });
 });
-*/

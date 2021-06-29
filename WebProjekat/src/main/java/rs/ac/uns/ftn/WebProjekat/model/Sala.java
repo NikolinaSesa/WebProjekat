@@ -21,8 +21,16 @@ public class Sala implements Serializable{
     @ManyToOne(fetch = FetchType.EAGER)
     private Fitnesscentar fitnesscentar;
 
-    @OneToMany(mappedBy = "sala", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "sala", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Termin> listatermina= new HashSet<>();
+
+    public Sala(){}
+
+    public Sala(Integer kapacitet, String oznaka, Fitnesscentar fitnesscentar){
+        this.kapacitet=kapacitet;
+        this.oznaka=oznaka;
+        this.fitnesscentar=fitnesscentar;
+    }
 
     public Long getId(){return id;}
     public void setId(Long id){this.id=id;}

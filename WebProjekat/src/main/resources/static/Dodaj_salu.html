@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="js/jquery.min.js"></script>
-    <script src="js/admin.js"></script>
-    <title>Fitnesscentar</title>
+    <script src="js/sala.js"></script>
+    <title>Dodavanje sale</title>
     <style>
         html{
             height: 100%;
@@ -28,11 +28,6 @@
             box-sizing: border-box;
             box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
             border-radius: 10px;
-        }
-        h1{
-            margin-top: 50px;
-            color: #fff;
-            text-align: center;
         }
         h2{
             margin: 0 0 30px;
@@ -70,29 +65,7 @@
             color: #03e9f4;
             font-size: 12px;
         }
-        form a{
-            position: relative;
-            display: inline-block;
-            padding: 10px 20px;
-            color: #30e9f4;
-            font-size: 16px;
-            text-decoration: none;
-            text-transform: uppercase;
-            overflow: hidden;
-            transition: .5s;
-            margin-top: 40px;
-            letter-spacing: 4px;
-        }
-        a:hover{
-            background: #30e9f4;
-            color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 5px #03e9f4,
-                        0 0 25px #03e9f4,
-                        0 0 50px #03e9f4,
-                        0 0 100px #03e9f4;
-        }
-        button{
+        .submit{
             position: relative;
             display: inline-block;
             padding: 10px 20px;
@@ -103,9 +76,8 @@
             overflow: hidden;
             transition: .5s;
             letter-spacing: 4px;
-            background-color:  rgba(0, 0, 0, .5);;
         }
-        button:hover{
+        .submit:hover{
             background: #30e9f4;
             color:#fff;
             border-radius: 5px;
@@ -114,20 +86,22 @@
                         0 0 50px #03e9f4,
                         0 0 100px #03e9f4;
         }
-    </style>
+        </style>
 </head>
 <body>
-    <h1>FITNESS CENTAR</h1>
     <div class="login">
-        <form>
-            <a href="#">IZMENI</a>         
-            <a href="Sale.html">SALE</a>
-            <a href="Pregled_treninga.html">TRENINZI</a>
-            <a href="Odobravanje_zahteva.html">ZAHTEVI</a>
-            <a href="Admin_Registracija_Trenera.html">REGISTRACIJA TRENERA</a>
-            <a href="Svi_Treneri.html">UKLANJANJE TRENERA</a>
-            <button class="obrisi">UKLONI</button>
-         </form>
+        <h2>Dodavanje sale</h2>
+        <form id="dodajSalu">
+            <div class="user">
+                <input type="text" id="oznaka" required>
+                <label for="oznaka">Oznaka</label>
+            </div>
+            <div class="user">
+                <input type="text" id="kapacitet" required>
+                <label for="kapacitet">Kapacitet</label>
+            </div>
+            <input type="submit" class="submit" value="Dodaj">
+        </form>
     </div>
 </body>
 </html>

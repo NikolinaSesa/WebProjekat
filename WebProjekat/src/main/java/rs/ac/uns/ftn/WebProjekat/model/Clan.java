@@ -50,12 +50,10 @@ public class Clan implements Serializable{
     @JoinTable(name = "ocene", joinColumns = @JoinColumn(name = "clan_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "ocena_id", referencedColumnName = "id"))
     private Set<Ocena> listaOcena = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(name = "listaprijava", joinColumns = @JoinColumn(name = "clan_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "termin_id", referencedColumnName = "id"))
-    private Set<Termin> listaPrijavaZaTermine= new HashSet<>();
+    @ManyToMany(mappedBy = "prijavljeni")
+    private Set<Termin> listaPrijavaZaTermine = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(name = "odradjeni", joinColumns = @JoinColumn(name = "clan_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "termin_id", referencedColumnName = "id"))
+    @ManyToMany(mappedBy = "clanoviKojiSuOdradili")
     private Set<Termin> listaOdradjenihTreninga = new HashSet<>();
 
     public Clan(){}

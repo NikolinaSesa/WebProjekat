@@ -75,7 +75,7 @@ public class FitnesscentarController {
     @DeleteMapping(value = "/obrisi/{id}")
     public ResponseEntity<Void> deleteFitnesscentar(@PathVariable Long id){
         this.fitnesscentarService.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping(value = "/svi/{id}/{uloga}", produces = MediaType.APPLICATION_JSON_VALUE)

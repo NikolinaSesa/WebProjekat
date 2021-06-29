@@ -1,4 +1,4 @@
-//pregled svi trenera 
+//pregled svih fitnesscentara
 //SAMO ZA ADMINA
 $(document).ready(function(){
 
