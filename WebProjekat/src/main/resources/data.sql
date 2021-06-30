@@ -6,11 +6,11 @@ INSERT INTO SALA(kapacitet, oznaka, fitnesscentar_id) VALUES (45, 'B14',1);
 
 INSERT INTO ADMINISTRATOR(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumrodjenja, uloga, aktivan) VALUES ('ninasesa', '2345ftg', 'Nikolina', 'Sesa', '0641126921', 'nikolinasesaa23@gmail.com', '2000-09-23', 'ADMINISTRATOR', true);
 
-INSERT INTO CLAN(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumrodjenja, uloga, aktivan, fitnesscentar_id) VALUES ('natasadjacic', 'ncbhjd73', 'Natasa', 'Djacic', '065674831', 'natashaa@gmail.com', '2000-02-06', 'CLAN', true, 1);
-INSERT INTO CLAN(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumrodjenja, uloga, aktivan, fitnesscentar_id) VALUES ('dragasvircevic', '35426tg', 'Draga', 'Svircevic', '063452731', 'dragaasvircevic@gmail.com', '2000-07-29', 'CLAN', true, 1);
-INSERT INTO CLAN(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumrodjenja, uloga, aktivan, fitnesscentar_id) VALUES ('milicagugleta', '2473672g', 'Milica', 'Gugleta', '061647883', 'micagugleta23@gmail.com', '2000-04-26', 'CLAN', true, 1);
-INSERT INTO CLAN(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumrodjenja, uloga, aktivan, fitnesscentar_id) VALUES ('natalijasub', 'jhdsa673ftg', 'Natalija', 'Subasic', '063456921', 'nataliiisub@gmail.com', '2000-10-26', 'CLAN', true, 1);
-INSERT INTO CLAN(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumrodjenja, uloga, aktivan, fitnesscentar_id) VALUES ('anjaaa', '82374htg', 'Anja', 'Dimitrijevic', '066487921', 'anjaaa23@gmail.com', '2000-08-24', 'CLAN', true, 1);
+INSERT INTO CLAN(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumrodjenja, uloga, aktivan) VALUES ('natasadjacic', 'ncbhjd73', 'Natasa', 'Djacic', '065674831', 'natashaa@gmail.com', '2000-02-06', 'CLAN', true);
+INSERT INTO CLAN(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumrodjenja, uloga, aktivan) VALUES ('dragasvircevic', '35426tg', 'Draga', 'Svircevic', '063452731', 'dragaasvircevic@gmail.com', '2000-07-29', 'CLAN', true);
+INSERT INTO CLAN(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumrodjenja, uloga, aktivan) VALUES ('milicagugleta', '2473672g', 'Milica', 'Gugleta', '061647883', 'micagugleta23@gmail.com', '2000-04-26', 'CLAN', true);
+INSERT INTO CLAN(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumrodjenja, uloga, aktivan) VALUES ('natalijasub', 'jhdsa673ftg', 'Natalija', 'Subasic', '063456921', 'nataliiisub@gmail.com', '2000-10-26', 'CLAN', true);
+INSERT INTO CLAN(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumrodjenja, uloga, aktivan) VALUES ('anjaaa', '82374htg', 'Anja', 'Dimitrijevic', '066487921', 'anjaaa23@gmail.com', '2000-08-24', 'CLAN', true);
 
 INSERT INTO TRENER(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumrodjenja, uloga, aktivan, fitnesscentar_id) VALUES('bokiipanic', 'nchd7384', 'Boris', 'Panic', '0654326781', 'borispanicc@gmail.com','1998-07-18','TRENER', true, 1);
 INSERT INTO TRENER(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumrodjenja, uloga, aktivan, fitnesscentar_id) VALUES('srdjanvasic','hfnc73748', 'Srdjan', 'Vasic', '0692435647', 'srkiivas@gmail.com', '1997-12-03', 'TRENER', true, 1);

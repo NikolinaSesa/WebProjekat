@@ -38,3 +38,35 @@ $(document).on("submit", "#regKorisnika", function(event){
         }
     });
 });
+
+//pregled profila
+$(document).on('click', '.btnSeeMore', function(){
+    let fitnesscentriDiv=$("#fitnesscentri");
+    fitnesscentriDiv.hide();
+
+    let clanId=localStorage.getItem("korisnikId");
+
+    $.ajax({
+        type:"GET",
+        url:"http://localhost:8080/api/clan/id/"+clanId,
+        dataType:"json",
+        success:function(response){
+            console.log("SUCCESS:\n", response);
+
+            $('#ime').text(response.ime);
+            $('#prezime').text(response.prezime);
+            $('#korisnickoIme').text(response.korisnickoIme);
+            $('#lozinka').text(response.lozinka);
+            $('#email').text(response.email);
+            $('#broj').text(response.brTelefona);
+            $('#datum').text(response.datumRodjenja);
+
+            let clanDiv=$('#Profil');
+            clanDiv.show();
+        },
+        error:function(response){
+            console.log("ERROR:\n", response);
+            alert("Niste prijavljeni!");
+        }
+    });
+});

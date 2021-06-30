@@ -39,7 +39,6 @@ public class Termin{
     @JoinTable(name = "ocene", joinColumns = @JoinColumn(name = "clan_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "termin_id", referencedColumnName = "id"))
     private Set<Ocena> oceneTermina = new HashSet<>();
     
-
     @ManyToOne(fetch = FetchType.EAGER)
     private Trening trening;
 

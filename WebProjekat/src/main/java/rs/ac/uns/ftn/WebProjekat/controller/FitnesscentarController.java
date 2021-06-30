@@ -14,10 +14,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import rs.ac.uns.ftn.WebProjekat.model.Administrator;
+import rs.ac.uns.ftn.WebProjekat.model.Clan;
 import rs.ac.uns.ftn.WebProjekat.model.Fitnesscentar;
 import rs.ac.uns.ftn.WebProjekat.model.Uloga;
 import rs.ac.uns.ftn.WebProjekat.model.dto.FitnesscentarDTO;
 import rs.ac.uns.ftn.WebProjekat.service.AdminService;
+import rs.ac.uns.ftn.WebProjekat.service.ClanService;
 import rs.ac.uns.ftn.WebProjekat.service.FitnesscentarService;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +31,13 @@ public class FitnesscentarController {
 
     private final FitnesscentarService fitnesscentarService;
     private final AdminService adminService;
+    private final ClanService clanService;
 
     @Autowired
-    public FitnesscentarController(FitnesscentarService fitnesscentarService, AdminService adminService){
+    public FitnesscentarController(FitnesscentarService fitnesscentarService, AdminService adminService, ClanService clanService){
         this.fitnesscentarService = fitnesscentarService;
         this.adminService=adminService;
+        this.clanService=clanService;
     }
     
     @PostMapping(value = "/dodaj/{id}/{uloga}" ,consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -81,10 +85,11 @@ public class FitnesscentarController {
     @GetMapping(value = "/svi/{id}/{uloga}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<FitnesscentarDTO>> getFitnesscentri(@PathVariable Long id, @PathVariable Uloga uloga){
 
-        if(uloga==Uloga.ADMINISTRATOR){
+        if(uloga!=Uloga.TRENER){
 
             Administrator admin =this.adminService.findOne(id);
-            if(admin==null){
+            Clan clan=this.clanService.findOne(id);
+            if(admin==null || clan==null){
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
             else{

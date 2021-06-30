@@ -30,9 +30,6 @@ public class Fitnesscentar implements Serializable{
     @OneToMany(mappedBy = "fitnesscentar", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Trener> treneri= new HashSet<>();
 
-    @OneToMany(mappedBy = "fitnesscentar", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Clan> clanovi= new HashSet<>();
-
     public Fitnesscentar(){}
 
     public Fitnesscentar(String naziv, String adresa, Long br, String email){
@@ -62,9 +59,6 @@ public class Fitnesscentar implements Serializable{
 
     public Set<Trener> getTreneri(){return treneri;}
     public void setTreneri(Set<Trener> treneri){this.treneri=treneri;}
-
-    public Set<Clan> getClanovi(){return clanovi;}
-    public void setClanovi(Set<Clan> clanovi){this.clanovi=clanovi;}
 
     @Override
     public String toString(){

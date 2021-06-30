@@ -43,9 +43,6 @@ public class Clan implements Serializable{
     @Column
     private Boolean aktivan;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Fitnesscentar fitnesscentar;
-
     @ManyToMany
     @JoinTable(name = "ocene", joinColumns = @JoinColumn(name = "clan_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "ocena_id", referencedColumnName = "id"))
     private Set<Ocena> listaOcena = new HashSet<>();
@@ -100,6 +97,4 @@ public class Clan implements Serializable{
     public Boolean getAktivan(){return aktivan;}
     public void setAktivan(Boolean aktivan){this.aktivan=aktivan;}
 
-    public Fitnesscentar getFC(){return fitnesscentar;}
-    public void setFC(Fitnesscentar fc){this.fitnesscentar=fc;}
 }

@@ -69,5 +69,23 @@ public class ClanController {
 
         return new ResponseEntity<>(clanDTO, HttpStatus.OK);
     }
+
+    //Za pregled profila
+    @GetMapping(value = "/id/{clanId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ClanDTO> getClan(@PathVariable Long clanId){
+
+        Clan clan=this.clanService.findOne(clanId);
+
+        ClanDTO clanDTO=new ClanDTO();
+        clanDTO.setKorisnickoIme(clan.getKorisnickoIme());
+        clanDTO.setLozinka(clan.getLozinka());
+        clanDTO.setIme(clan.getIme());
+        clanDTO.setPrezime(clan.getPrezime());
+        clanDTO.setBrTelefona(clan.getBrTelefona());
+        clanDTO.setEmail(clan.getEmail());
+        clanDTO.setDatumRodjenja(clan.getDatum());
+
+        return new ResponseEntity<>(clanDTO, HttpStatus.OK);
+    }
     
 }
