@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.MediaType;
 import rs.ac.uns.ftn.WebProjekat.model.dto.TerminDTO;
+import rs.ac.uns.ftn.WebProjekat.model.Clan;
 import rs.ac.uns.ftn.WebProjekat.model.Termin;
+import rs.ac.uns.ftn.WebProjekat.model.Uloga;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import rs.ac.uns.ftn.WebProjekat.service.ClanService;
 import rs.ac.uns.ftn.WebProjekat.service.TerminService;
 import rs.ac.uns.ftn.WebProjekat.model.dto.Tip;
 
@@ -23,10 +26,12 @@ import rs.ac.uns.ftn.WebProjekat.model.dto.Tip;
 public class TerminController{
 
     private final TerminService terminService;
+    private final ClanService clanService;
 
     @Autowired
-    public TerminController(TerminService terminService){
+    public TerminController(TerminService terminService, ClanService clanService){
         this.terminService=terminService;
+        this.clanService=clanService;
     }
 
     @GetMapping(value = "/cena/{cena}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -144,5 +149,33 @@ public class TerminController{
             terminiDTO.add(terminDTO);
         }
         return new ResponseEntity<>(terminiDTO, HttpStatus.OK);
-    } 
+    }
+    
+    //Prijava za termin treninga
+    @GetMapping(value = "/prijava/{id}/{uloga}/{terminId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<TerminDTO> getTermin(@PathVariable Long id, @PathVariable Uloga uloga, @PathVariable Long terminId) throws Exception{
+
+        if(uloga==Uloga.CLAN){
+            Clan clan=this.clanService.findOne(id);
+            if(clan==null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            else{
+                Termin termin=this.terminService.findById(terminId);
+
+                if(termin.getBrPrijavljenihClanova()+1>=termin.getSala().getKapacitet()){
+                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                }
+                else{
+                    Termin terminUpdate=this.terminService.update(termin, clan);
+
+                    TerminDTO terminDTO=new TerminDTO(terminUpdate.getId(), terminUpdate.getTrening().getNaziv(), terminUpdate.getTrening().getTip(), terminUpdate.getTrening().getOpis(), terminUpdate.getCena(), terminUpdate.getVreme(), terminUpdate.getDan(), terminUpdate.getTrening().getTrener().getIme(), terminUpdate.getTrening().getTrener().getPrezime());        
+                    return new ResponseEntity<>(terminDTO, HttpStatus.OK);
+                }
+            }
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
 }

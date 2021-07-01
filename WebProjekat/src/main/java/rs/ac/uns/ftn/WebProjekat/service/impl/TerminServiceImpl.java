@@ -73,4 +73,21 @@ public class TerminServiceImpl implements TerminService{
         List<Termin> terminiSortiraniPoVemenu = this.terminRepository.findByTreningTrenerFitnesscentarId(Sort.by(Sort.Direction.DESC, "vreme"), fitnesscentarId);
         return terminiSortiraniPoVemenu;
     }
+
+    @Override
+    public Termin findById(Long id){
+        Termin termin=this.terminRepository.getOne(id);
+        return termin;
+    }
+
+    @Override
+    public Termin update(Termin termin, Clan clan) throws Exception{
+        Termin terminToUpdate=this.terminRepository.getOne(termin.getId());
+        if(terminToUpdate==null){
+            throw new Exception("Termin doesn't exist!");
+        }
+        terminToUpdate.setPrijavljeni(clan);
+        Termin saveTermin=this.terminRepository.save(terminToUpdate);
+        return saveTermin;
+    }
 }

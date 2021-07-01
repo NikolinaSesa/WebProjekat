@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import rs.ac.uns.ftn.WebProjekat.model.dto.ClanDTO;
 import org.springframework.web.bind.annotation.RequestBody;
-
 import rs.ac.uns.ftn.WebProjekat.model.Administrator;
 import rs.ac.uns.ftn.WebProjekat.model.Clan;
 import rs.ac.uns.ftn.WebProjekat.model.Trener;
@@ -28,7 +27,7 @@ public class ClanController {
 
     private final ClanService clanService;
     private final TrenerService trenerService;
-    private AdminService adminService;
+    private final AdminService adminService;
 
     @Autowired
     public ClanController(ClanService clanService, TrenerService trenerService, AdminService adminService){
@@ -87,5 +86,6 @@ public class ClanController {
 
         return new ResponseEntity<>(clanDTO, HttpStatus.OK);
     }
+
     
 }

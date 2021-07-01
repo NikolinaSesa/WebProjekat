@@ -66,4 +66,7 @@ public class Termin{
     public Integer getBrPrijavljenihClanova(){return brPrijavljenihClanova;}
     public void setBrPrijavljenihClanova(Integer br){this.brPrijavljenihClanova=br;}
 
+    public Set<Clan> getPrijavljeni(){return prijavljeni;}
+    public void setPrijavljeni(Clan clan){this.prijavljeni.add(clan);}
+
 }

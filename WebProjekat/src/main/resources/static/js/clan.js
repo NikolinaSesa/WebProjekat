@@ -70,3 +70,35 @@ $(document).on('click', '.btnSeeMore', function(){
         }
     });
 });
+
+//Pregled svih treninga u ponudi
+$(document).on('click', '.treninzi', function(){
+    let fitnesscentarId=this.dataset.id;
+    localStorage.setItem("fitnesscentarId", fitnesscentarId);
+
+    window.location.href="Pregled_treninga.html";
+});
+
+//prijava za termin
+$(document).on('click', '.prijava', function(){
+    
+    let korisnikId=localStorage.getItem("korisnikId");
+    let uloga=localStorage.getItem("uloga");
+    let terminId=this.dataset.id;
+    localStorage.setItem("terminId", terminId);
+
+    $.ajax({
+        type:"GET",
+        url:"http://localhost:8080/api/termin/prijava/"+korisnikId+"/"+uloga+"/"+terminId,
+        dataType:"json",
+        success:function(response){
+           console.log("SUCCESS:\n", response);
+           alert("Uspesno ste se prijavili za zeljeni termin!");
+        },
+        error:function(response){
+            console.log("ERROR:\n", response);
+            alert("Greska prilikom prijave! Svi termini su zauzeti!");
+        }
+
+    });
+});

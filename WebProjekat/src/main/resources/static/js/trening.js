@@ -1,32 +1,64 @@
 $(document).on('click', '.btn1', function(){
 
-    let id = 1;
-    localStorage.setItem("sortId", id);
-    window.location.href="Termini.html";
+    let uloga=localStorage.getItem("uloga");
+    if(uloga=="CLAN"){
+        let id = 1;
+        localStorage.setItem("sortId", id);
+        window.location.href="Prijava_za_termine.html";
+    }
+    else{
+        let id = 1;
+        localStorage.setItem("sortId", id);
+        window.location.href="Termini.html";
+    }
 
 });
 
 $(document).on('click', '.btn2', function(){
 
-    let id=2;
-    localStorage.setItem("sortId", id);
-    window.location.href="Termini.html";
+    let uloga=localStorage.getItem("uloga");
+    if(uloga=="CLAN"){
+        let id = 2;
+        localStorage.setItem("sortId", id);
+        window.location.href="Prijava_za_termine.html";
+    }
+    else{
+        let id = 2;
+        localStorage.setItem("sortId", id);
+        window.location.href="Termini.html";
+    }
 
 });
 
 $(document).on('click', '.btn3', function(){
 
-    let id=3;
-    localStorage.setItem("sortId", id);
-    window.location.href="Termini.html";
+    let uloga=localStorage.getItem("uloga");
+    if(uloga=="CLAN"){
+        let id = 3;
+        localStorage.setItem("sortId", id);
+        window.location.href="Prijava_za_termine.html";
+    }
+    else{
+        let id = 3;
+        localStorage.setItem("sortId", id);
+        window.location.href="Termini.html";
+    }
 
 });
 
 $(document).on('click', '.btn4', function(){
 
-    let id=4;
-    localStorage.setItem("sortId", id);
-    window.location.href="Termini.html";
+    let uloga=localStorage.getItem("uloga");
+    if(uloga=="CLAN"){
+        let id = 4;
+        localStorage.setItem("sortId", id);
+        window.location.href="Prijava_za_termine.html";
+    }
+    else{
+        let id = 4;
+        localStorage.setItem("sortId", id);
+        window.location.href="Termini.html";
+    }
 
 });
 
@@ -43,7 +75,15 @@ $(document).on('click', '.btn5', function(){
     let vreme=$("#vreme").val();
     localStorage.setItem("vreme", vreme);
 
-    let id=5;
-    localStorage.setItem("sortId", id);
-    window.location.href="Termini.html";
+    let uloga=localStorage.getItem("uloga");
+    if(uloga=="CLAN"){
+        let id = 5;
+        localStorage.setItem("sortId", id);
+        window.location.href="Prijava_za_termine.html";
+    }
+    else{
+        let id = 5;
+        localStorage.setItem("sortId", id);
+        window.location.href="Termini.html";
+    }
 });

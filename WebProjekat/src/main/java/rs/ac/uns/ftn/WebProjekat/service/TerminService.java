@@ -24,4 +24,8 @@ public interface TerminService {
     List<Termin> findAllAndSortByVremeRastuce(Long fitnesscentarId);
 
     List<Termin> findAllAndSortByVremeOpadajuce(Long fitnesscentarId);
+
+    Termin findById(Long id);
+
+    Termin update(Termin termin, Clan clan) throws Exception; 
 }
