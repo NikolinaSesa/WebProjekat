@@ -13,9 +13,12 @@ import rs.ac.uns.ftn.WebProjekat.model.dto.TerminDTO;
 import rs.ac.uns.ftn.WebProjekat.model.Clan;
 import rs.ac.uns.ftn.WebProjekat.model.Termin;
 import rs.ac.uns.ftn.WebProjekat.model.Uloga;
+import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import rs.ac.uns.ftn.WebProjekat.service.ClanService;
 import rs.ac.uns.ftn.WebProjekat.service.TerminService;
 import rs.ac.uns.ftn.WebProjekat.model.dto.Tip;
@@ -41,8 +44,13 @@ public class TerminController{
         List<TerminDTO> terminiDTO = new ArrayList<>();
 
         for(Termin termin : termini){
-            TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getTrening().getNaziv(),termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDan(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
-            terminiDTO.add(terminDTO);
+            LocalDate localDate=LocalDate.now();
+            Date date=Date.valueOf(localDate);
+            if(date.before(termin.getDatum())){
+
+                TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getTrening().getNaziv(),termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDatum(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
+                terminiDTO.add(terminDTO);
+            }
         }
         return new ResponseEntity<>(terminiDTO, HttpStatus.OK);
     } 
@@ -54,8 +62,13 @@ public class TerminController{
         List<TerminDTO> terminiDTO = new ArrayList<>();
 
         for(Termin termin : termini){
-            TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getTrening().getNaziv(),termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDan(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
-            terminiDTO.add(terminDTO);
+            LocalDate localDate=LocalDate.now();
+            Date date=Date.valueOf(localDate);
+            if(date.before(termin.getDatum())){
+
+                TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getTrening().getNaziv(),termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDatum(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
+                terminiDTO.add(terminDTO);
+            }
         }
         return new ResponseEntity<>(terminiDTO, HttpStatus.OK);
     } 
@@ -67,8 +80,13 @@ public class TerminController{
         List<TerminDTO> terminiDTO = new ArrayList<>();
 
         for(Termin termin : termini){
-            TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDan(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
-            terminiDTO.add(terminDTO);
+            LocalDate localDate=LocalDate.now();
+            Date date=Date.valueOf(localDate);
+            if(date.before(termin.getDatum())){
+
+                TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDatum(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
+                terminiDTO.add(terminDTO);
+            }
         }
         return new ResponseEntity<>(terminiDTO, HttpStatus.OK);
     }
@@ -80,8 +98,13 @@ public class TerminController{
         List<TerminDTO> terminiDTO = new ArrayList<>();
 
         for(Termin termin : termini){
-            TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDan(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
-            terminiDTO.add(terminDTO);
+            LocalDate localDate=LocalDate.now();
+            Date date=Date.valueOf(localDate);
+            if(date.before(termin.getDatum())){
+
+                TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDatum(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
+                terminiDTO.add(terminDTO);
+            }
         }
         return new ResponseEntity<>(terminiDTO, HttpStatus.OK);
     } 
@@ -93,8 +116,13 @@ public class TerminController{
         List<TerminDTO> terminiDTO = new ArrayList<>();
 
         for(Termin termin : termini){
-            TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDan(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
-            terminiDTO.add(terminDTO);
+            LocalDate localDate=LocalDate.now();
+            Date date=Date.valueOf(localDate);
+            if(date.before(termin.getDatum())){
+
+                TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDatum(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
+                terminiDTO.add(terminDTO);
+            }
         }
         return new ResponseEntity<>(terminiDTO, HttpStatus.OK);
     } 
@@ -106,8 +134,13 @@ public class TerminController{
             List<TerminDTO> terminiDTO = new ArrayList<>();
 
             for(Termin termin : termini){
-                TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDan(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
-                terminiDTO.add(terminDTO);
+                LocalDate localDate=LocalDate.now();
+                Date date=Date.valueOf(localDate);
+                if(date.before(termin.getDatum())){
+
+                    TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDatum(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
+                    terminiDTO.add(terminDTO);
+                }
             }
             return new ResponseEntity<>(terminiDTO, HttpStatus.OK);
         }
@@ -119,8 +152,13 @@ public class TerminController{
         List<TerminDTO> terminiDTO = new ArrayList<>();
 
         for(Termin termin : termini){
-            TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDan(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
-            terminiDTO.add(terminDTO);
+            LocalDate localDate=LocalDate.now();
+            Date date=Date.valueOf(localDate);
+            if(date.before(termin.getDatum())){
+
+                TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDatum(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
+                terminiDTO.add(terminDTO);
+            }
         }
         return new ResponseEntity<>(terminiDTO, HttpStatus.OK);
     } 
@@ -132,8 +170,13 @@ public class TerminController{
         List<TerminDTO> terminiDTO = new ArrayList<>();
 
         for(Termin termin : termini){
-            TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDan(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
-            terminiDTO.add(terminDTO);
+            LocalDate localDate=LocalDate.now();
+            Date date=Date.valueOf(localDate);
+            if(date.before(termin.getDatum())){
+
+                TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDatum(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
+                terminiDTO.add(terminDTO);
+            }
         }
         return new ResponseEntity<>(terminiDTO, HttpStatus.OK);
     } 
@@ -145,8 +188,13 @@ public class TerminController{
         List<TerminDTO> terminiDTO = new ArrayList<>();
 
         for(Termin termin : termini){
-            TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDan(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
-            terminiDTO.add(terminDTO);
+            LocalDate localDate=LocalDate.now();
+            Date date=Date.valueOf(localDate);
+            if(date.before(termin.getDatum())){
+
+                TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDatum(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
+                terminiDTO.add(terminDTO);
+            }
         }
         return new ResponseEntity<>(terminiDTO, HttpStatus.OK);
     }
@@ -170,7 +218,7 @@ public class TerminController{
                     termin.setBrPrijavljenihClanova(termin.getBrPrijavljenihClanova()+1);
                     Termin terminUpdate=this.terminService.update(termin, clan);
 
-                    TerminDTO terminDTO=new TerminDTO(terminUpdate.getId(), terminUpdate.getTrening().getNaziv(), terminUpdate.getTrening().getTip(), terminUpdate.getTrening().getOpis(), terminUpdate.getCena(), terminUpdate.getVreme(), terminUpdate.getDan(), terminUpdate.getTrening().getTrener().getIme(), terminUpdate.getTrening().getTrener().getPrezime());        
+                    TerminDTO terminDTO=new TerminDTO(terminUpdate.getId(), terminUpdate.getTrening().getNaziv(), terminUpdate.getTrening().getTip(), terminUpdate.getTrening().getOpis(), terminUpdate.getCena(), terminUpdate.getVreme(), terminUpdate.getDatum(), terminUpdate.getTrening().getTrener().getIme(), terminUpdate.getTrening().getTrener().getPrezime());        
                     return new ResponseEntity<>(terminDTO, HttpStatus.OK);
                 }
             }
@@ -194,8 +242,40 @@ public class TerminController{
                 termin.setBrPrijavljenihClanova(termin.getBrPrijavljenihClanova()-1);
                 Termin terminToUpdate=this.terminService.otkazi(termin, clan);
 
-                TerminDTO terminDTO= new TerminDTO(terminToUpdate.getId(), terminToUpdate.getTrening().getNaziv(), terminToUpdate.getTrening().getTip(), terminToUpdate.getTrening().getOpis(), terminToUpdate.getCena(), terminToUpdate.getVreme(), terminToUpdate.getDan(), terminToUpdate.getTrening().getTrener().getIme(), terminToUpdate.getTrening().getTrener().getPrezime());
+                TerminDTO terminDTO= new TerminDTO(terminToUpdate.getId(), terminToUpdate.getTrening().getNaziv(), terminToUpdate.getTrening().getTip(), terminToUpdate.getTrening().getOpis(), terminToUpdate.getCena(), terminToUpdate.getVreme(), terminToUpdate.getDatum(), terminToUpdate.getTrening().getTrener().getIme(), terminToUpdate.getTrening().getTrener().getPrezime());
                 return new ResponseEntity<>(terminDTO, HttpStatus.OK);
+            }
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+
+    //Lista odradjenih termina
+    @GetMapping(value = "/odradjeni/{id}/{uloga}/{fitnesscentarId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TerminDTO>> getListaOdradjenih(@PathVariable Long id, @PathVariable Uloga uloga, @PathVariable Long fitnesscentarId) throws Exception{
+
+        if(uloga==Uloga.CLAN){
+            Clan clan=this.clanService.findOne(id);
+            if(clan==null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            else{
+                Set<Termin> prijavljeniTermini=clan.getListaPrijava();
+                List<TerminDTO> odradjeniTerminiDTO=new ArrayList<>();
+
+                for(Termin termin : prijavljeniTermini){
+                    if(termin.getTrening().getTrener().getFitnessCentar().getId()==fitnesscentarId){
+                        LocalDate localDate=LocalDate.now();
+                        Date date=Date.valueOf(localDate);
+                        if(date.after(termin.getDatum())){
+                            Termin odradjen=this.terminService.odradjen(termin, clan);
+                            TerminDTO terminDTO=new TerminDTO(odradjen.getId(), odradjen.getTrening().getNaziv(), odradjen.getTrening().getTip(), odradjen.getTrening().getOpis(), odradjen.getCena(), odradjen.getVreme(), odradjen.getDatum(), odradjen.getTrening().getTrener().getIme(), odradjen.getTrening().getTrener().getPrezime());
+                            odradjeniTerminiDTO.add(terminDTO);
+                        }
+                    }
+                }
+                return new ResponseEntity<>(odradjeniTerminiDTO, HttpStatus.OK);
             }
         }
         else{

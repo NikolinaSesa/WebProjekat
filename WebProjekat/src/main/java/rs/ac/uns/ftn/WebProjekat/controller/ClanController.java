@@ -2,6 +2,9 @@ package rs.ac.uns.ftn.WebProjekat.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -107,8 +110,13 @@ public class ClanController {
 
                 for(Termin termin : prijavljeniTremini){
                     if(termin.getTrening().getTrener().getFitnessCentar().getId()==fitnesscentarId){
-                        TerminDTO terminDTO=new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDan(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
-                        prijavljeniTerminiDTO.add(terminDTO);   
+                        LocalDate localDate=LocalDate.now();
+                        Date date=Date.valueOf(localDate);
+                        if(date.before(termin.getDatum())){
+
+                            TerminDTO terminDTO=new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDatum(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
+                            prijavljeniTerminiDTO.add(terminDTO); 
+                        }  
                     } 
                 }
                 return new ResponseEntity<>(prijavljeniTerminiDTO, HttpStatus.OK);

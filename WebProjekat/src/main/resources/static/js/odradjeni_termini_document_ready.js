@@ -6,7 +6,7 @@ $(document).ready(function(){
 
     $.ajax({
         type:"GET",
-        url:"http://localhost:8080/api/clan/prijavljeni/"+id+"/"+uloga+"/"+fitnesscentarId,
+        url:"http://localhost:8080/api/termin/odradjeni/"+id+"/"+uloga+"/"+fitnesscentarId,
         dataType:"json",
         success:function(response){
             console.log("SUCCESS:\n", response);
@@ -21,7 +21,7 @@ $(document).ready(function(){
                 row+="<td>"+termin.vreme+"</td>";
                 row+="<td>"+termin.imeTrenera+"</td>";
                 row+="<td>"+termin.prezimeTrenera+"</td>";
-                let btn="<button class='odjava' data-id="+termin.id+">Otkazi prijavu</button>";
+                let btn="<button class='oceni' data-id="+termin.id+">Oceni</button>";
                 row+="<td>"+btn+"</td>";
                 row+="</tr>";
 

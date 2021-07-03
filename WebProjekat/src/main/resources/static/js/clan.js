@@ -132,3 +132,11 @@ $(document).on('click', '.odjava', function(){
         }
     });
 });
+
+//Prikaz liste odradjenih termina
+$(document).on('click', '.odradjeni', function(){
+    let fitnesscentarId=this.dataset.id;
+    localStorage.setItem("fitnesscentarId", fitnesscentarId);
+
+    window.location.href="Pregled_odradjenih_termina.html";
+});

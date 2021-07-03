@@ -105,4 +105,15 @@ public class TerminServiceImpl implements TerminService{
         Termin saveTermin=this.terminRepository.save(terminToUpdate);
         return saveTermin;
     }
+
+    @Override
+    public Termin odradjen(Termin termin, Clan clan) throws Exception{
+        Termin terminToUpdate=this.terminRepository.getOne(termin.getId());
+        if(terminToUpdate==null){
+            throw new Exception("Termin doesn't exist!");
+        }
+        terminToUpdate.setClanKojiJeOdradio(clan);
+        Termin saveTermin=this.terminRepository.save(terminToUpdate);
+        return saveTermin;
+    }
 }

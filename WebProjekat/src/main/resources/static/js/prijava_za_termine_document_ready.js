@@ -18,7 +18,7 @@ $(document).ready(function(){
                            row+="<td>"+termin.tipTreninga+"</td>";
                            row+="<td>"+termin.opis+"</td>";
                            row+="<td>"+termin.cena+"</td>";
-                           row+="<td>"+termin.dan+"</td>";
+                           row+="<td>"+termin.datum+"</td>";
                            row+="<td>"+termin.vreme+"</td>";
                            row+="<td>"+termin.imeTrenera+"</td>";
                            row+="<td>"+termin.prezimeTrenera+"</td>";
@@ -48,7 +48,7 @@ $(document).ready(function(){
                            row+="<td>"+termin.tipTreninga+"</td>";
                            row+="<td>"+termin.opis+"</td>";
                            row+="<td>"+termin.cena+"</td>";
-                           row+="<td>"+termin.dan+"</td>";
+                           row+="<td>"+termin.datum+"</td>";
                            row+="<td>"+termin.vreme+"</td>";
                            row+="<td>"+termin.imeTrenera+"</td>";
                            row+="<td>"+termin.prezimeTrenera+"</td>";
@@ -78,7 +78,7 @@ $(document).ready(function(){
                            row+="<td>"+termin.tipTreninga+"</td>";
                            row+="<td>"+termin.opis+"</td>";
                            row+="<td>"+termin.cena+"</td>";
-                           row+="<td>"+termin.dan+"</td>";
+                           row+="<td>"+termin.datum+"</td>";
                            row+="<td>"+termin.vreme+"</td>";
                            row+="<td>"+termin.imeTrenera+"</td>";
                            row+="<td>"+termin.prezimeTrenera+"</td>";
@@ -108,7 +108,7 @@ $(document).ready(function(){
                            row+="<td>"+termin.tipTreninga+"</td>";
                            row+="<td>"+termin.opis+"</td>";
                            row+="<td>"+termin.cena+"</td>";
-                           row+="<td>"+termin.dan+"</td>";
+                           row+="<td>"+termin.datum+"</td>";
                            row+="<td>"+termin.vreme+"</td>";
                            row+="<td>"+termin.imeTrenera+"</td>";
                            row+="<td>"+termin.prezimeTrenera+"</td>";
@@ -140,7 +140,7 @@ $(document).ready(function(){
                         row+="<td>"+termin.tipTreninga+"</td>";
                         row+="<td>"+termin.opis+"</td>";
                         row+="<td>"+termin.cena+"</td>";
-                        row+="<td>"+termin.dan+"</td>";
+                        row+="<td>"+termin.datum+"</td>";
                         row+="<td>"+termin.vreme+"</td>";
                         row+="<td>"+termin.imeTrenera+"</td>";
                         row+="<td>"+termin.prezimeTrenera+"</td>";
@@ -171,7 +171,7 @@ $(document).ready(function(){
                         row+="<td>"+termin.tipTreninga+"</td>";
                         row+="<td>"+termin.opis+"</td>";
                         row+="<td>"+termin.cena+"</td>";
-                        row+="<td>"+termin.dan+"</td>";
+                        row+="<td>"+termin.datum+"</td>";
                         row+="<td>"+termin.vreme+"</td>";
                         row+="<td>"+termin.imeTrenera+"</td>";
                         row+="<td>"+termin.prezimeTrenera+"</td>";
@@ -202,7 +202,7 @@ $(document).ready(function(){
                             row+="<td>"+termin.tipTreninga+"</td>";
                             row+="<td>"+termin.opis+"</td>";
                             row+="<td>"+termin.cena+"</td>";
-                            row+="<td>"+termin.dan+"</td>";
+                            row+="<td>"+termin.datum+"</td>";
                             row+="<td>"+termin.vreme+"</td>";
                             row+="<td>"+termin.imeTrenera+"</td>";
                             row+="<td>"+termin.prezimeTrenera+"</td>";
@@ -233,7 +233,7 @@ $(document).ready(function(){
                             row+="<td>"+termin.tipTreninga+"</td>";
                             row+="<td>"+termin.opis+"</td>";
                             row+="<td>"+termin.cena+"</td>";
-                            row+="<td>"+termin.dan+"</td>";
+                            row+="<td>"+termin.datum+"</td>";
                             row+="<td>"+termin.vreme+"</td>";
                             row+="<td>"+termin.imeTrenera+"</td>";
                             row+="<td>"+termin.prezimeTrenera+"</td>";
@@ -264,7 +264,7 @@ $(document).ready(function(){
                             row+="<td>"+termin.tipTreninga+"</td>";
                             row+="<td>"+termin.opis+"</td>";
                             row+="<td>"+termin.cena+"</td>";
-                            row+="<td>"+termin.dan+"</td>";
+                            row+="<td>"+termin.datum+"</td>";
                             row+="<td>"+termin.vreme+"</td>";
                             row+="<td>"+termin.imeTrenera+"</td>";
                             row+="<td>"+termin.prezimeTrenera+"</td>";

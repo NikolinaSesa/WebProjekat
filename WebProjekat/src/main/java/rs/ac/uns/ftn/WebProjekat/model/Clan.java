@@ -100,4 +100,7 @@ public class Clan implements Serializable{
     public Set<Termin> getListaPrijava(){return listaPrijavaZaTermine;}
     public void setListaPrijava(Set<Termin> listaPrijava){this.listaPrijavaZaTermine=listaPrijava;}
 
+    public Set<Termin> getListaOdradjenih(){return listaOdradjenihTreninga;}
+    public void setListaOdradjenih(Set<Termin> listaOdradjenih){this.listaOdradjenihTreninga=listaOdradjenih;}
+
 }

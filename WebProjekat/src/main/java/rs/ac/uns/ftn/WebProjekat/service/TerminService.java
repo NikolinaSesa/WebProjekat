@@ -30,4 +30,6 @@ public interface TerminService {
     Termin update(Termin termin, Clan clan) throws Exception;
     
     Termin otkazi(Termin termin, Clan clan) throws Exception;
+
+    Termin odradjen(Termin termin, Clan clan) throws Exception;
 }

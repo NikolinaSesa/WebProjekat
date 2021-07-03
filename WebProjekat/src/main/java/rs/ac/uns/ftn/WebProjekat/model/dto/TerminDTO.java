@@ -1,6 +1,7 @@
 package rs.ac.uns.ftn.WebProjekat.model.dto;
 
 import java.sql.Time;
+import java.sql.Date;
 
 public class TerminDTO{
     
@@ -10,20 +11,20 @@ public class TerminDTO{
     private String opisTreninga;
     private Double cena;
     private Time vreme;
-    private Dani dan;
+    private Date datum;
     private String imeTrenera;
     private String prezimeTrenera;
 
     public TerminDTO(){}
 
-    public TerminDTO(Long id, String naziv,Tip tip, String opis, Double cena, Time vreme, Dani dan, String ime, String prezime){
+    public TerminDTO(Long id, String naziv,Tip tip, String opis, Double cena, Time vreme, Date datum, String ime, String prezime){
         this.id=id;
         this.nazivTreninga=naziv;
         this.tipTreninga=tip;
         this.opisTreninga=opis;
         this.cena=cena;
         this.vreme=vreme;
-        this.dan=dan;
+        this.datum=datum;
         this.imeTrenera=ime;
         this.prezimeTrenera=prezime;
     }
@@ -46,8 +47,8 @@ public class TerminDTO{
     public Time getVreme(){return vreme;}
     public void setVreme(Time vreme){this.vreme=vreme;}
 
-    public Dani getDan(){return dan;}
-    public void setDan(Dani dan){this.dan=dan;}
+    public Date getDatum(){return datum;}
+    public void setDatum(Date datum){this.datum=datum;}
 
     public String getImeTrenera(){return imeTrenera;}
     public void setImeTrenera(String ime){this.imeTrenera=ime;}

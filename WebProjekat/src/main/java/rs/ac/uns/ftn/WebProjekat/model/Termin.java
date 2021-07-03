@@ -4,8 +4,8 @@ import javax.persistence.Entity;
 import java.util.Set;
 import java.util.HashSet;
 import javax.persistence.*;
-import rs.ac.uns.ftn.WebProjekat.model.dto.Dani;
 import java.sql.Time;
+import java.sql.Date;
 
 @Entity
 public class Termin{
@@ -17,9 +17,8 @@ public class Termin{
     @Column
     private Double cena;
 
-    @Enumerated(EnumType.STRING)
     @Column
-    private Dani dan;
+    private Date datum;
 
     @Column
     private Time vreme;
@@ -51,8 +50,8 @@ public class Termin{
     public Double getCena(){return cena;}
     public void setCena(Double cena){this.cena=cena;}
 
-    public Dani getDan(){return dan;}
-    public void setDan(Dani dan){this.dan=dan;}
+    public Date getDatum(){return datum;}
+    public void setDatum(Date datum){this.datum=datum;}
 
     public Time getVreme(){return vreme;}
     public void setVreme(Time vreme){this.vreme=vreme;}
@@ -69,5 +68,9 @@ public class Termin{
     public Set<Clan> getPrijavljeni(){return prijavljeni;}
     public void setPrijavljeni(Clan clan){this.prijavljeni.add(clan);}
     public void otkazi(Set<Clan> prijavljeni){this.prijavljeni=prijavljeni;}
+
+    public Set<Clan> getClanoviKojiSuOdradili(){return clanoviKojiSuOdradili;}
+    public void setClanKojiJeOdradio(Clan clan){this.clanoviKojiSuOdradili.add(clan);}
+    
 
 }
