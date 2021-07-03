@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import rs.ac.uns.ftn.WebProjekat.model.*;
 import java.sql.Time;
 import java.util.List;
+import java.util.Set;
+
 import rs.ac.uns.ftn.WebProjekat.repository.TerminRepository;
 import rs.ac.uns.ftn.WebProjekat.service.TerminService;
 import rs.ac.uns.ftn.WebProjekat.model.dto.Tip;
@@ -87,6 +89,19 @@ public class TerminServiceImpl implements TerminService{
             throw new Exception("Termin doesn't exist!");
         }
         terminToUpdate.setPrijavljeni(clan);
+        Termin saveTermin=this.terminRepository.save(terminToUpdate);
+        return saveTermin;
+    }
+
+    @Override
+    public Termin otkazi(Termin termin, Clan clan) throws Exception{
+        Termin terminToUpdate=this.terminRepository.getOne(termin.getId());
+        if(terminToUpdate==null){
+            throw new Exception("Termin doesn't exist!");
+        }
+        Set<Clan> termini=terminToUpdate.getPrijavljeni();
+        termini.remove(clan);
+        terminToUpdate.otkazi(termini);
         Termin saveTermin=this.terminRepository.save(terminToUpdate);
         return saveTermin;
     }

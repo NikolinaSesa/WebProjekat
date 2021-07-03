@@ -97,4 +97,7 @@ public class Clan implements Serializable{
     public Boolean getAktivan(){return aktivan;}
     public void setAktivan(Boolean aktivan){this.aktivan=aktivan;}
 
+    public Set<Termin> getListaPrijava(){return listaPrijavaZaTermine;}
+    public void setListaPrijava(Set<Termin> listaPrijava){this.listaPrijavaZaTermine=listaPrijava;}
+
 }

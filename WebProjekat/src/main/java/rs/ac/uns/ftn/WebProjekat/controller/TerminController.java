@@ -167,11 +167,35 @@ public class TerminController{
                     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
                 }
                 else{
+                    termin.setBrPrijavljenihClanova(termin.getBrPrijavljenihClanova()+1);
                     Termin terminUpdate=this.terminService.update(termin, clan);
 
                     TerminDTO terminDTO=new TerminDTO(terminUpdate.getId(), terminUpdate.getTrening().getNaziv(), terminUpdate.getTrening().getTip(), terminUpdate.getTrening().getOpis(), terminUpdate.getCena(), terminUpdate.getVreme(), terminUpdate.getDan(), terminUpdate.getTrening().getTrener().getIme(), terminUpdate.getTrening().getTrener().getPrezime());        
                     return new ResponseEntity<>(terminDTO, HttpStatus.OK);
                 }
+            }
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+
+    //Otkazivanje termina
+    @GetMapping(value = "/otkazi/{id}/{uloga}/{terminId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<TerminDTO> otkazi(@PathVariable Long id, @PathVariable Uloga uloga, @PathVariable Long terminId) throws Exception{
+
+        if(uloga==Uloga.CLAN){
+            Clan clan=this.clanService.findOne(id);
+            if(clan==null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            else{
+                Termin termin=this.terminService.findById(terminId);
+                termin.setBrPrijavljenihClanova(termin.getBrPrijavljenihClanova()-1);
+                Termin terminToUpdate=this.terminService.otkazi(termin, clan);
+
+                TerminDTO terminDTO= new TerminDTO(terminToUpdate.getId(), terminToUpdate.getTrening().getNaziv(), terminToUpdate.getTrening().getTip(), terminToUpdate.getTrening().getOpis(), terminToUpdate.getCena(), terminToUpdate.getVreme(), terminToUpdate.getDan(), terminToUpdate.getTrening().getTrener().getIme(), terminToUpdate.getTrening().getTrener().getPrezime());
+                return new ResponseEntity<>(terminDTO, HttpStatus.OK);
             }
         }
         else{

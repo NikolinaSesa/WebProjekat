@@ -27,5 +27,7 @@ public interface TerminService {
 
     Termin findById(Long id);
 
-    Termin update(Termin termin, Clan clan) throws Exception; 
+    Termin update(Termin termin, Clan clan) throws Exception;
+    
+    Termin otkazi(Termin termin, Clan clan) throws Exception;
 }

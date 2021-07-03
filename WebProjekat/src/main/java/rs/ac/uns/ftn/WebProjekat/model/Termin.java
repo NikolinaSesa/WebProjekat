@@ -68,5 +68,6 @@ public class Termin{
 
     public Set<Clan> getPrijavljeni(){return prijavljeni;}
     public void setPrijavljeni(Clan clan){this.prijavljeni.add(clan);}
+    public void otkazi(Set<Clan> prijavljeni){this.prijavljeni=prijavljeni;}
 
 }

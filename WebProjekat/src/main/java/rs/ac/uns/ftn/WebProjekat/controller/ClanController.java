@@ -2,6 +2,9 @@ package rs.ac.uns.ftn.WebProjekat.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,9 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import rs.ac.uns.ftn.WebProjekat.model.dto.ClanDTO;
+import rs.ac.uns.ftn.WebProjekat.model.dto.TerminDTO;
 import org.springframework.web.bind.annotation.RequestBody;
 import rs.ac.uns.ftn.WebProjekat.model.Administrator;
 import rs.ac.uns.ftn.WebProjekat.model.Clan;
+import rs.ac.uns.ftn.WebProjekat.model.Termin;
 import rs.ac.uns.ftn.WebProjekat.model.Trener;
 import rs.ac.uns.ftn.WebProjekat.model.Uloga;
 import rs.ac.uns.ftn.WebProjekat.service.AdminService;
@@ -87,5 +92,31 @@ public class ClanController {
         return new ResponseEntity<>(clanDTO, HttpStatus.OK);
     }
 
+    //Za pregled prijavljenih termina
+    @GetMapping(value = "/prijavljeni/{id}/{uloga}/{fitnesscentarId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TerminDTO>> getListaPrijava(@PathVariable Long id, @PathVariable Uloga uloga, @PathVariable Long fitnesscentarId){
+
+        if(uloga==Uloga.CLAN){
+            Clan clan=this.clanService.findOne(id);
+            if(clan==null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            else{
+                Set<Termin> prijavljeniTremini=clan.getListaPrijava();
+                List<TerminDTO> prijavljeniTerminiDTO=new ArrayList<>();
+
+                for(Termin termin : prijavljeniTremini){
+                    if(termin.getTrening().getTrener().getFitnessCentar().getId()==fitnesscentarId){
+                        TerminDTO terminDTO=new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDan(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
+                        prijavljeniTerminiDTO.add(terminDTO);   
+                    } 
+                }
+                return new ResponseEntity<>(prijavljeniTerminiDTO, HttpStatus.OK);
+            }
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
     
 }

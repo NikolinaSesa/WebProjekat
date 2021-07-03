@@ -79,7 +79,7 @@ $(document).on('click', '.treninzi', function(){
     window.location.href="Pregled_treninga.html";
 });
 
-//prijava za termin
+//Prijava za termin
 $(document).on('click', '.prijava', function(){
     
     let korisnikId=localStorage.getItem("korisnikId");
@@ -100,5 +100,35 @@ $(document).on('click', '.prijava', function(){
             alert("Greska prilikom prijave! Svi termini su zauzeti!");
         }
 
+    });
+});
+
+//Prikaz liste prijava za termine
+$(document).on('click', '.prijavljeni', function(){
+    let fitnesscentarId=this.dataset.id;
+    localStorage.setItem("fitnesscentarId", fitnesscentarId);
+
+    window.location.href="Pregled_prijava_za_termine.html";
+});
+
+//Otkazivanje prijave za termin
+$(document).on('click', '.odjava', function(){
+    let terminId=this.dataset.id;
+    let id=localStorage.getItem("korisnikId");
+    let uloga=localStorage.getItem("uloga");
+
+    $.ajax({
+        type:"GET",
+        url:"http://localhost:8080/api/termin/otkazi/"+id+"/"+uloga+"/"+terminId,
+        dataType:"json",
+        success:function(response){
+            console.log("SUCCESS:\n", response);
+            alert("Uspesno ste otkazali prijavu za dati termin!");
+            $('[data-id="'+terminId+'"]').parent().parent().remove();
+        },
+        error:function(response){
+            console.log("ERROR:\n", response);
+            alert("Greska prilikom otkazivanja termina!");
+        }
     });
 });
