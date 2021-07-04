@@ -22,5 +22,11 @@ public class TreningServiceImpl implements TreningService{
         List<Trening> treninzi = this.treningRepository.findByTrenerFitnesscentarId(fitnesscentarId);
         return treninzi;
     }
+
+    @Override
+    public Trening findByNazivAndTrenerId(String naziv, Long trenerId){
+        Trening trening=this.treningRepository.findByTrenerIdAndNaziv(trenerId, naziv);
+        return trening;
+    }
     
 }

@@ -140,3 +140,68 @@ $(document).on('click', '.odradjeni', function(){
 
     window.location.href="Pregled_odradjenih_termina.html";
 });
+
+//ocenjivanje odradjenog termina
+$(document).on('click', '.oceni', function(){
+    let terminiDiv=$("#termini");
+    terminiDiv.hide();
+
+    let korisnikId=localStorage.getItem("korisnikId");
+    let uloga=localStorage.getItem("uloga");
+    let terminId=this.dataset.id;
+    localStorage.setItem("terminId", terminId);
+    
+    $.ajax({
+        type:"GET",
+        url:"http://localhost:8080/api/termin/id/"+korisnikId+"/"+uloga+"/"+terminId,
+        dataType:"json",
+        success:function(response){
+            console.log("SUCCESS:\n", response);
+
+            $('#naziv').text(response.naziv);
+            $('#datum').text(response.datum);
+            $('#vreme').text(response.vreme);
+            $('#cena').text(response.cena);
+
+            let ocenaDiv=$("#oceni");
+            ocenaDiv.show();
+        },
+        error:function(response){
+            console.log("ERROR:\n", response);
+        }
+    });
+});
+
+$(document).on('submit', '#oceniTermin', function(event){
+    event.preventDefault();
+
+    let korisnikId=localStorage.getItem("korisnikId");
+    let uloga=localStorage.getItem("uloga");
+    let terminId=localStorage.getItem("terminId");
+    let ocena=$("#ocena").val();
+
+    let newOcena={
+        ocena
+    }
+
+    $.ajax({
+        type:"POST",
+        url:"http://localhost:8080/api/ocena/oceni/"+korisnikId+"/"+uloga+"/"+terminId,
+        dataType:"json",
+        contentType:"application/json",
+        data: JSON.stringify(newOcena),
+        success:function(response){
+            console.log("SUCCESS:\n", response);
+
+            alert("Uspesno ste ocenili ovaj termin!");
+            window.location.href="Pregled_odradjenih_termina.html";
+            
+        },
+        error:function(response){
+            console.log("ERROR:\n", response);
+
+            alert("Greska prilikom ocenjivanja termina!");
+            window.location.href="Pregled_odradjenih_termina.html";
+        }
+    });
+});

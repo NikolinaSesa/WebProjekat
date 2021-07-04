@@ -9,4 +9,6 @@ import rs.ac.uns.ftn.WebProjekat.model.Sala;
 public interface SalaRepository extends JpaRepository<Sala, Long>{
     
     List<Sala> findByFitnesscentarId(Long fitnesscentarId);
+
+    Sala findByOznaka(String oznaka);
 }

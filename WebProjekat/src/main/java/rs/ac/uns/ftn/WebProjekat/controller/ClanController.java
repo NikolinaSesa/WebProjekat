@@ -2,7 +2,6 @@ package rs.ac.uns.ftn.WebProjekat.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;

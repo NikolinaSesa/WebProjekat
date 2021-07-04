@@ -14,6 +14,8 @@ public class TerminDTO{
     private Date datum;
     private String imeTrenera;
     private String prezimeTrenera;
+    private Long salaId;
+    private Long treningId;
 
     public TerminDTO(){}
 
@@ -55,4 +57,11 @@ public class TerminDTO{
 
     public String getPrezimeTrenera(){return prezimeTrenera;}
     public void setprezimeTrenera(String prezime){this.prezimeTrenera=prezime;}
+
+    public Long getSalaId(){return salaId;}
+    public void setSalaId(Long id){this.salaId=id;}
+
+    public Long getTreningId(){return treningId;}
+    public void setTreningId(Long id){this.treningId=id;}
+
 }

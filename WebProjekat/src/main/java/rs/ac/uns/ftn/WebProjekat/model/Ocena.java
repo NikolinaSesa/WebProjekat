@@ -2,8 +2,6 @@ package rs.ac.uns.ftn.WebProjekat.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Set;
-import java.util.HashSet;
 
 @Entity
 public class Ocena implements Serializable{
@@ -15,15 +13,30 @@ public class Ocena implements Serializable{
     @Column
     private Integer ocena;
 
-    @ManyToMany(mappedBy = "listaOcena")
-    private Set<Clan> clanovi = new HashSet<>();
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Clan clan;
 
-    @ManyToMany(mappedBy = "oceneTermina")
-    private Set<Termin> termini = new HashSet<>();
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Termin termin;
+
+    public Ocena(){}
+    public Ocena(Integer ocena, Clan clan, Termin termin){
+        this.ocena=ocena;
+        this.clan=clan;
+        this.termin=termin;
+    }
 
     public Long getId(){return id;}
     public void setId(Long id){this.id = id;}
 
     public Integer getOcena(){return ocena;}
     public void setOcena(Integer ocena){this.ocena = ocena;}
+
+    public Clan getClan(){return clan;}
+    public void setClan(Clan clan){this.clan=clan;}
+
+    public Termin getTermin(){return termin;}
+    public void setTermin(Termin termin){this.termin=termin;}
+
+
 }

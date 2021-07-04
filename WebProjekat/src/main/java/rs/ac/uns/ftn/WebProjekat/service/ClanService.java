@@ -9,4 +9,5 @@ public interface ClanService {
     Clan findByKorisnickoime(String korisnickoime);
 
     Clan findOne(Long id);
+
 }

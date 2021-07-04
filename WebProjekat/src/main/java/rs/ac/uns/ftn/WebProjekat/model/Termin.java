@@ -34,15 +34,26 @@ public class Termin{
     @JoinTable(name = "odradjeni", joinColumns = @JoinColumn(name = "termin_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "clan_id", referencedColumnName = "id"))
     private Set<Clan> clanoviKojiSuOdradili = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(name = "ocene", joinColumns = @JoinColumn(name = "clan_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "termin_id", referencedColumnName = "id"))
-    private Set<Ocena> oceneTermina = new HashSet<>();
+    @OneToMany(mappedBy = "termin", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Ocena> oceneTermina=new HashSet<>();
     
     @ManyToOne(fetch = FetchType.EAGER)
     private Trening trening;
 
     @Column
     private Integer brPrijavljenihClanova;
+
+    public Termin(){}
+
+    public Termin(Double cena, Date datum, Time vreme, Sala sala, Trening trening){
+        this.cena=cena;
+        this.datum=datum;
+        this.vreme=vreme;
+        this.sala=sala;
+        this.trening=trening;
+        this.brPrijavljenihClanova=0;
+
+    }
 
     public Long getId(){return id;}
     public void setId(Long id){this.id=id;}
@@ -71,6 +82,9 @@ public class Termin{
 
     public Set<Clan> getClanoviKojiSuOdradili(){return clanoviKojiSuOdradili;}
     public void setClanKojiJeOdradio(Clan clan){this.clanoviKojiSuOdradili.add(clan);}
+
+    public Set<Ocena> getOceneTermina(){return oceneTermina;}
+    public void setOcena(Ocena ocena){this.oceneTermina.add(ocena);}
     
 
 }

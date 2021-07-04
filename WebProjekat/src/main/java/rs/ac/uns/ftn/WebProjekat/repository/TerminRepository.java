@@ -1,6 +1,7 @@
 package rs.ac.uns.ftn.WebProjekat.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
 import rs.ac.uns.ftn.WebProjekat.model.Termin;
@@ -20,4 +21,6 @@ public interface TerminRepository extends JpaRepository<Termin, Long>{
     List<Termin> findByTreningTip(Tip tip);
 
     List<Termin> findByTreningTrenerFitnesscentarId(Sort sort, Long fitnesscentarId);
+
+    Termin findBySalaIdAndDatumAndVreme(Long salaId, Date datum, Time vreme);
 }

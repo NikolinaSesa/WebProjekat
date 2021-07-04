@@ -6,12 +6,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.MediaType;
 import rs.ac.uns.ftn.WebProjekat.model.dto.TerminDTO;
+import rs.ac.uns.ftn.WebProjekat.model.dto.TerminDTO2;
 import rs.ac.uns.ftn.WebProjekat.model.Clan;
+import rs.ac.uns.ftn.WebProjekat.model.Sala;
 import rs.ac.uns.ftn.WebProjekat.model.Termin;
+import rs.ac.uns.ftn.WebProjekat.model.Trener;
+import rs.ac.uns.ftn.WebProjekat.model.Trening;
 import rs.ac.uns.ftn.WebProjekat.model.Uloga;
 import java.sql.Date;
 import java.sql.Time;
@@ -20,7 +26,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import rs.ac.uns.ftn.WebProjekat.service.ClanService;
+import rs.ac.uns.ftn.WebProjekat.service.SalaService;
 import rs.ac.uns.ftn.WebProjekat.service.TerminService;
+import rs.ac.uns.ftn.WebProjekat.service.TrenerService;
+import rs.ac.uns.ftn.WebProjekat.service.TreningService;
 import rs.ac.uns.ftn.WebProjekat.model.dto.Tip;
 
 @CrossOrigin("*")
@@ -30,11 +39,36 @@ public class TerminController{
 
     private final TerminService terminService;
     private final ClanService clanService;
+    private final TrenerService trenerService;
+    private final SalaService salaService;
+    private final TreningService treningService;
 
     @Autowired
-    public TerminController(TerminService terminService, ClanService clanService){
+    public TerminController(TerminService terminService, ClanService clanService, TrenerService trenerService, SalaService salaService, TreningService treningService){
         this.terminService=terminService;
         this.clanService=clanService;
+        this.trenerService=trenerService;
+        this.salaService=salaService;
+        this.treningService=treningService;
+    }
+
+    @GetMapping(value = "/id/{id}/{uloga}/{terminId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<TerminDTO> getTermin(@PathVariable Long id, @PathVariable Uloga uloga, @PathVariable Long terminId){
+        if(uloga==Uloga.CLAN){
+            Clan clan=this.clanService.findOne(id);
+            if(clan==null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            else{
+                Termin termin=this.terminService.findById(terminId);
+                TerminDTO terminDTO=new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDatum(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
+
+                return new ResponseEntity<>(terminDTO, HttpStatus.OK);
+            }
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
     }
 
     @GetMapping(value = "/cena/{cena}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -201,7 +235,7 @@ public class TerminController{
     
     //Prijava za termin treninga
     @GetMapping(value = "/prijava/{id}/{uloga}/{terminId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<TerminDTO> getTermin(@PathVariable Long id, @PathVariable Uloga uloga, @PathVariable Long terminId) throws Exception{
+    public ResponseEntity<TerminDTO> prijavaZaTermin(@PathVariable Long id, @PathVariable Uloga uloga, @PathVariable Long terminId) throws Exception{
 
         if(uloga==Uloga.CLAN){
             Clan clan=this.clanService.findOne(id);
@@ -282,4 +316,42 @@ public class TerminController{
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
+
+    //Kreiranje novog termina
+    @PostMapping(value = "/kreiraj/{id}/{uloga}/{salaOznaka}/{nazivTreninga}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<TerminDTO> createTermin(@RequestBody TerminDTO2 terminDTO2, @PathVariable Long id, @PathVariable Uloga uloga, @PathVariable String salaOznaka, @PathVariable String nazivTreninga) throws Exception{
+
+        if(uloga==Uloga.TRENER){
+            Trener trener=this.trenerService.findOne(id);
+            if(trener==null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            else{
+                Sala sala=this.salaService.findByOznaka(salaOznaka);
+                Termin tmplTermin=this.terminService.findBySalaIdAndDatumAndVreme(sala.getId(), terminDTO2.getDatum(), terminDTO2.getVreme());
+                if(tmplTermin==null){
+                    Trening trening=this.treningService.findByNazivAndTrenerId(nazivTreninga, id);
+                    if(trening==null){
+                        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                    }
+                    else{
+                        Termin termin=new Termin(terminDTO2.getCena(), terminDTO2.getDatum(), terminDTO2.getVreme(), sala, trening);
+                        Termin newTermin=this.terminService.create(termin);
+                        TerminDTO newterminDTO=new TerminDTO(newTermin.getId(), newTermin.getTrening().getNaziv(), newTermin.getTrening().getTip(), newTermin.getTrening().getOpis(), newTermin.getCena(), newTermin.getVreme(), newTermin.getDatum(), newTermin.getTrening().getTrener().getIme(), newTermin.getTrening().getTrener().getPrezime());
+                        newterminDTO.setSalaId(sala.getId());
+                        newterminDTO.setTreningId(trening.getId());
+
+                        return new ResponseEntity<>(newterminDTO, HttpStatus.CREATED);
+                    }
+                }
+                else{
+                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                }
+            }
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+
 }

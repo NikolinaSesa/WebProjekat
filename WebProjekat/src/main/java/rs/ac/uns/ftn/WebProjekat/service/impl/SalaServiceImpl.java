@@ -55,5 +55,11 @@ public class SalaServiceImpl implements SalaService{
         Sala sala = this.salaRepository.getOne(id);
         return sala;
     }
+
+    @Override
+    public Sala findByOznaka(String oznaka){
+        Sala sala=this.salaRepository.findByOznaka(oznaka);
+        return sala;
+    }
     
 }

@@ -7,5 +7,7 @@ import java.util.List;
 public interface TreningRepository extends JpaRepository<Trening, Long>{
 
     List<Trening> findByTrenerFitnesscentarId(Long fitnesscentarId);
+
+    Trening findByTrenerIdAndNaziv(Long trenerId, String naziv);
     
 }

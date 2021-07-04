@@ -14,5 +14,7 @@ public interface SalaService {
     List<Sala> findByFitnesscentarId(Long fitnesscentarId);
 
     Sala findById(Long id);
+
+    Sala findByOznaka(String oznaka);
     
 }

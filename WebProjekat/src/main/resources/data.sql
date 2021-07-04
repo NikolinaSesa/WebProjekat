@@ -43,12 +43,4 @@ INSERT INTO ODRADJENI(clan_id, termin_id) VALUES(1, 2);
 INSERT INTO ODRADJENI(clan_id, termin_id) VALUES(2, 2);
 INSERT INTO ODRADJENI(clan_id, termin_id) VALUES(3, 1);
 
-INSERT INTO OCENA(ocena) VALUES(1);
-INSERT INTO OCENA(ocena) VALUES(2);
-INSERT INTO OCENA(ocena) VALUES(3);
-INSERT INTO OCENA(ocena) VALUES(4);
-INSERT INTO OCENA(ocena) VALUES(5);
 
-INSERT INTO OCENE(clan_id, termin_id, ocena_id) VALUES(1, 2, 4);
-INSERT INTO OCENE(clan_id, termin_id, ocena_id) VALUES(2, 2, 5);
-INSERT INTO OCENE(clan_id, termin_id, ocena_id) VALUES(3, 3, 3);

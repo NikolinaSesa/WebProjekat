@@ -7,4 +7,5 @@ public interface TreningService{
     
     List<Trening> findByTrenerFitnesscentarId(Long fitnesscentarId);
   
+    Trening findByNazivAndTrenerId(String naziv, Long trenerId);
 }

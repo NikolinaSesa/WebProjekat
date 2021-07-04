@@ -4,10 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import rs.ac.uns.ftn.WebProjekat.model.*;
+
+import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
 import java.util.Set;
-
 import rs.ac.uns.ftn.WebProjekat.repository.TerminRepository;
 import rs.ac.uns.ftn.WebProjekat.service.TerminService;
 import rs.ac.uns.ftn.WebProjekat.model.dto.Tip;
@@ -116,4 +117,20 @@ public class TerminServiceImpl implements TerminService{
         Termin saveTermin=this.terminRepository.save(terminToUpdate);
         return saveTermin;
     }
+
+    @Override
+    public Termin create(Termin termin) throws Exception{
+        if(termin.getId()!=null){
+            throw new Exception("ID must be null!");
+        }
+        Termin newTermin=this.terminRepository.save(termin);
+        return newTermin;
+    }
+
+    @Override
+    public Termin findBySalaIdAndDatumAndVreme(Long salaId, Date datum, Time vreme){
+        Termin termin=this.terminRepository.findBySalaIdAndDatumAndVreme(salaId, datum, vreme);
+        return termin;
+    }
+
 }
