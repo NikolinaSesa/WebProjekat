@@ -1,7 +1,6 @@
 package rs.ac.uns.ftn.WebProjekat.model.dto;
 
 import java.sql.Date;
-
 import rs.ac.uns.ftn.WebProjekat.model.Uloga;
 
 public class ClanDTO {

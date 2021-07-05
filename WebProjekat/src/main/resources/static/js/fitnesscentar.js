@@ -36,3 +36,38 @@ $(document).on("submit", "#dodajFC", function(event){
         }
     });
 });
+
+//izmena fitnesscentra
+$(document).on("submit", "#izmeniFC", function(event){
+    event.preventDefault();
+
+    let fitnesscentarId=localStorage.getItem("fitnesscentarId");
+    let naziv = $("#naziv").val();
+    let adresa = $("#adresa").val();
+    let brTelefona = $("#broj").val();
+    let email = $("#email").val();
+
+    let updateFitnesscentar={
+        naziv,
+        adresa,
+        brTelefona,
+        email
+    }
+
+    $.ajax({
+        type:"PUT",
+        url:"http://localhost:8080/api/fitnesscentar/izmeni/"+fitnesscentarId,
+        dataType:"json",
+        contentType:"application/json",
+        data: JSON.stringify(updateFitnesscentar),
+        success:function(response){
+            console.log("SUCCESS:\n", response);
+            alert("Uspesno ste izmenili podatke!");
+            window.location.href="Fitnesscentar.html";
+        },
+        error:function(response){
+            console.log("ERROR:\n", response);
+            alert("Greska prilikom izmene podataka!");
+        }
+    });
+});

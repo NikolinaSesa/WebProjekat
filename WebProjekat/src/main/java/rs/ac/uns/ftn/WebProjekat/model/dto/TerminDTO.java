@@ -16,6 +16,7 @@ public class TerminDTO{
     private String prezimeTrenera;
     private Long salaId;
     private Long treningId;
+    private String oznakaSale;
 
     public TerminDTO(){}
 
@@ -29,6 +30,19 @@ public class TerminDTO{
         this.datum=datum;
         this.imeTrenera=ime;
         this.prezimeTrenera=prezime;
+    }
+
+    public TerminDTO(Long id, String naziv,Tip tip, String opis, Double cena, Time vreme, Date datum, String ime, String prezime, String oznaka){
+        this.id=id;
+        this.nazivTreninga=naziv;
+        this.tipTreninga=tip;
+        this.opisTreninga=opis;
+        this.cena=cena;
+        this.vreme=vreme;
+        this.datum=datum;
+        this.imeTrenera=ime;
+        this.prezimeTrenera=prezime;
+        this.oznakaSale=oznaka;
     }
 
     public Long getId(){return id;}
@@ -63,5 +77,8 @@ public class TerminDTO{
 
     public Long getTreningId(){return treningId;}
     public void setTreningId(Long id){this.treningId=id;}
+
+    public String getOznaka(){return oznakaSale;}
+    public void setOznaka(String oznaka){this.oznakaSale=oznaka;}
 
 }

@@ -171,3 +171,39 @@ $(document).on('click','.btnObrisi', function(){
         }
     });
 });
+
+//dodajvanje termina
+$(document).on("submit", "#dodajTermin", function(event){
+    event.preventDefault();
+
+    let id=localStorage.getItem("korisnikId");
+    let uloga=localStorage.getItem("uloga");
+    let nazivTreninga=$('#nazivTreninga').val();
+    let cena=$('#cena').val();
+    let datum=$('#datum').val();
+    let vreme=$('#vreme').val();
+    let sala=$('#sala').val();
+
+    let newTermin={
+        cena,
+        vreme,
+        datum
+    }
+
+    $.ajax({
+        type:"POST",
+        url:"http://localhost:8080/api/termin/kreiraj/"+id+"/"+uloga+"/"+sala+"/"+nazivTreninga,
+        dataType:"json",
+        contentType:"application/json",
+        data: JSON.stringify(newTermin),
+        success:function(response){
+            console.log("SUCCESS:\n", response);
+            alert("Uspesno kreiran novi termin!");
+            window.location.href="Raspored.html";
+        },
+        error:function(response){
+            console.log("ERROR:\n", response);
+            alert("Greska prilikom kreiranja termina!");
+        }
+    });
+});

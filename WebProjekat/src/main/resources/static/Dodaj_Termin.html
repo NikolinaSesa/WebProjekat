@@ -2,13 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="js/jquery.min.js"></script>
-    <script src="js/fitnesscentar_document_ready.js"></script>
-    <script src="js/fitnesscentar.js"></script>
-    <script src="js/admin.js"></script>
-    <title>Izmena Fitness Centra</title>
+    <script src="js/trener.js"></script>
+    <title>Dodavanje Termina</title>
     <style>
         html{
             height: 100%;
@@ -77,32 +73,9 @@
             text-transform: uppercase;
             overflow: hidden;
             transition: .5s;
-            margin-top: 40px;
             letter-spacing: 4px;
         }
         .submit:hover{
-            background: #30e9f4;
-            color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 5px #03e9f4,
-                        0 0 25px #03e9f4,
-                        0 0 50px #03e9f4,
-                        0 0 100px #03e9f4;
-        }
-        button{
-            position: relative;
-            display: inline-block;
-            padding: 10px 20px;
-            color: #30e9f4;
-            font-size: 16px;
-            text-decoration: none;
-            text-transform: uppercase;
-            overflow: hidden;
-            transition: .5s;
-            letter-spacing: 4px;
-            background-color:  rgba(0, 0, 0, .5);;
-        }
-        button:hover{
             background: #30e9f4;
             color:#fff;
             border-radius: 5px;
@@ -111,31 +84,34 @@
                         0 0 50px #03e9f4,
                         0 0 100px #03e9f4;
         }
-    </style>
+        </style>
 </head>
 <body>
     <div class="login">
-        <h2>IZMENA FITNESS CENTRA</h2>
-            <form id="izmeniFC">
-                <div class="user">
-                    <input id="naziv" type="text">
-                    <label for="naziv">Naziv</label>
-                </div>
-                <div class="user">
-                    <input id="adresa" type="text">
-                    <label for="adresa">Adresa</label>
-                </div>
-                <div class="user">
-                    <input id="broj" type="tel">
-                    <label for="broj">Broj Telefona</label>
-                </div>
-                <div class="user">
-                    <input id="email" type="text">
-                    <label for="email">Email</label>
-                </div>
-                <input type="submit" class="submit" value="Izmeni">
-                <button class="obrisi">Izbrisi</button>
-            </form>
+        <h2>Dodavanje Termina</h2>
+        <form id="dodajTermin">
+            <div class="user">
+                <input id="nazivTreninga" type="text" required>
+                <label for="nazivTreninga">Naziv Treninga</label>
+            </div>
+            <div class="user">
+                <input id="cena" type="text" required>
+                <label for="cena">Cena</label>
+            </div>
+            <div class="user">
+                <input id="datum" type="date" required>
+                <label for="datum" style="top: -20px;">Datum</label>
+            </div>
+            <div class="user">
+                <input id="vreme" type="datetime" required>
+                <label for="vreme">Vreme</label>
+            </div>
+            <div class="user">
+                <input id="sala" type="text" required>
+                <label for="sala">Sala</label>
+            </div>
+            <input type="submit" class="submit" value="Kreiraj">
+        </form>
     </div>
 </body>
 </html>

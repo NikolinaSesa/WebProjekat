@@ -10,4 +10,6 @@ public interface ClanService {
 
     Clan findOne(Long id);
 
+    Clan update(Clan clan) throws Exception;
+
 }

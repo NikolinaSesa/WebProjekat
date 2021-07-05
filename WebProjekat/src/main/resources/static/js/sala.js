@@ -62,3 +62,37 @@ $(document).on('click', '.izmeni', function(){
     window.location.href="Izmena_sale.html";
 });
 
+$(document).on("submit", "#izmeniSalu", function(event){
+    event.preventDefault();
+
+    let salaId=localStorage.getItem("salaId");
+    let id=localStorage.getItem("korisnikId");
+    let uloga=localStorage.getItem("uloga");
+    let fitnesscentarId=localStorage.getItem("fitnesscentarId");
+
+    let oznaka=$("#oznaka").val();
+    let kapacitet=$("#kapacitet").val();
+
+    let updateSala={
+        oznaka,
+        kapacitet
+    }
+
+    $.ajax({
+        type:"PUT",
+        url:"http://localhost:8080/api/sala/izmeni/"+salaId+"/"+id+"/"+uloga+"/"+fitnesscentarId,
+        dataType:"json",
+        contentType:"application/json",
+        data: JSON.stringify(updateSala),
+        success:function(response){
+            console.log("SUCCESS:\n", response);
+            alert("Uspesno ste izmenili podatke!");
+            window.location.href="Sale.html";
+        },
+        error:function(response){
+            console.log("ERROR:\n", response);
+            alert("Greska prilikom izmene podataka!")
+        }
+    });
+});
+

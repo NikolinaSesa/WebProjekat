@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import rs.ac.uns.ftn.WebProjekat.model.dto.ClanDTO;
@@ -77,21 +78,30 @@ public class ClanController {
     }
 
     //Za pregled profila
-    @GetMapping(value = "/id/{clanId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ClanDTO> getClan(@PathVariable Long clanId){
+    @GetMapping(value = "/id/{clanId}/{uloga}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ClanDTO> getClan(@PathVariable Long clanId, @PathVariable Uloga uloga){
 
-        Clan clan=this.clanService.findOne(clanId);
-
-        ClanDTO clanDTO=new ClanDTO();
-        clanDTO.setKorisnickoIme(clan.getKorisnickoIme());
-        clanDTO.setLozinka(clan.getLozinka());
-        clanDTO.setIme(clan.getIme());
-        clanDTO.setPrezime(clan.getPrezime());
-        clanDTO.setBrTelefona(clan.getBrTelefona());
-        clanDTO.setEmail(clan.getEmail());
-        clanDTO.setDatumRodjenja(clan.getDatum());
+        if(uloga==Uloga.CLAN){
+            Clan clan=this.clanService.findOne(clanId);
+            if(clan==null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            else{
+                ClanDTO clanDTO=new ClanDTO();
+                clanDTO.setKorisnickoIme(clan.getKorisnickoIme());
+                clanDTO.setLozinka(clan.getLozinka());
+                clanDTO.setIme(clan.getIme());
+                clanDTO.setPrezime(clan.getPrezime());
+                clanDTO.setBrTelefona(clan.getBrTelefona());
+                clanDTO.setEmail(clan.getEmail());
+                clanDTO.setDatumRodjenja(clan.getDatum());
 
         return new ResponseEntity<>(clanDTO, HttpStatus.OK);
+            }
+        }else{
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+        
     }
 
     //Za pregled prijavljenih termina
@@ -119,6 +129,28 @@ public class ClanController {
                     } 
                 }
                 return new ResponseEntity<>(prijavljeniTerminiDTO, HttpStatus.OK);
+            }
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+
+    //izmena profila
+    @PutMapping(value = "/izmeni/{id}/{uloga}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ClanDTO> updateClan(@RequestBody ClanDTO clanDTO, @PathVariable Long id, @PathVariable Uloga uloga) throws Exception{
+        if(uloga==Uloga.CLAN){
+            Clan tmplclan=this.clanService.findOne(id);
+            if(tmplclan==null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            else{
+                Clan clan=new Clan(clanDTO.getKorisnickoIme(), clanDTO.getLozinka(), clanDTO.getIme(), clanDTO.getPrezime(), clanDTO.getBrTelefona(), clanDTO.getEmail(), clanDTO.getDatumRodjenja(), tmplclan.getUloga(), true);
+                clan.setId(id);
+
+                Clan upDateClan=this.clanService.update(clan);
+                ClanDTO upDateClanDTO=new ClanDTO(upDateClan.getId(), upDateClan.getKorisnickoIme(), upDateClan.getLozinka(), upDateClan.getIme(), upDateClan.getPrezime(), upDateClan.getBrTelefona(), upDateClan.getEmail(), upDateClan.getDatum(), upDateClan.getUloga(), true);
+                return new ResponseEntity<>(upDateClanDTO, HttpStatus.OK);
             }
         }
         else{

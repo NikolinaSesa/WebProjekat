@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -347,6 +348,57 @@ public class TerminController{
                 else{
                     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
                 }
+            }
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+
+    //Raspored
+    @GetMapping(value = "/raspored/{id}/{uloga}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TerminDTO>> Raspored(@PathVariable Long id, @PathVariable Uloga uloga){
+
+        if(uloga==Uloga.TRENER){
+            Trener trener=this.trenerService.findOne(id);
+            if(trener==null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                }
+                else{
+                    List<Termin> termini = this.terminService.findAllAndSortByDatumAndVreme(trener.getFitnessCentar().getId());
+
+                    List<TerminDTO> terminiDTO = new ArrayList<>();
+
+                    for(Termin termin : termini){
+                        LocalDate localDate=LocalDate.now();
+                        Date date=Date.valueOf(localDate);
+                        if(date.before(termin.getDatum())){
+
+                            TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDatum(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime(), termin.getSala().getOznaka());
+                            terminDTO.setSalaId(termin.getSala().getId());
+                            terminDTO.setTreningId(termin.getTrening().getId());
+                            terminiDTO.add(terminDTO);
+                        }
+                    }
+                return new ResponseEntity<>(terminiDTO, HttpStatus.OK);
+                }
+            }
+            else{
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            }
+    }
+    
+    //Uklanjanje termina iz rasporeda
+    @DeleteMapping(value = "/delete/{id}/{uloga}/{terminId}")
+    public ResponseEntity<Void> deleteTermin(@PathVariable Long id, @PathVariable Uloga uloga, @PathVariable Long terminId){
+        if(uloga==Uloga.TRENER){
+            Trener trener=this.trenerService.findOne(id);
+            if(trener==null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            else{
+                this.terminService.delete(terminId);
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
         }
         else{

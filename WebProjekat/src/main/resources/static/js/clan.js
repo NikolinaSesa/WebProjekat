@@ -45,10 +45,11 @@ $(document).on('click', '.btnSeeMore', function(){
     fitnesscentriDiv.hide();
 
     let clanId=localStorage.getItem("korisnikId");
+    let uloga=localStorage.getItem("uloga");
 
     $.ajax({
         type:"GET",
-        url:"http://localhost:8080/api/clan/id/"+clanId,
+        url:"http://localhost:8080/api/clan/id/"+clanId+"/"+uloga,
         dataType:"json",
         success:function(response){
             console.log("SUCCESS:\n", response);
@@ -67,6 +68,7 @@ $(document).on('click', '.btnSeeMore', function(){
         error:function(response){
             console.log("ERROR:\n", response);
             alert("Niste prijavljeni!");
+            window.location.href="Login_korisnika.html"
         }
     });
 });
@@ -202,6 +204,49 @@ $(document).on('submit', '#oceniTermin', function(event){
 
             alert("Greska prilikom ocenjivanja termina!");
             window.location.href="Pregled_odradjenih_termina.html";
+        }
+    });
+});
+
+//izmena profila
+$(document).on('submit', '#izmeniProfil', function(event){
+    event.preventDefault();
+
+    let id=localStorage.getItem("korisnikId");
+    let uloga=localStorage.getItem("uloga");
+
+    let korisnickoIme=$("#korisnickoIme").val();
+    let lozinka=$("#lozinka").val();
+    let ime=$("#ime").val();
+    let prezime=$("#prezime").val();
+    let brTelefona=$("#broj").val();
+    let email=$("#email").val();
+    let datumRodjenja=$("#datum").val();
+    
+    let updateClan={
+        korisnickoIme,
+        lozinka,
+        ime,
+        prezime,
+        brTelefona,
+        email,
+        datumRodjenja
+    }
+
+    $.ajax({
+        type:"PUT",
+        url:"http://localhost:8080/api/clan/izmeni/"+id+"/"+uloga,
+        dataType:"json",
+        contentType:"application/json",
+        data: JSON.stringify(updateClan),
+        success:function(response){
+            console.log("SUCCESS:\n", response);
+            alert("Uspesno ste izmenili podatke!");
+            window.location.href="Clan_Pocetna_Strana.html";
+        },
+        error:function(response){
+            console.log("ERROR:\n", response);
+            alert("Greska prilikom izmene podataka!");
         }
     });
 });

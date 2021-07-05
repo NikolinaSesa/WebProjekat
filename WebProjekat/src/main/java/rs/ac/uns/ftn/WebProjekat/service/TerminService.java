@@ -38,4 +38,8 @@ public interface TerminService {
     Termin create(Termin termin) throws Exception;
 
     Termin findBySalaIdAndDatumAndVreme(Long salaId, Date datum, Time vreme);
+
+    List<Termin> findAllAndSortByDatumAndVreme(Long fitnesscentarId);
+
+    void delete(Long id);
 }

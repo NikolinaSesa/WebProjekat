@@ -33,7 +33,7 @@ $(document).on('submit','#logIn', function(event){
                         localStorage.setItem("korisnikId", response.id);
                         localStorage.setItem("uloga", response.uloga);
                         alert("Uspesno ste prijavljeni!");
-                        window.location.href="Trener_Pocetna_Strana.html";
+                        window.location.href="Raspored.html";
                     }
                     else{
                         console.log("ERROR")

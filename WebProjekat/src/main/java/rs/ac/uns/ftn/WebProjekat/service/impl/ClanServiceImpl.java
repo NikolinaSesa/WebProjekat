@@ -36,4 +36,22 @@ public class ClanServiceImpl implements ClanService{
         Clan clan=this.clanRepository.getOne(id);
         return clan;
     }
+
+    @Override
+    public Clan update(Clan clan) throws Exception{
+        Clan clanToUpDate=this.clanRepository.getOne(clan.getId());
+        if(clanToUpDate==null){
+            throw new Exception("Clan doesn't exist!");
+        }
+        clanToUpDate.setKorisnickoIme(clan.getKorisnickoIme());
+        clanToUpDate.setLozinka(clan.getLozinka());
+        clanToUpDate.setIme(clan.getIme());
+        clanToUpDate.setPrezime(clan.getPrezime());
+        clanToUpDate.setBrTelefona(clan.getBrTelefona());
+        clanToUpDate.setDatum(clan.getDatum());
+        clanToUpDate.setEmail(clan.getEmail());
+
+        Clan saveClan=this.clanRepository.save(clanToUpDate);
+        return saveClan;
+    }
 }

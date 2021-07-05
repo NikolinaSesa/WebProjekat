@@ -31,4 +31,5 @@ $(document).ready(function(){
             window.location.href="Login_korisnika.html";
         }
     });
+    
 });

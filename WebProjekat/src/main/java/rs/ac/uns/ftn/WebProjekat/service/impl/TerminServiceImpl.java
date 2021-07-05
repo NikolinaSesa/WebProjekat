@@ -133,4 +133,14 @@ public class TerminServiceImpl implements TerminService{
         return termin;
     }
 
+    @Override
+    public List<Termin> findAllAndSortByDatumAndVreme(Long fitnesscentarId){
+        List<Termin> raspored=this.terminRepository.findByTreningTrenerFitnesscentarId(Sort.by(Sort.Direction.ASC, "datum", "vreme"), fitnesscentarId);
+        return raspored;
+    }
+
+    @Override
+    public void delete(Long id){
+        this.terminRepository.deleteById(id);
+    }
 }
