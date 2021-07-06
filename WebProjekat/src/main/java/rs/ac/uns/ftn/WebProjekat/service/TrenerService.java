@@ -16,4 +16,6 @@ public interface TrenerService{
     Trener create(Trener trener) throws Exception;
 
     Trener findByKorisnickoime(String korisnickoime);
+
+    Trener updateProsecneOcene(Trener trener) throws Exception;
 }

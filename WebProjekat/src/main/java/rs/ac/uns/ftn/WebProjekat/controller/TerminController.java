@@ -246,7 +246,7 @@ public class TerminController{
             else{
                 Termin termin=this.terminService.findById(terminId);
 
-                if(termin.getBrPrijavljenihClanova()+1>=termin.getSala().getKapacitet()){
+                if(termin.getBrPrijavljenihClanova()>=termin.getSala().getKapacitet()){
                     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
                 }
                 else{

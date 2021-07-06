@@ -16,6 +16,7 @@ public class TrenerDTO {
     private Uloga uloga;
     private Boolean aktivan;
     private Long fitnesscentarId;
+    private Double prOcena;
 
     public TrenerDTO(){}
 
@@ -77,4 +78,7 @@ public class TrenerDTO {
     
     public Long getFitnesscentar(){return fitnesscentarId;}
     public void setFitnesscentar(Long fitnesscentarId){this.fitnesscentarId=fitnesscentarId;}
+
+    public Double getPrOcena(){return prOcena;}
+    public void setPrOcena(Double procena){this.prOcena=procena;}
 }

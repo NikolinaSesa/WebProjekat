@@ -60,4 +60,14 @@ public class TrenerServiceImpl implements TrenerService{
         Trener trener = this.trenerRepository.findByKorisnickoime(korisnickoime);
         return trener;
     }
+
+    @Override
+    public Trener updateProsecneOcene(Trener trener) throws Exception{
+        Trener trenerToUpdate=this.trenerRepository.getOne(trener.getId());
+        if(trenerToUpdate==null){
+            throw new Exception("Trener doesn't exist!");
+        }
+        Trener saveTrener=this.trenerRepository.save(trener);
+        return saveTrener;
+    }
 }

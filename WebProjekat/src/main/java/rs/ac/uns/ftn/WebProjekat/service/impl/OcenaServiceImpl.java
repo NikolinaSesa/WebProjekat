@@ -1,5 +1,7 @@
 package rs.ac.uns.ftn.WebProjekat.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rs.ac.uns.ftn.WebProjekat.model.Ocena;
@@ -23,5 +25,11 @@ public class OcenaServiceImpl implements OcenaService {
         }
         Ocena newOcena=this.ocenaRepository.save(ocena);
         return newOcena;
+    }
+
+    @Override
+    public List<Ocena> findByTerminTreningTrenerId(Long id){
+        List<Ocena> ocene=this.ocenaRepository.findByTerminTreningTrenerId(id);
+        return ocene;
     }
 }

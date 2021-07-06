@@ -4,6 +4,7 @@ public class OcenaDTO {
 
     private Long id;
     private Integer ocena;
+    private Long trenerId;
 
     public OcenaDTO(){}
     public OcenaDTO(Long id, Integer ocena){
@@ -16,5 +17,8 @@ public class OcenaDTO {
 
     public Integer getOcena(){return ocena;}
     public void setOcena(Integer ocena){this.ocena=ocena;}
+
+    public Long getTrenerId(){return trenerId;}
+    public void setTrenerId(Long id){this.trenerId=id;}
     
 }

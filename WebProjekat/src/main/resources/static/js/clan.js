@@ -195,6 +195,20 @@ $(document).on('submit', '#oceniTermin', function(event){
         success:function(response){
             console.log("SUCCESS:\n", response);
 
+            let trenerId=response.trenerId;
+
+            $.ajax({
+                type:"GET",
+                url:"http://localhost:8080/api/trener/azurirajProsecnuOcenu/"+trenerId,
+                dataType:"json",
+                success:function(response){
+                    console.log("SUCCESS:\n", response);
+                },
+                error:function(response){
+                    console.log("ERROR:\n", response);
+                }
+            });
+
             alert("Uspesno ste ocenili ovaj termin!");
             window.location.href="Pregled_odradjenih_termina.html";
             

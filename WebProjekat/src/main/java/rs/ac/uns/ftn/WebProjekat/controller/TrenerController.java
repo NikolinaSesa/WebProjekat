@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import rs.ac.uns.ftn.WebProjekat.service.AdminService;
 import rs.ac.uns.ftn.WebProjekat.service.ClanService;
 import rs.ac.uns.ftn.WebProjekat.service.FitnesscentarService;
+import rs.ac.uns.ftn.WebProjekat.service.OcenaService;
 import rs.ac.uns.ftn.WebProjekat.service.TrenerService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import rs.ac.uns.ftn.WebProjekat.model.Administrator;
 import rs.ac.uns.ftn.WebProjekat.model.Fitnesscentar;
+import rs.ac.uns.ftn.WebProjekat.model.Ocena;
 import rs.ac.uns.ftn.WebProjekat.model.Trener;
 import rs.ac.uns.ftn.WebProjekat.model.Clan;
 import rs.ac.uns.ftn.WebProjekat.model.Uloga;
@@ -35,13 +37,15 @@ public class TrenerController{
     private final AdminService adminService;
     private final FitnesscentarService fitnesscentarService;
     private final ClanService calnService;
+    private final OcenaService ocenaService;
 
     @Autowired
-    public TrenerController(TrenerService trenerService, AdminService adminService, FitnesscentarService fitnesscentarService, ClanService clanService){
+    public TrenerController(TrenerService trenerService, AdminService adminService, FitnesscentarService fitnesscentarService, ClanService clanService, OcenaService ocenaService){
         this.trenerService=trenerService;
         this.adminService=adminService;
         this.fitnesscentarService=fitnesscentarService;
         this.calnService=clanService;
+        this.ocenaService=ocenaService;
     }
 
     //za registraciju trenera
@@ -166,4 +170,24 @@ public class TrenerController{
         
     }
 
+    //za azuriranje prosecne ocene trenera
+    @GetMapping(value = "/azurirajProsecnuOcenu/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<TrenerDTO> azurirajPrOcenu(@PathVariable Long id) throws Exception{
+
+        Trener trener=this.trenerService.findOne(id);
+        List<Ocena> ocene=this.ocenaService.findByTerminTreningTrenerId(id);
+        int n=0;
+        int suma=0;
+        double prOcena=0;
+        for(Ocena ocena : ocene){
+            n++;
+            suma=suma+ocena.getOcena();
+        }
+        prOcena=suma/n;
+        trener.setPrOcena(prOcena);
+        Trener updateTrener=this.trenerService.updateProsecneOcene(trener);
+        TrenerDTO trenerDTO=new TrenerDTO(updateTrener.getId(), updateTrener.getKorisnickoIme(), updateTrener.getIme(), trener.getPrezime(), updateTrener.getBrTelefona(), updateTrener.getEmail(), updateTrener.getDatum(), updateTrener.getUloga(), updateTrener.getAktivan());
+        trenerDTO.setPrOcena(prOcena);
+        return new ResponseEntity<>(trenerDTO, HttpStatus.OK);
+    }
 }

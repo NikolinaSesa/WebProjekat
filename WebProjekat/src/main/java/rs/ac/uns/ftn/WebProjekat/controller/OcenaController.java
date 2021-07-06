@@ -50,7 +50,7 @@ public class OcenaController {
                 Ocena newOcena=this.ocenaService.create(ocena);
 
                 OcenaDTO newOcenaDTO=new OcenaDTO(newOcena.getId(), newOcena.getOcena());
-                
+                newOcenaDTO.setTrenerId(termin.getTrening().getTrener().getId());
                 return new ResponseEntity<>(newOcenaDTO, HttpStatus.CREATED);
             }
         }
