@@ -143,4 +143,10 @@ public class TerminServiceImpl implements TerminService{
     public void delete(Long id){
         this.terminRepository.deleteById(id);
     }
+
+    @Override
+    public List<Termin> findByTreningTrenerId(Long id){
+        List<Termin> terminiKojeDrziTrener=this.terminRepository.findByTreningTrenerId(Sort.by(Sort.Direction.ASC, "datum", "vreme"), id);
+        return terminiKojeDrziTrener;
+    }
 }

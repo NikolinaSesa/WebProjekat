@@ -207,3 +207,11 @@ $(document).on("submit", "#dodajTermin", function(event){
         }
     });
 });
+
+//prikaz clanova prijavnjenih za dati termin
+$(document).on('click', '.clanovi', function(){
+    let terminId=this.dataset.id;
+    localStorage.setItem("terminId", terminId);
+
+    window.location.href="Prijavljeni_clanovi.html";
+})

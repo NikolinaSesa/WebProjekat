@@ -32,4 +32,10 @@ public class OcenaServiceImpl implements OcenaService {
         List<Ocena> ocene=this.ocenaRepository.findByTerminTreningTrenerId(id);
         return ocene;
     }
+
+    @Override
+    public Ocena findByTerminIdAndClanId(Long terminId, Long clanId){
+        Ocena ocena=this.ocenaRepository.findByTerminIdAndClanId(terminId, clanId);
+        return ocena;
+    }
 }

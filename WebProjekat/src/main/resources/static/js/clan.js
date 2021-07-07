@@ -264,3 +264,14 @@ $(document).on('submit', '#izmeniProfil', function(event){
         }
     });
 });
+
+//ocenjeni/neocenjeni termini
+$(document).on('click', '.ocenjeni', function(){
+    localStorage.setItem("ocenjen/neocenjen", 1);
+    window.location.href="Ocenjeni_Neocenjeni_termini.html";
+});
+
+$(document).on('click', '.neocenjeni', function(){
+    localStorage.setItem("ocenjen/neocenjen", 2);
+    window.location.href="Ocenjeni_Neocenjeni_termini.html";
+});

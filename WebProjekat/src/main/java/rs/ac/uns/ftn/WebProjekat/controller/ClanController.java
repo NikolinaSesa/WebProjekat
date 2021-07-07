@@ -26,6 +26,7 @@ import rs.ac.uns.ftn.WebProjekat.model.Trener;
 import rs.ac.uns.ftn.WebProjekat.model.Uloga;
 import rs.ac.uns.ftn.WebProjekat.service.AdminService;
 import rs.ac.uns.ftn.WebProjekat.service.ClanService;
+import rs.ac.uns.ftn.WebProjekat.service.TerminService;
 import rs.ac.uns.ftn.WebProjekat.service.TrenerService;
 
 @CrossOrigin("*")
@@ -36,12 +37,14 @@ public class ClanController {
     private final ClanService clanService;
     private final TrenerService trenerService;
     private final AdminService adminService;
+    private final TerminService terminService;
 
     @Autowired
-    public ClanController(ClanService clanService, TrenerService trenerService, AdminService adminService){
+    public ClanController(ClanService clanService, TrenerService trenerService, AdminService adminService, TerminService terminService){
         this.clanService=clanService;
         this.trenerService=trenerService;
         this.adminService=adminService;
+        this.terminService=terminService;
     }
 
     //za registraciju clana
@@ -158,4 +161,28 @@ public class ClanController {
         }
     }
     
+     //Clanovi koji su prijavljeni za dati termin
+     @GetMapping(value = "/prijavljeniClanovi/{id}/{uloga}/{terminId}", produces = MediaType.APPLICATION_JSON_VALUE)
+     public ResponseEntity<List<ClanDTO>> prijavljeniClanovi(@PathVariable Long id, @PathVariable Uloga uloga, @PathVariable Long terminId){
+
+        if(uloga==Uloga.TRENER){
+            Trener trener=this.trenerService.findOne(id);
+            if(trener==null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            else{
+                Termin termin=this.terminService.findById(terminId);
+                Set<Clan> clanovi=termin.getPrijavljeni();
+                List<ClanDTO> clanoviDTO=new ArrayList<>();
+                for(Clan clan : clanovi){
+                    ClanDTO clanDTO= new ClanDTO(clan.getId(), clan.getIme(), clan.getPrezime(), clan.getBrTelefona(), clan.getEmail(), clan.getDatum());
+                    clanoviDTO.add(clanDTO);
+                }
+                return new ResponseEntity<>(clanoviDTO, HttpStatus.OK);
+            }
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+     }
 }

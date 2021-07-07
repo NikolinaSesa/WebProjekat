@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="js/jquery.min.js"></script>
+    <script src="js/ocenjeni_neocenjeni_document_ready.js"></script>
     <script src="js/clan.js"></script>
-    <script src="js/odradjeni_termini_document_ready.js"></script>
-    <title>Odradjeni termini</title>
+    <title>Pregled ocena termina</title>
     <style>
         html{
             height: 100%;
@@ -45,21 +45,6 @@
         }
         table, th, td{
             text-align: center;
-        }
-        .topnav input[type=text] {
-            position: absolute;
-            padding: 10px;
-            left: 15%;
-            top: 20%;
-            width: 70%;
-            border: none;
-            font-size: 17px;
-        }
-        .btn{
-            position: absolute;
-            left: 15%;
-            top: 25%;
-            width: 70%;
         }
         .submit{
             position: relative;
@@ -120,17 +105,13 @@
 </head>
 <body>
     <div id="termini">
-        <h1>Odradjeni termini</h1>
-        <div class="btn">
-            <button class="ocenjeni" style="left: 15%;">Pregled ocenjenih termina</button>
-            <button class="neocenjeni" style="left: 25%;">Pregled neocenjenih termina</button>
-        </div>
+        <h1>Termini</h1>
         <table id="sviTermini">
             <thead>
                 <tr>
-                    <th>Naziv treninga</th>
-                    <th>Tip treninga</th>
-                    <th>Opis treninga</th>
+                    <th>Naziv Treninga</th>
+                    <th>Tip Treninga</th>
+                    <th>Opis Treninga</th>
                     <th>Cena</th>
                     <th>Datum</th>
                     <th>Vreme</th>

@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="js/jquery.min.js"></script>
-    <script src="js/clan.js"></script>
-    <script src="js/odradjeni_termini_document_ready.js"></script>
-    <title>Odradjeni termini</title>
+    <script src="js/termini_koji_su_prosli_document_ready.js"></script>
+    <script src="js/trener.js"></script>
+    <title>Termini koji su prosli</title>
     <style>
         html{
             height: 100%;
@@ -35,9 +35,6 @@
             color: #fff;
             text-align: center;
         }
-        h4, p{
-            color: #fff;
-        }
         th, td{
             padding: 0.5rem;
             border: 1px solid #999;
@@ -54,35 +51,6 @@
             width: 70%;
             border: none;
             font-size: 17px;
-        }
-        .btn{
-            position: absolute;
-            left: 15%;
-            top: 25%;
-            width: 70%;
-        }
-        .submit{
-            position: relative;
-            display: inline-block;
-            padding: 10px 20px;
-            color: #30e9f4;
-            font-size: 16px;
-            text-decoration: none;
-            text-transform: uppercase;
-            overflow: hidden;
-            transition: .5s;
-            margin-top: 40px;
-            letter-spacing: 4px;
-            background-color: rgba(0, 0, 0, .5);
-        }
-        .submit:hover{
-            background: #30e9f4;
-            color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 5px #03e9f4,
-                        0 0 25px #03e9f4,
-                        0 0 50px #03e9f4,
-                        0 0 100px #03e9f4;
         }
         button{
             position: relative;
@@ -106,25 +74,11 @@
                         0 0 50px #03e9f4,
                         0 0 100px #03e9f4;
         }
-        .card{
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .6);
-            max-width: 300px;
-            margin: auto;
-            text-align: center;
-           
-        }
-        .container{
-            padding: 2px 16px;
-        }
     </style>
 </head>
 <body>
     <div id="termini">
-        <h1>Odradjeni termini</h1>
-        <div class="btn">
-            <button class="ocenjeni" style="left: 15%;">Pregled ocenjenih termina</button>
-            <button class="neocenjeni" style="left: 25%;">Pregled neocenjenih termina</button>
-        </div>
+        <h1>Termini koji su prosli</h1>
         <table id="sviTermini">
             <thead>
                 <tr>
@@ -140,25 +94,6 @@
                 </tr>
             </thead>
         </table>
-    </div>
-
-    <div id="oceni" hidden>
-        <h1>Oceni Termin</h1>
-        <div class="card">
-            <form id="oceniTermin">
-            <img src="slika/slika2.png" alt="avatar" style="width: 100%;">
-            <div class="container">
-            <h4 id="naziv"></h4>
-            <br>
-            <p id="datum"></p>
-            <p id="vreme"></p>
-            <p id="cena"></p>
-            <input id="ocena" type="number" min="1" max="5">
-            <br>
-            <input type="submit" class="submit" value="Oceni">
-            </div>
-            </form>
-        </div>
     </div>
 </body>
 </html>

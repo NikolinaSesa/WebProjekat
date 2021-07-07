@@ -31,6 +31,15 @@ public class ClanDTO {
         this.aktivan=aktivan;
     }
 
+    public ClanDTO(Long id, String ime, String prezime, Long br, String email, Date datum){
+        this.id=id;
+        this.ime=ime;
+        this.prezime=prezime;
+        this.brTelefona=br;
+        this.email=email;
+        this.datumRodjenja=datum;
+    }
+
     public Long getId(){return id;}
     public void setId(Long id){this.id=id;}
 

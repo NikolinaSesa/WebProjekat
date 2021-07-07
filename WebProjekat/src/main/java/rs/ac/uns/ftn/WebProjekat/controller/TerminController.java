@@ -15,6 +15,7 @@ import org.springframework.http.MediaType;
 import rs.ac.uns.ftn.WebProjekat.model.dto.TerminDTO;
 import rs.ac.uns.ftn.WebProjekat.model.dto.TerminDTO2;
 import rs.ac.uns.ftn.WebProjekat.model.Clan;
+import rs.ac.uns.ftn.WebProjekat.model.Ocena;
 import rs.ac.uns.ftn.WebProjekat.model.Sala;
 import rs.ac.uns.ftn.WebProjekat.model.Termin;
 import rs.ac.uns.ftn.WebProjekat.model.Trener;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import rs.ac.uns.ftn.WebProjekat.service.ClanService;
+import rs.ac.uns.ftn.WebProjekat.service.OcenaService;
 import rs.ac.uns.ftn.WebProjekat.service.SalaService;
 import rs.ac.uns.ftn.WebProjekat.service.TerminService;
 import rs.ac.uns.ftn.WebProjekat.service.TrenerService;
@@ -43,14 +45,16 @@ public class TerminController{
     private final TrenerService trenerService;
     private final SalaService salaService;
     private final TreningService treningService;
+    private final OcenaService ocenaService;
 
     @Autowired
-    public TerminController(TerminService terminService, ClanService clanService, TrenerService trenerService, SalaService salaService, TreningService treningService){
+    public TerminController(TerminService terminService, ClanService clanService, TrenerService trenerService, SalaService salaService, TreningService treningService, OcenaService ocenaService){
         this.terminService=terminService;
         this.clanService=clanService;
         this.trenerService=trenerService;
         this.salaService=salaService;
         this.treningService=treningService;
+        this.ocenaService=ocenaService;
     }
 
     @GetMapping(value = "/id/{id}/{uloga}/{terminId}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -288,29 +292,24 @@ public class TerminController{
 
     //Lista odradjenih termina
     @GetMapping(value = "/odradjeni/{id}/{uloga}/{fitnesscentarId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<TerminDTO>> getListaOdradjenih(@PathVariable Long id, @PathVariable Uloga uloga, @PathVariable Long fitnesscentarId) throws Exception{
-
+    public ResponseEntity<List<TerminDTO>> odradjeniTermini(@PathVariable Long id, @PathVariable Uloga uloga, @PathVariable Long fitnesscentarId){
         if(uloga==Uloga.CLAN){
             Clan clan=this.clanService.findOne(id);
             if(clan==null){
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
             else{
-                Set<Termin> prijavljeniTermini=clan.getListaPrijava();
-                List<TerminDTO> odradjeniTerminiDTO=new ArrayList<>();
+                Set<Termin> odradjeni=clan.getListaOdradjenih();
+                List<TerminDTO> odradjeniDTO=new ArrayList<>();
+                for(Termin termin : odradjeni){
 
-                for(Termin termin : prijavljeniTermini){
                     if(termin.getTrening().getTrener().getFitnessCentar().getId()==fitnesscentarId){
-                        LocalDate localDate=LocalDate.now();
-                        Date date=Date.valueOf(localDate);
-                        if(date.after(termin.getDatum())){
-                            Termin odradjen=this.terminService.odradjen(termin, clan);
-                            TerminDTO terminDTO=new TerminDTO(odradjen.getId(), odradjen.getTrening().getNaziv(), odradjen.getTrening().getTip(), odradjen.getTrening().getOpis(), odradjen.getCena(), odradjen.getVreme(), odradjen.getDatum(), odradjen.getTrening().getTrener().getIme(), odradjen.getTrening().getTrener().getPrezime());
-                            odradjeniTerminiDTO.add(terminDTO);
-                        }
+                        TerminDTO terminDTO=new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDatum(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
+                    odradjeniDTO.add(terminDTO);
                     }
+                    
                 }
-                return new ResponseEntity<>(odradjeniTerminiDTO, HttpStatus.OK);
+                return new ResponseEntity<>(odradjeniDTO, HttpStatus.OK);
             }
         }
         else{
@@ -406,4 +405,109 @@ public class TerminController{
         }
     }
 
+    //Svi termini koje drzi dati trener
+    @GetMapping(value = "/terminiTrenerId/{id}/{uloga}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TerminDTO>> terminiKojeJeDrzaoTrener(@PathVariable Long id, @PathVariable Uloga uloga){
+
+        if(uloga==Uloga.TRENER){
+            Trener trener=this.trenerService.findOne(id);
+            if(trener==null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            else{
+                List<Termin> termini=this.terminService.findByTreningTrenerId(id);
+
+                List<TerminDTO> terminiDTO=new ArrayList<>();
+
+                for(Termin termin : termini){
+                    LocalDate localDate=LocalDate.now();
+                    Date date=Date.valueOf(localDate);
+                    if(date.after(termin.getDatum())){
+                        TerminDTO terminDTO=new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDatum(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
+                        terminiDTO.add(terminDTO);
+                    }
+                }
+                return new ResponseEntity<>(terminiDTO, HttpStatus.OK);
+            }
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+
+   //Termin je odradjen od strane datog clana
+    @GetMapping(value = "/odradjenTermin/{id}/{uloga}/{terminId}/{clanId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<TerminDTO> odradjeniTermin(@PathVariable Long id, @PathVariable Uloga uloga, @PathVariable Long terminId, @PathVariable Long clanId) throws Exception{
+
+        if(uloga==Uloga.TRENER){
+            Trener trener=this.trenerService.findOne(id);
+            if(trener==null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            else{
+                Termin termin=this.terminService.findById(terminId);
+                Clan clan=this.clanService.findOne(clanId);
+
+                Termin odradjen=this.terminService.odradjen(termin, clan);
+                TerminDTO terminDTO=new TerminDTO(odradjen.getId(), odradjen.getTrening().getNaziv(), odradjen.getTrening().getTip(), odradjen.getTrening().getOpis(), odradjen.getCena(), odradjen.getVreme(), odradjen.getDatum(), odradjen.getTrening().getTrener().getIme(), odradjen.getTrening().getTrener().getPrezime());
+                
+                return new ResponseEntity<>(terminDTO, HttpStatus.OK);
+            }
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+
+    //Dobijanje svih ocenjenih termina datog korisnika
+    @GetMapping(value = "/ocenjeni/{id}/{uloga}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TerminDTO>> getOcenjeneTermine(@PathVariable Long id, @PathVariable Uloga uloga){
+
+        if(uloga==Uloga.CLAN){
+            Clan clan=this.clanService.findOne(id);
+            if(clan==null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            else{
+                Set<Ocena> ocene=clan.getOcene();
+                List<TerminDTO> ocenjeniTermini=new ArrayList<>();
+                for(Ocena ocena : ocene){
+                    Termin termin=ocena.getTermin();
+                    TerminDTO terminDTO=new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDatum(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
+                    ocenjeniTermini.add(terminDTO);
+                }
+                return new ResponseEntity<>(ocenjeniTermini, HttpStatus.OK);
+            }
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+
+    //Dobijanje svih neocenjenih termina
+    @GetMapping(value = "/neocenjeni/{id}/{uloga}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TerminDTO>> getNeocenjeniTermini(@PathVariable Long id, @PathVariable Uloga uloga){
+
+        if(uloga==Uloga.CLAN){
+            Clan clan=this.clanService.findOne(id);
+            if(clan==null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            else{
+                Set<Termin> odradjeniTermini=clan.getListaOdradjenih();
+                List<TerminDTO> neocenjeniTermini=new ArrayList<>();
+                for(Termin termin : odradjeniTermini){
+                    Ocena ocena=this.ocenaService.findByTerminIdAndClanId(termin.getId(), id);
+                    if(ocena==null){
+                        TerminDTO terminDTO=new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDatum(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
+                        neocenjeniTermini.add(terminDTO);
+                    }
+                }
+                return new ResponseEntity<>(neocenjeniTermini, HttpStatus.OK);
+            }
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
 }

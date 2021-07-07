@@ -42,4 +42,6 @@ public interface TerminService {
     List<Termin> findAllAndSortByDatumAndVreme(Long fitnesscentarId);
 
     void delete(Long id);
+
+    List<Termin> findByTreningTrenerId(Long id);
 }

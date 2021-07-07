@@ -8,4 +8,6 @@ public interface OcenaService {
     Ocena create(Ocena ocena) throws Exception;
 
     List<Ocena> findByTerminTreningTrenerId(Long id);
+
+    Ocena findByTerminIdAndClanId(Long terminId, Long clanId);
 }

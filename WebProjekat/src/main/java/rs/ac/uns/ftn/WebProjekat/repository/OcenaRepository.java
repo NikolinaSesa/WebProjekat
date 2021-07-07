@@ -8,5 +8,7 @@ import rs.ac.uns.ftn.WebProjekat.model.Ocena;
 public interface OcenaRepository extends JpaRepository<Ocena, Long>{
 
     List<Ocena> findByTerminTreningTrenerId(Long id);
+
+    Ocena findByTerminIdAndClanId(Long terminId, Long clanId);
     
 }

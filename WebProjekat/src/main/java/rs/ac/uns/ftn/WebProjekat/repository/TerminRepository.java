@@ -23,4 +23,7 @@ public interface TerminRepository extends JpaRepository<Termin, Long>{
     List<Termin> findByTreningTrenerFitnesscentarId(Sort sort, Long fitnesscentarId);
 
     Termin findBySalaIdAndDatumAndVreme(Long salaId, Date datum, Time vreme);
+
+    List<Termin> findByTreningTrenerId(Sort sort, Long id);
+
 }
