@@ -28,5 +28,14 @@ public class TreningServiceImpl implements TreningService{
         Trening trening=this.treningRepository.findByTrenerIdAndNaziv(trenerId, naziv);
         return trening;
     }
+
+    @Override
+    public Trening create(Trening trening) throws Exception{
+        if(trening.getId()!=null){
+            throw new Exception("ID must be null!");
+        }
+        Trening newTrening=this.treningRepository.save(trening);
+        return newTrening;
+    }
     
 }

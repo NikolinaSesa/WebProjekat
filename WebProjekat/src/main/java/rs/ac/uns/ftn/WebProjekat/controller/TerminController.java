@@ -305,7 +305,7 @@ public class TerminController{
 
                     if(termin.getTrening().getTrener().getFitnessCentar().getId()==fitnesscentarId){
                         TerminDTO terminDTO=new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDatum(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
-                    odradjeniDTO.add(terminDTO);
+                        odradjeniDTO.add(terminDTO);
                     }
                     
                 }
@@ -460,8 +460,8 @@ public class TerminController{
     }
 
     //Dobijanje svih ocenjenih termina datog korisnika
-    @GetMapping(value = "/ocenjeni/{id}/{uloga}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<TerminDTO>> getOcenjeneTermine(@PathVariable Long id, @PathVariable Uloga uloga){
+    @GetMapping(value = "/ocenjeni/{id}/{uloga}/{fitnesscentarId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TerminDTO>> getOcenjeneTermine(@PathVariable Long id, @PathVariable Uloga uloga, @PathVariable Long fitnesscentarId){
 
         if(uloga==Uloga.CLAN){
             Clan clan=this.clanService.findOne(id);
@@ -473,8 +473,11 @@ public class TerminController{
                 List<TerminDTO> ocenjeniTermini=new ArrayList<>();
                 for(Ocena ocena : ocene){
                     Termin termin=ocena.getTermin();
-                    TerminDTO terminDTO=new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDatum(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
-                    ocenjeniTermini.add(terminDTO);
+                    if(termin.getTrening().getTrener().getFitnessCentar().getId()==fitnesscentarId){
+                        TerminDTO terminDTO=new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDatum(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
+                        ocenjeniTermini.add(terminDTO);
+                    }
+                    
                 }
                 return new ResponseEntity<>(ocenjeniTermini, HttpStatus.OK);
             }
@@ -485,8 +488,8 @@ public class TerminController{
     }
 
     //Dobijanje svih neocenjenih termina
-    @GetMapping(value = "/neocenjeni/{id}/{uloga}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<TerminDTO>> getNeocenjeniTermini(@PathVariable Long id, @PathVariable Uloga uloga){
+    @GetMapping(value = "/neocenjeni/{id}/{uloga}/{fitnesscentarId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TerminDTO>> getNeocenjeniTermini(@PathVariable Long id, @PathVariable Uloga uloga, @PathVariable Long fitnesscentarId){
 
         if(uloga==Uloga.CLAN){
             Clan clan=this.clanService.findOne(id);
@@ -497,11 +500,14 @@ public class TerminController{
                 Set<Termin> odradjeniTermini=clan.getListaOdradjenih();
                 List<TerminDTO> neocenjeniTermini=new ArrayList<>();
                 for(Termin termin : odradjeniTermini){
-                    Ocena ocena=this.ocenaService.findByTerminIdAndClanId(termin.getId(), id);
-                    if(ocena==null){
-                        TerminDTO terminDTO=new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDatum(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
-                        neocenjeniTermini.add(terminDTO);
+                    if(termin.getTrening().getTrener().getFitnessCentar().getId()==fitnesscentarId){
+                        Ocena ocena=this.ocenaService.findByTerminIdAndClanId(termin.getId(), id);
+                        if(ocena==null){
+                            TerminDTO terminDTO=new TerminDTO(termin.getId(), termin.getTrening().getNaziv(), termin.getTrening().getTip(), termin.getTrening().getOpis(), termin.getCena(), termin.getVreme(), termin.getDatum(), termin.getTrening().getTrener().getIme(), termin.getTrening().getTrener().getPrezime());
+                            neocenjeniTermini.add(terminDTO);
+                        }
                     }
+                    
                 }
                 return new ResponseEntity<>(neocenjeniTermini, HttpStatus.OK);
             }

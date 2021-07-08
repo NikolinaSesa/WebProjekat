@@ -3,12 +3,13 @@ $(document).ready(function(){
     let tmpl=localStorage.getItem("ocenjen/neocenjen");
     let id=localStorage.getItem("korisnikId");
     let uloga=localStorage.getItem("uloga");
+    let fitnesscentarId=localStorage.getItem("fitnesscentarId");
 
     if(tmpl==1){
 
         $.ajax({
             type:"GET",
-            url:"http://localhost:8080/api/termin/ocenjeni/"+id+"/"+uloga,
+            url:"http://localhost:8080/api/termin/ocenjeni/"+id+"/"+uloga+"/"+fitnesscentarId,
             dataType:"json",
             success:function(response){
                 console.log("SUCCESS:\n", response);
@@ -38,7 +39,7 @@ $(document).ready(function(){
         
         $.ajax({
             type:"GET",
-            url:"http://localhost:8080/api/termin/neocenjeni/"+id+"/"+uloga,
+            url:"http://localhost:8080/api/termin/neocenjeni/"+id+"/"+uloga+"/"+fitnesscentarId,
             dataType:"json",
             success:function(response){
                 console.log("SUCCESS:\n", response);

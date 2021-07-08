@@ -14,6 +14,7 @@ import rs.ac.uns.ftn.WebProjekat.model.Trener;
 import rs.ac.uns.ftn.WebProjekat.model.Trening;
 import rs.ac.uns.ftn.WebProjekat.model.Uloga;
 import rs.ac.uns.ftn.WebProjekat.model.dto.TreningDTO;
+import rs.ac.uns.ftn.WebProjekat.model.dto.TreningDTO2;
 import org.springframework.http.HttpStatus;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,6 +86,50 @@ public class TreningController{
                     return new ResponseEntity<>(treninziDTO, HttpStatus.OK);
                 }
         }   
+    }
+
+    @GetMapping(value = "/trenerPregledTreninga/{id}/{uloga}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TreningDTO>> treninzi(@PathVariable Long id, @PathVariable Uloga uloga){
+
+        if(uloga==Uloga.TRENER){
+            Trener trener=this.trenerService.findOne(id);
+            if(trener==null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            else{
+                List<Trening> treninzi=this.treningService.findByTrenerFitnesscentarId(trener.getFitnessCentar().getId());
+                List<TreningDTO> treninziDTO=new ArrayList<>();
+                for(Trening trening : treninzi){
+                    TreningDTO treningDTO=new TreningDTO(trening.getId(), trening.getNaziv(), trening.getTip(), trening.getOpis(), trening.getTrajanje(), trening.getTrener().getIme(), trening.getTrener().getPrezime());
+                    treninziDTO.add(treningDTO);
+                }
+                return new ResponseEntity<>(treninziDTO, HttpStatus.OK);
+            }
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+
+    @PostMapping(value = "/dodajNoviTrening/{id}/{uloga}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<TreningDTO> dodajNoviTrening(@RequestBody TreningDTO2 treningDTO2, @PathVariable Long id, @PathVariable Uloga uloga)throws Exception{
+
+        if(uloga==Uloga.TRENER){
+            Trener trener=this.trenerService.findOne(id);
+            if(trener==null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            else{
+                Trening trening=new Trening(treningDTO2.getNaziv(), treningDTO2.getOpis(), treningDTO2.getTip(), treningDTO2.getTrajanje(), trener);
+                Trening newTrening=this.treningService.create(trening);
+                TreningDTO newTreningDTO=new TreningDTO(newTrening.getId(), newTrening.getNaziv(), newTrening.getTip(), newTrening.getOpis(), newTrening.getTrajanje(), newTrening.getTrener().getIme(), newTrening.getTrener().getPrezime());
+
+                return new ResponseEntity<>(newTreningDTO, HttpStatus.CREATED);
+            }
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
     }
     
 }

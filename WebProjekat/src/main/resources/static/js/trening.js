@@ -87,3 +87,39 @@ $(document).on('click', '.btn5', function(){
         window.location.href="Termini.html";
     }
 });
+
+$(document).on("submit", "#dodajTrening", function(event){
+    event.preventDefault();
+
+    let id=localStorage.getItem("korisnikId");
+    let uloga=localStorage.getItem("uloga");
+
+    let naziv=$("#nazivTreninga").val();
+    let tip=$("#tip").val();
+    let opis=$("#opis").val();
+    let trajanje=$("#trajanje").val();
+
+    let newTrening={
+        naziv,
+        tip,
+        opis,
+        trajanje
+    }
+
+    $.ajax({
+        type:"POST",
+        url:"http://localhost:8080/api/treninzi/dodajNoviTrening/"+id+"/"+uloga,
+        dataType:"json",
+        contentType:"application/json",
+        data: JSON.stringify(newTrening),
+        success:function(response){
+            console.log("SUCCESS:\n", response);
+            alert("Uspesno ste kreirali novi trening!");
+            window.location.href="Trener_pregled_treninga.html";
+        },
+        error:function(response){
+            console.log("ERROR:\n", response);
+            alert("Greska prilikom kreiranja novog treninga!");
+        }
+    });
+});

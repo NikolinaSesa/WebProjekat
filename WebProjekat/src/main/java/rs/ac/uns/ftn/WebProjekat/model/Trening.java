@@ -32,6 +32,16 @@ public class Trening implements Serializable{
     @OneToMany(mappedBy = "trening", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Termin> termini= new HashSet<>();
 
+    public Trening(){}
+
+    public Trening(String naziv, String opis, Tip tip, Double trajanje, Trener trener){
+        this.naziv=naziv;
+        this.opis=opis;
+        this.tip=tip;
+        this.trajanje=trajanje;
+        this.trener=trener;
+    }
+
     public Long getId(){return id;}
     public void setId(Long id){this.id=id;}
 

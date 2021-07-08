@@ -1,10 +1,10 @@
 INSERT INTO FITNESSCENTAR(naziv, adresa, brtelefona, email) VALUES ('SuperFC', 'Kraljevica Marka bb', '0645536273', 'superfc@gmail.com');
 INSERT INTO FITNESSCENTAR(naziv, adresa, brtelefona, email) VALUES ('FitMax', 'Svetog Save 11a', '0651234676', 'maxFit@gmail.com');
 
-INSERT INTO SALA(kapacitet, oznaka, fitnesscentar_id) VALUES (60, 'A23',1);
-INSERT INTO SALA(kapacitet, oznaka, fitnesscentar_id) VALUES (45, 'B14',1);
-INSERT INTO SALA(kapacitet, oznaka, fitnesscentar_id) VALUES (20, '3A',2);
-INSERT INTO SALA(kapacitet, oznaka, fitnesscentar_id) VALUES (30, '2B',2);
+INSERT INTO SALA(kapacitet, oznaka, fitnesscentar_id) VALUES (60, 'A1',1);
+INSERT INTO SALA(kapacitet, oznaka, fitnesscentar_id) VALUES (45, 'A2',1);
+INSERT INTO SALA(kapacitet, oznaka, fitnesscentar_id) VALUES (20, 'B1',2);
+INSERT INTO SALA(kapacitet, oznaka, fitnesscentar_id) VALUES (30, 'B2',2);
 
 INSERT INTO ADMINISTRATOR(korisnickoime, lozinka, ime, prezime, brtelefona, email, datumrodjenja, uloga, aktivan) VALUES ('ninasesa', '2345ftg', 'Nikolina', 'Sesa', '0641126921', 'nikolinasesaa23@gmail.com', '2000-09-23', 'ADMINISTRATOR', true);
 

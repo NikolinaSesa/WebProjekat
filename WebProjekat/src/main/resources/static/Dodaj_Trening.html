@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="js/jquery.min.js"></script>
-    <title>Trener Pocetna Strana</title>
+    <script src="js/trening.js"></script>
+    <title>Dodavanje Novog Treninga</title>
     <style>
         html{
             height: 100%;
@@ -27,11 +28,6 @@
             box-sizing: border-box;
             box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
             border-radius: 10px;
-        }
-        h1{
-            margin-top: 50px;
-            color: #fff;
-            text-align: center;
         }
         h2{
             margin: 0 0 30px;
@@ -69,7 +65,7 @@
             color: #03e9f4;
             font-size: 12px;
         }
-        form a{
+        .submit{
             position: relative;
             display: inline-block;
             padding: 10px 20px;
@@ -79,29 +75,41 @@
             text-transform: uppercase;
             overflow: hidden;
             transition: .5s;
-            margin-top: 40px;
             letter-spacing: 4px;
         }
-        a:hover{
+        .submit:hover{
             background: #30e9f4;
-            color: #fff;
+            color:#fff;
             border-radius: 5px;
             box-shadow: 0 0 5px #03e9f4,
                         0 0 25px #03e9f4,
                         0 0 50px #03e9f4,
                         0 0 100px #03e9f4;
         }
-        
     </style>
 </head>
 <body>
-    <h1>TRENER POCETNA STRANA</h1>
     <div class="login">
-        <form>
-            <a href="Raspored.html">Raspored</a>
-            <a href="Trener_pregled_treninga.html">Treninzi U Ponudi</a>
-            <a href="Termini_Trenera.html">Odrzani Termini</a>
-         </form>
+        <h2>Dodavanje Treninga</h2>
+        <form id="dodajTrening">
+            <div class="user">
+                <input id="nazivTreninga" type="text" required>
+                <label for="nazivTreninga">Naziv Treninga</label>
+            </div>
+            <div class="user">
+                <input id="tip" type="text" required>
+                <label for="tip">Tip Treninga</label>
+            </div>
+            <div class="user">
+                <input id="opis" type="text" required>
+                <label for="opis">Opis Treninga</label>
+            </div>
+            <div class="user">
+                <input id="trajanje" type="text" required>
+                <label for="trajanje">Trajanje</label>
+            </div>
+            <input type="submit" class="submit" value="Kreiraj">
+        </form>
     </div>
 </body>
 </html>
