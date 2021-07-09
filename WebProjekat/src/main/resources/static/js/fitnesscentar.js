@@ -5,13 +5,13 @@ $(document).on("submit", "#dodajFC", function(event){
 
     let naziv = $("#naziv").val();
     let adresa = $("#adresa").val();
-    let broj = $("#broj").val();
+    let brTelefona = $("#broj").val();
     let email = $("#email").val();
 
     let noviFC = {
         naziv,
         adresa,
-        broj,
+        brTelefona,
         email
     }
 
